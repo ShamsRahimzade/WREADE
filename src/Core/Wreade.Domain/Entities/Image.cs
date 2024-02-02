@@ -10,7 +10,7 @@ namespace Wreade.Domain.Entities
         public Category Category { get; set; }
         public int BookId { get; set; }
         public Book Book { get; set; }
-        public int AuthorId { get; set; }
-        public Author Author { get; set; }
+        public int AppUSerId { get; set; }
+        public AppUser User { get; set; }
     }
 }

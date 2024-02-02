@@ -1,23 +1,28 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
+using Wreade.Application.Abstractions.Services;
+using Wreade.Application.ViewModels;
+using Wreade.Domain.Entities;
+using Wreade.Persistence.DAL;
 
 namespace WEB.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IHomeService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            HomeVM vm = await _service.GetAllAsync();
+            return View(vm);
         }
 
-      
+
     }
 }

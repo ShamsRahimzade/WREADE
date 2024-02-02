@@ -12,5 +12,9 @@ namespace Wreade.Domain.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime Birthday { get; set; }
+        public List<Book>? Books { get; set; }
+        public List<Image>? Images { get; set; }
+        public int StatusId { get; set; }
+        public Status Status { get; set; }
     }
 }

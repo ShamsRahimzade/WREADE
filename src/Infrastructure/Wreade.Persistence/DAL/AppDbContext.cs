@@ -10,26 +10,39 @@ using Wreade.Domain.Entities;
 
 namespace Wreade.Persistence.DAL
 {
-    public class AppDbContext:IdentityDbContext<AppUser>
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.AppQueryFilters();
-
+            modelBuilder.Entity<Category>()
+         .HasOne(c => c.Image)
+         .WithOne(i => i.Category)
+         .HasForeignKey<Image>(i => i.CategoryId) 
+         .IsRequired();
+            modelBuilder.Entity<BookCategory>()
+    .HasOne(bc => bc.Category)
+    .WithMany(c => c.BookCategories)
+    .HasForeignKey(bc => bc.CategoryId)
+    .OnDelete(DeleteBehavior.NoAction);
+         
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
 
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Author> Authors { get; set; }
+       
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<BookCategory> BookCategory { get; set; }
+        public DbSet<BookTag> BookTag { get; set; }
+        public DbSet<Setting> Setting { get; set; }
         //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         //{
         //    //var entities = ChangeTracker.Entries<Category>();

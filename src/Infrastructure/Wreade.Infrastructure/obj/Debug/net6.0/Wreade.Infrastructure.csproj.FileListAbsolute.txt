@@ -15,3 +15,20 @@ C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Infrast
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\ref\Wreade.Infrastructure.dll
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Application.dll
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Application.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Infrastructure.deps.json
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Infrastructure.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Infrastructure.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Application.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Domain.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Application.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\bin\Debug\net6.0\Wreade.Domain.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.AssemblyInfo.cs
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.csproj.CopyComplete
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\refint\Wreade.Infrastructure.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\Wreade.Infrastructure.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Infrastructure\obj\Debug\net6.0\ref\Wreade.Infrastructure.dll

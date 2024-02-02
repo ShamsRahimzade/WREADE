@@ -150,3 +150,13 @@ C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\obj\Debug\net6.0\
 C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\obj\Debug\net6.0\WEB.csproj.CopyComplete
 C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\obj\Debug\net6.0\WEB.genruntimeconfig.cache
 C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\obj\Debug\net6.0\ref\WEB.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\Wreade.Persistence.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\Wreade.Persistence.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\obj\Debug\net6.0\WEB.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
