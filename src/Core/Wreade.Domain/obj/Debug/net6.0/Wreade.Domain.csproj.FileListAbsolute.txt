@@ -1,0 +1,11 @@
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\bin\Debug\net6.0\Wreade.Domain.deps.json
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\bin\Debug\net6.0\Wreade.Domain.dll
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\bin\Debug\net6.0\Wreade.Domain.pdb
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\Wreade.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\Wreade.Domain.AssemblyInfoInputs.cache
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\Wreade.Domain.AssemblyInfo.cs
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\Wreade.Domain.csproj.CoreCompileInputs.cache
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\Wreade.Domain.dll
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\refint\Wreade.Domain.dll
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\Wreade.Domain.pdb
+C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Domain\obj\Debug\net6.0\ref\Wreade.Domain.dll
