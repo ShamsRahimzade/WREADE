@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\Presentation\\WEB\\WEB.csproj": {}
+    "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\WEB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\Presentation\\WEB\\WEB.csproj": {
+    "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\WEB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\Presentation\\WEB\\WEB.csproj",
+        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\WEB.csproj",
         "projectName": "WEB",
-        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\Presentation\\WEB\\WEB.csproj",
+        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\WEB.csproj",
         "packagesPath": "C:\\Users\\rehim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\Presentation\\WEB\\obj\\",
+        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Application\\Wreade.Application.csproj": {
-                "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Application\\Wreade.Application.csproj"
-              },
-              "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {
-                "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj"
+              "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Persistence\\Wreade.Persistence.csproj": {
+                "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Persistence\\Wreade.Persistence.csproj"
               }
             }
           }
@@ -52,25 +49,7 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[6.0.25, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[6.0.25, )"
-            },
             "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.0.25, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[6.0.25, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
@@ -100,14 +79,14 @@
         }
       }
     },
-    "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Application\\Wreade.Application.csproj": {
+    "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Application\\Wreade.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Application\\Wreade.Application.csproj",
+        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Application\\Wreade.Application.csproj",
         "projectName": "Wreade.Application",
-        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Application\\Wreade.Application.csproj",
+        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Application\\Wreade.Application.csproj",
         "packagesPath": "C:\\Users\\rehim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Application\\obj\\",
+        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -129,8 +108,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {
-                "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj"
+              "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {
+                "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj"
               }
             }
           }
@@ -144,12 +123,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[6.0.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -170,14 +143,14 @@
         }
       }
     },
-    "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {
+    "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
         "projectName": "Wreade.Domain",
-        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
+        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
         "packagesPath": "C:\\Users\\rehim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\Wreade project\\src\\Core\\Wreade.Domain\\obj\\",
+        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -214,12 +187,88 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.25, )"
-            },
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Persistence\\Wreade.Persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Persistence\\Wreade.Persistence.csproj",
+        "projectName": "Wreade.Persistence",
+        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Persistence\\Wreade.Persistence.csproj",
+        "packagesPath": "C:\\Users\\rehim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Persistence\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\rehim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Application\\Wreade.Application.csproj": {
+                "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Application\\Wreade.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.25, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",

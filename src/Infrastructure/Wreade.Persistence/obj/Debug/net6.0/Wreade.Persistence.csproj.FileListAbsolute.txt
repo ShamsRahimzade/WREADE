@@ -23,3 +23,11 @@ C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Persist
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\ref\Wreade.Persistence.dll
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Persistence\bin\Debug\net6.0\Wreade.Application.dll
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Infrastructure\Wreade.Persistence\bin\Debug\net6.0\Wreade.Application.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\Wreade.Persistence.csproj.AssemblyReference.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\Wreade.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\Wreade.Persistence.AssemblyInfoInputs.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\Wreade.Persistence.AssemblyInfo.cs
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\Wreade.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\Wreade.Persistence.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\refint\Wreade.Persistence.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Infrastructure\Wreade.Persistence\obj\Debug\net6.0\Wreade.Persistence.pdb

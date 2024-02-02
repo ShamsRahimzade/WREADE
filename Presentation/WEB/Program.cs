@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
-using WEB.Models;
-using Wreade.Domain.Entities.Models
+using Wreade.Persistence.ServiceRegistration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,7 +15,7 @@ var app = builder.Build();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

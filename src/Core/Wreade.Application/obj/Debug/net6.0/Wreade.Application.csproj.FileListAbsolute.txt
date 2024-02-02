@@ -13,3 +13,18 @@ C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Application\obj\D
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Application\bin\Debug\net6.0\Wreade.Domain.dll
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Application\bin\Debug\net6.0\Wreade.Domain.pdb
 C:\Users\rehim\OneDrive\Desktop\Wreade project\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.csproj.CopyComplete
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\bin\Debug\net6.0\Wreade.Application.deps.json
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\bin\Debug\net6.0\Wreade.Application.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\bin\Debug\net6.0\Wreade.Application.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\bin\Debug\net6.0\Wreade.Domain.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\bin\Debug\net6.0\Wreade.Domain.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.csproj.AssemblyReference.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.AssemblyInfoInputs.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.AssemblyInfo.cs
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.csproj.CoreCompileInputs.cache
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.csproj.CopyComplete
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\refint\Wreade.Application.dll
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\Wreade.Application.pdb
+C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\src\Core\Wreade.Application\obj\Debug\net6.0\ref\Wreade.Application.dll

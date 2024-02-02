@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WEB.Models;
+using Wreade.Domain.Entities;
 
 namespace Wreade.Persistence.DAL
 {

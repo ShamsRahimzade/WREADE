@@ -2,7 +2,7 @@
 
 using Wreade.Domain.Entities.Common;
 
-namespace WEB.Models
+namespace Wreade.Domain.Entities
 {
     public class Author:BaseEntity
     {

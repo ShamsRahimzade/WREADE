@@ -13,6 +13,7 @@
           "Microsoft.EntityFrameworkCore.Design": "6.0.25",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.25",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.25",
+          "Wreade.Application": "1.0.0",
           "Wreade.Domain": "1.0.0"
         },
         "runtime": {
@@ -505,6 +506,15 @@
           }
         }
       },
+      "Wreade.Application/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Wreade.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Wreade.Application.dll": {}
+        }
+      },
       "Wreade.Domain/1.0.0": {
         "runtime": {
           "Wreade.Domain.dll": {}
@@ -853,6 +863,11 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
+    },
+    "Wreade.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Wreade.Domain/1.0.0": {
       "type": "project",
