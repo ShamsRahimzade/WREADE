@@ -6,6 +6,6 @@ namespace Wreade.Domain.Entities
     {
         public int ImageId { get; set; }
         public Image Image { get; set; }
-        public List<BookCategory> BookCategories { get; set; }
+        public List<BookCategory>? BookCategories { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Wreade.Domain.Enums;
 
 namespace Wreade.Domain.Entities
 {
@@ -11,10 +12,15 @@ namespace Wreade.Domain.Entities
     {
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string? SelfInformation { get; set; }
+		public string? Instagram { get; set; }
+        public string? Facebook { get; set; }
+        public string? Twitter { get; set; }
         public DateTime Birthday { get; set; }
         public List<Book>? Books { get; set; }
         public List<Image>? Images { get; set; }
         public int StatusId { get; set; }
         public Status Status { get; set; }
-    }
+		public List<UserRole> Roles { get; set; }
+	}
 }

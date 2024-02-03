@@ -31,9 +31,9 @@ namespace Wreade.Persistence.DAL
     .OnDelete(DeleteBehavior.NoAction);
          
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+		
 
-
-            base.OnModelCreating(modelBuilder);
+			base.OnModelCreating(modelBuilder);
         }
        
         public DbSet<Tag> Tags { get; set; }
