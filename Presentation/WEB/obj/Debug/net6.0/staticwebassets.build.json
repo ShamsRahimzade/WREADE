@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BSgOXW9vHiIBA+CRbvgSZxxPftDRQQLahAwbeg9Bo1g=",
+  "Hash": "EOOBkJVf2HVAyoFj7sxuTwwTNFw3rwtWotCYmI3Ooi4=",
   "Source": "WEB",
   "BasePath": "_content/WEB",
   "Mode": "Default",
@@ -1324,6 +1324,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\backgrounds\\bg_9.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\backgrounds\\book.png",
+      "SourceId": "WEB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
+      "BasePath": "_content/WEB",
+      "RelativePath": "assets/images/backgrounds/book.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\backgrounds\\book.png"
+    },
+    {
+      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\backgrounds\\book2.jpg",
+      "SourceId": "WEB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
+      "BasePath": "_content/WEB",
+      "RelativePath": "assets/images/backgrounds/book2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\backgrounds\\book2.jpg"
     },
     {
       "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\blogs\\22_blogger\\img_1.jpg",

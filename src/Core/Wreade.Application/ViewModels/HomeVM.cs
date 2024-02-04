@@ -10,6 +10,9 @@ namespace Wreade.Application.ViewModels
     public class HomeVM
     {
         public ICollection<Book> Books { get; set; }
-        public ICollection<AppUser> Users { get; set; }
+		public string UserName { get; set; }
+		public ICollection<BookCategory> MostReadCategory { get; set; }
+		public List<Book> ReadingHistory { get; set; }
+		public ICollection<AppUser> Users { get; set; }
     }
 }

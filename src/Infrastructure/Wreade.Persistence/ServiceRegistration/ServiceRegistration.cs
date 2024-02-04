@@ -12,6 +12,9 @@ using Wreade.Application.Abstractions.Services;
 using Wreade.Persistence.Implementations.Services;
 using Wreade.Application.Abstractions.Repostories;
 using Wreade.Persistence.Implementations.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
+using Wreade.Application.MappingProfiles;
 
 namespace Wreade.Persistence.ServiceRegistration
 {
@@ -20,9 +23,11 @@ namespace Wreade.Persistence.ServiceRegistration
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("default")));
-            //services.AddAutoMapper(typeof(TagProfile));
-            //services.AddAutoMapper(typeof(CategoryProfile));
-            services.AddIdentity<AppUser, IdentityRole>(opt =>
+			//services.AddAutoMapper(typeof(TagProfile));
+			//services.AddAutoMapper(typeof(CategoryProfile));
+			services.AddAutoMapper(typeof(AppUserProfile));
+			
+			services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequiredLength = 8;
@@ -35,19 +40,21 @@ namespace Wreade.Persistence.ServiceRegistration
             //services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IHomeService, HomeService>();
-            //services.AddScoped<ICategoryRepository, CategoryRepository>();
-            //services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IBookService, BookService>();
+			//services.AddScoped<ICategoryRepository, CategoryRepository>();
+			//services.AddScoped<ICategoryService, CategoryService>();
 
-            //services.AddScoped<ITagRepository, TagRepository>();
-            //services.AddScoped<ITagService, TagService>();
+			//services.AddScoped<ITagRepository, TagRepository>();
+			//services.AddScoped<ITagService, TagService>();
 
-            //services.AddScoped<IColorRepository, ColorRepository>();
+			//services.AddScoped<IColorRepository, ColorRepository>();
 
-            //services.AddScoped<IAuthService, AuthService>();
+			//services.AddScoped<IAuthService, AuthService>();
 
 
 
-            return services;
+			return services;
         }
     }
 }

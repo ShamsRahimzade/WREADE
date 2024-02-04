@@ -8,7 +8,7 @@ using Wreade.Persistence.DAL;
 
 #nullable disable
 
-namespace Wreade.Persistence.Migrations
+namespace Wreade.Persistence.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -270,6 +270,9 @@ namespace Wreade.Persistence.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Isdeleted")
                         .HasColumnType("bit");
