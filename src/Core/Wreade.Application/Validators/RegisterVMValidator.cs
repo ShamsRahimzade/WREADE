@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using FluentValidation;
-using Wreade.Application.ViewModels.Users;
+using Wreade.Application.ViewModels;
 
 namespace Wreade.Application.Validators
 {

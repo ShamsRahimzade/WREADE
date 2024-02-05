@@ -18,8 +18,8 @@
 			@if (Model.Users != null)
 			{
 
-				@foreach (var item in Model.Users
-						.Where(u => u.Roles.Contains(UserRole.Author))
+				@* @foreach (var item in Model.Users
+						.Where(u => u.Roles.Contains(UserRole.Author.ToString()))
 						.OrderByDescending(u => u.Books.Max(b => b.Rating))
 						.Take(3))
 				{
@@ -69,7 +69,7 @@
 							</div>
 						</div>
 					</div>
-				}
+				} *@
 			}
 
 		</div>
@@ -146,7 +146,7 @@
 		<section id="service-section" class="service-section sec-ptb-100 bg-light-gray clearfix">
 			<div class="container">
 				<div class="row mt--60">
-					@foreach (var item in Model.Users.Where(u => u.Roles.Contains(UserRole.Author)))
+					@* @foreach (var item in Model.Users.Where(u => u.Roles.Contains(UserRole.Author.ToString())))
 					{
 						count++;
 						<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -158,7 +158,7 @@
 								</p>
 							</div>
 						</div>
-					}
+					} *@
 				</div>
 			</div>
 		</section>

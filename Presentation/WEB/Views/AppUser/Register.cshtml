@@ -1,5 +1,105 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Wreade.Domain.Enums;
+@model RegisterVM
 @{
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/assets/account/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/assets/account/css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="post" class="register-form" id="register-form" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                            <div class="form-group">
+                                <label asp-for="MainImage" for="MainImage"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="MainImage" name="MainImage" id="MainImage" placeholder="Your MainImage" accept="image/*"/>
+                                <span cite="text-danger" asp-validation-for="MainImage"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BackImage" for="BackImage"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="BackImage" name="BackImage" id="BackImage" placeholder="Your BackImage" accept="image/*" />
+                                <span cite="text-danger" asp-validation-for="BackImage"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Name" for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Name" name="name" id="name" placeholder="Your Name" />
+                                <span cite="text-danger" asp-validation-for="Name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Surname" for="Surname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Surname" name="Surname" id="Surname" placeholder="Your Surname" />
+                                <span cite="text-danger" asp-validation-for="Surname"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Email" name="Email" id="Email" placeholder="Your Email" />
+                                <span cite="text-danger" asp-validation-for="Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="UserName" for="UserName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="UserName" name="UserName" id="UserName" placeholder="Your UserName" />
+                                <span cite="text-danger" asp-validation-for="UserName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="BirthDay" for=""><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="BirthDay" name="BirthDay" id="BirthDay" placeholder="Your BirthDay" />
+                                <span cite="text-danger" asp-validation-for="BirthDay"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" for="Password"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Password" name="Password" id="Password" placeholder="Your Password" />
+                                <span cite="text-danger" asp-validation-for="Password"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ConfirmPassword" for="ConfirmPassword"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="ConfirmPassword" name="ConfirmPassword" id="ConfirmPassword" placeholder="Your ConfirmPassword" />
+                                <span cite="text-danger" asp-validation-for="ConfirmPassword"></span>
+                            </div>
+                            <div class="input-box d-flex align-items-center">
+                                <div class="select-container">
+                                    <select asp-for="SelectedRole" asp-items="Html.GetEnumSelectList<UserRole>()" class="form-control" required>
+                                        <option value="">Select Role</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="SelectedRole"></span>
+                                </div>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="~/assets/account/images/signup-image.jpg" alt="sing up image"></figure>
+                        <a asp-action="login" asp-controller="appuser" class="signup-image-link">I am already member</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+    <!-- JS -->
+    <script src="~/assets/account/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/account/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

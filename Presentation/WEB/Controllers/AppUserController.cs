@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
-using Wreade.Application.ViewModels.Users;
 
 namespace WEB.Controllers
 {
@@ -17,20 +16,57 @@ namespace WEB.Controllers
 		{
 			return View();
 		}
+
         [HttpPost]
-		public async Task<IActionResult> Register([FromForm] RegisterVM vm)
+		public async Task<IActionResult> Register([FromForm] RegisterVM register)
 		{
-			await _service.Register(vm);
-			return RedirectToAction("Index","Home");
+			if (!ModelState.IsValid)
+			{
+
+				return View(register);
+			}
+			var result = await _service.Register(register);
+			if (result.Any())
+			{
+				foreach (var item in result)
+				{
+					ModelState.AddModelError(String.Empty, item);
+					return View(register);
+				}
+			}
+			return RedirectToAction("Index", "Home");
 		}
 		public IActionResult Login()
 		{
 			return View();
 		}
 		[HttpPost]
-		public async Task<IActionResult> Login([FromForm] LoginVM vm)
+		public async Task<IActionResult> Login([FromForm] LoginVM login)
 		{
-			await _service.Login(vm);
+			if (!ModelState.IsValid)
+			{
+
+				return View(login);
+			}
+			var result = await _service.Login(login);
+			if (result.Any())
+			{
+				foreach (var item in result)
+				{
+					ModelState.AddModelError(String.Empty, item);
+					return View(login);
+				}
+			}
+			return RedirectToAction("Index", "Home");
+		}
+		public async Task<IActionResult> Logout()
+		{
+			await _service.Logout();
+			return RedirectToAction("Index", "Home");
+		}
+		public async Task<IActionResult> CreateRole()
+		{
+			await _service.CreateRoleAsync();
 			return RedirectToAction("Index", "Home");
 		}
 	}

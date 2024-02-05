@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Wreade.Application.ViewModels.Users
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Wreade.Domain.Enums;
+
+namespace Wreade.Application.ViewModels
 {
 	public class RegisterVM
 	{
@@ -36,5 +36,12 @@ namespace Wreade.Application.ViewModels.Users
 		[Required(ErrorMessage = "Birthday bosh gonderile bilmez")]
 		[DataType(DataType.DateTime)]
 		public DateTime BirthDay { get; set; }
-	}
+		public IFormFile? MainImage { get; set; }
+		public IFormFile? BackImage { get; set; }
+        [Required(ErrorMessage = "Please select a role.")]
+        [Display(Name = "Select a Role")]
+        public string SelectedRole { get; set; }
+
+
+    }
 }

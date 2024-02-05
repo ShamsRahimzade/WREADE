@@ -26,8 +26,13 @@ namespace Wreade.Persistence.ServiceRegistration
 			//services.AddAutoMapper(typeof(TagProfile));
 			//services.AddAutoMapper(typeof(CategoryProfile));
 			services.AddAutoMapper(typeof(AppUserProfile));
-			
-			services.AddIdentity<AppUser, IdentityRole>(opt =>
+            services.AddAuthentication()
+               .AddGoogle(options =>
+               {
+                   options.ClientId = "YourClientId";
+                   options.ClientSecret = "YourClientSecret";
+               });
+            services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequiredLength = 8;

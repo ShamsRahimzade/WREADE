@@ -9,7 +9,7 @@ namespace Wreade.Domain.Enums
     public enum UserRole
     {
         Author,
-        SimpleUser,
-        Admin
+        SimpleUser
+       
     }
 }

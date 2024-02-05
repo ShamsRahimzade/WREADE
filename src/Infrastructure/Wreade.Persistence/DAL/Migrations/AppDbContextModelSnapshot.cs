@@ -163,6 +163,10 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("BackImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
@@ -188,6 +192,10 @@ namespace Wreade.Persistence.DAL.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MainImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -217,7 +225,7 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<string>("SelfInformation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
@@ -402,6 +410,9 @@ namespace Wreade.Persistence.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
@@ -546,6 +557,9 @@ namespace Wreade.Persistence.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
@@ -609,9 +623,7 @@ namespace Wreade.Persistence.DAL.Migrations
                 {
                     b.HasOne("Wreade.Domain.Entities.Status", "Status")
                         .WithMany("Users")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StatusId");
 
                     b.Navigation("Status");
                 });
@@ -676,7 +688,7 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Wreade.Domain.Entities.AppUser", "User")
-                        .WithMany("Images")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Book");
@@ -689,8 +701,6 @@ namespace Wreade.Persistence.DAL.Migrations
             modelBuilder.Entity("Wreade.Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("Books");
-
-                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Book", b =>

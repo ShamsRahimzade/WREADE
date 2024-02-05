@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Wreade.Application.ViewModels.Users;
+using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
 
 namespace Wreade.Application.MappingProfiles

@@ -18,9 +18,15 @@ namespace Wreade.Domain.Entities
         public string? Twitter { get; set; }
         public DateTime Birthday { get; set; }
         public List<Book>? Books { get; set; }
-        public List<Image>? Images { get; set; }
-        public int StatusId { get; set; }
-        public Status Status { get; set; }
-		public List<UserRole> Roles { get; set; }
+        public string MainImage { get; set; } = "profile.png";
+		public string BackImage { get; set; } = "profile.png";
+		public int? StatusId { get; set; }
+        public Status? Status { get; set; }
+        public List<AppUser> Roles { get; set; }
+        public AppUser()
+		{
+			MainImage = "profile.png";
+			BackImage = "profile.png";
+		}
 	}
 }
