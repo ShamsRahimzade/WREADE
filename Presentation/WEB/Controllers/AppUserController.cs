@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
+using Wreade.Application.ViewModels.Users;
 
 namespace WEB.Controllers
 {
@@ -20,10 +21,14 @@ namespace WEB.Controllers
         [HttpPost]
 		public async Task<IActionResult> Register([FromForm] RegisterVM register)
 		{
+			var combinevm = new IdentityVM
+			{
+				Register = register
+			};
 			if (!ModelState.IsValid)
 			{
 
-				return View(register);
+				return View(combinevm);
 			}
 			var result = await _service.Register(register);
 			if (result.Any())
@@ -31,7 +36,7 @@ namespace WEB.Controllers
 				foreach (var item in result)
 				{
 					ModelState.AddModelError(String.Empty, item);
-					return View(register);
+					return View(combinevm);
 				}
 			}
 			return RedirectToAction("Index", "Home");
@@ -43,10 +48,14 @@ namespace WEB.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login([FromForm] LoginVM login)
 		{
-			if (!ModelState.IsValid)
+			var combinevm = new IdentityVM
+			{
+				Login = login
+            };
+            if (!ModelState.IsValid)
 			{
 
-				return View(login);
+				return View(combinevm);
 			}
 			var result = await _service.Login(login);
 			if (result.Any())
@@ -54,7 +63,7 @@ namespace WEB.Controllers
 				foreach (var item in result)
 				{
 					ModelState.AddModelError(String.Empty, item);
-					return View(login);
+					return View(combinevm);
 				}
 			}
 			return RedirectToAction("Index", "Home");
