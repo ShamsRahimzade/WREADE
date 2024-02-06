@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/DashBoard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXERhc2hCb2FyZFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/AppUser/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwVXNlclxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

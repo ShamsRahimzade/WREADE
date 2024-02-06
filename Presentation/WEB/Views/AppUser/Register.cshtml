@@ -33,10 +33,19 @@
                 <input asp-for="Register.Email" placeholder="Email">
                 <span asp-validation-for="Register.Email"></span>
 
-                <input asp-for="Register.Password" id="passsword" name="passsword" onmouseover="showPasssword()" onmouseout="hidePasssword()" placeholder="Password">
+                <input asp-for="Register.Password" for="Regsiter.Password"  placeholder="Password">
                 <span asp-validation-for="Register.Password"></span>
-                <input asp-for="Register.ConfirmPassword" id="password" name="password" onmouseover="showPassword()" onmouseout="hidePassword()" placeholder="Confirm Password">
+                <input asp-for="Register.ConfirmPassword" placeholder="Confirm Password">
                 <span asp-validation-for="Register.ConfirmPassword"></span>
+
+                <div class="input-box d-flex align-items-center">
+                    <div class="select-container">
+                        <select asp-for="Register.SelectedRole" asp-items="Html.GetEnumSelectList<UserRole>()" class="form-control" required>
+                            <option value="">Select Role</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Register.SelectedRole"></span>
+                    </div>
+                </div>
             <button type="submit">SignUp</button>
             </form>
         </div>
@@ -45,11 +54,11 @@
                 <div asp-validation-summary="ModelOnly"></div>
                 <h1>Sign In</h1>
                
-                <input asp-for="Register.Email" placeholder="Email">
-                <span asp-validation-for="Register.Email"></span>
+                <input asp-for="Login.UserNameOrEmail" placeholder="UserNameOrEmail">
+                <span asp-validation-for="Login.UserNameOrEmail"></span>
 
-                <input asp-for="Register.Password" id="passsword" name="passsword" onmouseover="showPasssword()" onmouseout="hidePasssword()" placeholder="Password">
-                <span asp-validation-for="Register.Password"></span>
+                <input asp-for="Login.Password"  placeholder="Password">
+                <span asp-validation-for="Login.Password"></span>
                
                 <button type="submit">Login</button>
             </form>

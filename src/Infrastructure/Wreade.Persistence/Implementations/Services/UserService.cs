@@ -113,7 +113,7 @@ namespace Wreade.Persistence.Implementations.Services
 				}
 				if (!register.MainImage.ValidateSize(7))
 				{
-					String.Add("Your Email size must be max 5mb");
+					String.Add("Your Email size must be max 7 mb");
 					return String;
 				}
 				user.MainImage = await register.MainImage.CreateFileAsync(_env.WebRootPath, "assets", "images");

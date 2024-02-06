@@ -19,7 +19,7 @@ namespace WEB.Controllers
 		}
 
         [HttpPost]
-		public async Task<IActionResult> Register([FromForm] RegisterVM register)
+		public async Task<IActionResult> Register( RegisterVM register)
 		{
 			var combinevm = new IdentityVM
 			{
@@ -30,7 +30,7 @@ namespace WEB.Controllers
 
 				return View(combinevm);
 			}
-			var result = await _service.Register(register);
+			var result = await _service.Register(combinevm.Register);
 			if (result.Any())
 			{
 				foreach (var item in result)
@@ -46,7 +46,7 @@ namespace WEB.Controllers
 			return View();
 		}
 		[HttpPost]
-		public async Task<IActionResult> Login([FromForm] LoginVM login)
+		public async Task<IActionResult> Login( LoginVM login)
 		{
 			var combinevm = new IdentityVM
 			{
@@ -57,7 +57,7 @@ namespace WEB.Controllers
 
 				return View(combinevm);
 			}
-			var result = await _service.Login(login);
+			var result = await _service.Login(combinevm.Login);
 			if (result.Any())
 			{
 				foreach (var item in result)
