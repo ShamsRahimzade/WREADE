@@ -2,7 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.Utilities.Extensions;
 using Wreade.Application.ViewModels;
@@ -45,32 +45,32 @@ namespace Wreade.Persistence.Implementations.Services
 			}
 		}
 
-		public async Task<List<string>> Login(LoginVM login)
+		public async Task<bool> Login(LoginVM login, ModelStateDictionary modelstate)
 		{
-			List<string> String = new List<string>();
+			if (!modelstate.IsValid) return false;
 			AppUser user = await _user.FindByEmailAsync(login.UserNameOrEmail);
 			if (user == null)
 			{
 				user = await _user.FindByNameAsync(login.UserNameOrEmail);
 				if (user == null)
 				{
-					String.Add("Username, Email or Password was wrong");
-					return String;
+					modelstate.AddModelError(string.Empty,"user empty");
+					return false;
 
 				}
 			}
 			var result = await _signman.PasswordSignInAsync(user, login.Password, login.IsRemembered, true);
 			if (result.IsLockedOut)
 			{
-				String.Add("You have a lot of fail  try that is why you banned please try some minuts late");
-				return String;
+				modelstate.AddModelError(string.Empty, "bloked");
+				return false;
 			}
 			if (!result.Succeeded)
 			{
-				String.Add("Username, Email or Password was wrong");
-				return String;
+				modelstate.AddModelError(string.Empty, "not succeeded");
+				return false;
 			}
-			return String;
+			return true;
 		}
 
 		public async Task Logout()
@@ -79,18 +79,18 @@ namespace Wreade.Persistence.Implementations.Services
 
 		}
 
-		public async Task<List<string>> Register(RegisterVM register)
+		public async Task<bool> Register(RegisterVM register, ModelStateDictionary modelstate)
 		{
-			List<string> String = new List<string>();
+			if (!modelstate.IsValid) return false;
 			if (!register.Name.IsLetter())
 			{
-				String.Add("Your Name or Surname only contain letters");
-				return String;
+				modelstate.AddModelError("Name", "letter");
+				return false;
 			}
 			if (!register.Email.CheeckEmail())
 			{
-				String.Add("Your Email type is not true");
-				return String;
+				modelstate.AddModelError("Name", "mail");
+				return false;
 			}
 			register.Name.Capitalize();
 			register.Surname.Capitalize();
@@ -108,13 +108,13 @@ namespace Wreade.Persistence.Implementations.Services
 			{
 				if (!register.MainImage.CheckType("image/"))
 				{
-					String.Add("Your photo type is not true.Please use only image");
-					return String;
+					modelstate.AddModelError("MainImage", "wrong image type");
+					return false;
 				}
 				if (!register.MainImage.ValidateSize(7))
 				{
-					String.Add("Your Email size must be max 7 mb");
-					return String;
+					modelstate.AddModelError("MainImage", "wrong image size");
+					return false;
 				}
 				user.MainImage = await register.MainImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
 			}
@@ -122,14 +122,14 @@ namespace Wreade.Persistence.Implementations.Services
             {
                 if (!register.BackImage.CheckType("image/"))
                 {
-                    String.Add("Your photo type is not true.Please use only image");
-                    return String;
-                }
+					modelstate.AddModelError("BackImage", "wrong image type");
+					return false;
+				}
                 if (!register.BackImage.ValidateSize(7))
                 {
-                    String.Add("Your Email size must be max 5mb");
-                    return String;
-                }
+					modelstate.AddModelError("BackImage", "wrong image size");
+					return false;
+				}
                 user.BackImage = await register.BackImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
             }
             IdentityResult result = await _user.CreateAsync(user, register.Password);
@@ -138,9 +138,10 @@ namespace Wreade.Persistence.Implementations.Services
 				foreach (var error in result.Errors)
 				{
 
-					String.Add(error.Description);
+					modelstate.AddModelError(string.Empty, error.Description);
+					
 				}
-				return String;
+				return false;
 			}
 
             await _signman.SignInAsync(user, isPersistent: false);
@@ -148,7 +149,7 @@ namespace Wreade.Persistence.Implementations.Services
             {
                 await AssignRoleToUser(user, register.SelectedRole);
             }
-			return String;
+			return true;
 
 		}
         public async Task AssignRoleToUser(AppUser user, string roleName)

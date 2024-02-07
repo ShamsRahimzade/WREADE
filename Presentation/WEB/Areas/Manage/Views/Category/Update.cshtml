@@ -1,0 +1,41 @@
+﻿@model CategoryUpdateVM
+<main>
+	<div class="container">
+		<div class="page-title-container">
+
+			<a asp-action="index" asp-asp-controller="dashboard" class="muted-link pb-1 d-inline-block breadcrumb-back">
+				<i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
+				<span class="text-small align-middle">Home</span>
+			</a>
+			<h1 class="mb-0 pb-0 display-4" id="title">CATEGORY</h1>
+			<div class="col-md-6 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Update CATEGORY</h4>
+						<p class="card-description">
+							Basic form layout
+						</p>
+						<form class="forms-sample" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<img src="~/assets/images/@Model.Image" alt="product" class="card-img card-img-horizontal sw-11 h-100">
+								<input asp-for="Image" type="hidden">
+								<label asp-for="Photo" for="exampleInputUsername1">Photo</label>
+								<input asp-for="Photo" class="form-control" id="exampleInputUsername1" placeholder="Photo">
+								<span asp-validation-for="Photo" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label asp-for="Name" for="exampleInputUsername1">Name</label>
+								<input asp-for="Name" class="form-control" id="exampleInputUsername1" placeholder="Name">
+								<span asp-validation-for="Name" class="text-danger"></span>
+							</div>
+							<button type="submit" class="btn btn-primary mr-2">Submit</button>
+							<button asp-action="index" asp-asp-controller="category" class="btn btn-light">Cancel</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</main>

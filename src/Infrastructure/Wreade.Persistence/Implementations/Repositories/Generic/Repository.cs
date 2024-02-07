@@ -57,12 +57,12 @@ namespace Wreade.Persistence.Implementations.Repositories.Generic
             query = _addIncludes(query, includes);
             return await query.FirstOrDefaultAsync();
         }
-        public IQueryable<T> GetPagination(int skip = 0, int take = 0, bool IgnoreQuery = true, params string[] includes)
+        public IQueryable<T> GetPagination(int skip = 0, int take = 0, bool IgnoreQuery = true)
         {
             IQueryable<T> query = _context.Set<T>();
             if (skip != 0) query = query.Skip(skip);
             if (take != 0) query = query.Take(take);
-            query = _addIncludes(query, includes);
+           
             if (IgnoreQuery)
             {
                 query = query.IgnoreQueryFilters();

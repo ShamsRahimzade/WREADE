@@ -19,11 +19,7 @@ namespace Wreade.Persistence.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.AppQueryFilters();
-            modelBuilder.Entity<Category>()
-         .HasOne(c => c.Image)
-         .WithOne(i => i.Category)
-         .HasForeignKey<Image>(i => i.CategoryId) 
-         .IsRequired();
+          
             modelBuilder.Entity<BookCategory>()
     .HasOne(bc => bc.Category)
     .WithMany(c => c.BookCategories)

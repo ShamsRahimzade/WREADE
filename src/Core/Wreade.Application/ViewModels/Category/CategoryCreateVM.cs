@@ -16,8 +16,7 @@ namespace Wreade.Application.ViewModels
         public string Name { get; set; }
         [Required]
         public IFormFile Photo { get; set; }
-        public int Rating { get; set; }
-        public List<Book>? books { get; set; }
-        public List<int>? BookIds { get; set; }
+       
+       
     }
 }

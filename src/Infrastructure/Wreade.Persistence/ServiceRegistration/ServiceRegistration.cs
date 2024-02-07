@@ -42,24 +42,20 @@ namespace Wreade.Persistence.ServiceRegistration
                 opt.Lockout.AllowedForNewUsers = true;
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<IBookRepository, BookRepository>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
-            //services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IHomeService, HomeService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IBookService, BookService>();
-			//services.AddScoped<ICategoryRepository, CategoryRepository>();
-			//services.AddScoped<ICategoryService, CategoryService>();
-
-			//services.AddScoped<ITagRepository, TagRepository>();
-			//services.AddScoped<ITagService, TagService>();
-
-			//services.AddScoped<IColorRepository, ColorRepository>();
-
-			//services.AddScoped<IAuthService, AuthService>();
+			services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<ITagService, TagService>();
+     
 
 
+        
 
-			return services;
+
+            return services;
         }
     }
 }

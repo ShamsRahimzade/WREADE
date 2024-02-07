@@ -320,7 +320,7 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<int?>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -396,8 +396,9 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Isdeleted")
                         .HasColumnType("bit");
@@ -435,9 +436,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -464,9 +462,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -646,8 +641,7 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.HasOne("Wreade.Domain.Entities.Category", "Category")
                         .WithMany("BookCategories")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Book");
 
@@ -681,19 +675,11 @@ namespace Wreade.Persistence.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wreade.Domain.Entities.Category", "Category")
-                        .WithOne("Image")
-                        .HasForeignKey("Wreade.Domain.Entities.Image", "CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Wreade.Domain.Entities.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Book");
-
-                    b.Navigation("Category");
 
                     b.Navigation("User");
                 });
@@ -715,9 +701,6 @@ namespace Wreade.Persistence.DAL.Migrations
             modelBuilder.Entity("Wreade.Domain.Entities.Category", b =>
                 {
                     b.Navigation("BookCategories");
-
-                    b.Navigation("Image")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Status", b =>

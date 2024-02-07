@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
 
@@ -6,8 +6,8 @@ namespace Wreade.Application.Abstractions.Services
 {
 	public interface IUserService
 	{
-		Task<List<string>> Register(RegisterVM register);
-		Task<List<string>> Login(LoginVM login);
+		Task<bool> Register(RegisterVM register, ModelStateDictionary modelstate);
+		Task<bool> Login(LoginVM login, ModelStateDictionary modelstate);
 		Task Logout();
 		Task CreateRoleAsync();
         Task CreateAdminRoleAsync();

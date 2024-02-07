@@ -25,25 +25,13 @@ namespace WEB.Controllers
 			{
 				Register = register
 			};
-			if (!ModelState.IsValid)
-			{
-
-				return View(combinevm);
-			}
-			var result = await _service.Register(combinevm.Register);
-			if (result.Any())
-			{
-				foreach (var item in result)
-				{
-					ModelState.AddModelError(String.Empty, item);
-					return View(combinevm);
-				}
-			}
-			return RedirectToAction("Index", "Home");
+			if(await _service.Register(register, ModelState))
+			return RedirectToAction("Index","Home");
+			return View(combinevm);
 		}
 		public IActionResult Login()
 		{
-			return View();
+			return View("register");
 		}
 		[HttpPost]
 		public async Task<IActionResult> Login( LoginVM login)
@@ -52,21 +40,10 @@ namespace WEB.Controllers
 			{
 				Login = login
             };
-            if (!ModelState.IsValid)
-			{
+			if(await _service.Login(login, ModelState))
+			return RedirectToAction("Index","Home");
 
-				return View(combinevm);
-			}
-			var result = await _service.Login(combinevm.Login);
-			if (result.Any())
-			{
-				foreach (var item in result)
-				{
-					ModelState.AddModelError(String.Empty, item);
-					return View(combinevm);
-				}
-			}
-			return RedirectToAction("Index", "Home");
+			return View("register");
 		}
 		public async Task<IActionResult> Logout()
 		{

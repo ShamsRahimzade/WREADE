@@ -50,7 +50,7 @@
             </form>
         </div>
         <div class="form-container sign-in">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" asp-action="login">
                 <div asp-validation-summary="ModelOnly"></div>
                 <h1>Sign In</h1>
                
@@ -60,7 +60,7 @@
                 <input asp-for="Login.Password"  placeholder="Password">
                 <span asp-validation-for="Login.Password"></span>
                
-                <button type="submit">Login</button>
+                <button asp-action="login" asp-controller="appuser" type="submit">Login</button>
             </form>
         </div>
         <div class="toggle-container">

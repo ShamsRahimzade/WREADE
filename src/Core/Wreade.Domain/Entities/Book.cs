@@ -10,7 +10,7 @@ namespace Wreade.Domain.Entities
         public AppUser User { get; set; }
         public List<Image> Images { get; set; }
         public List<BookTag > BookTags { get; set; }
-        public List<BookCategory > BookCategories { get; set; }
+        public List<BookCategory>? BookCategories { get; set; }
         public double Rating { get; set; }
         public bool IsCompleted { get; set; }
     }

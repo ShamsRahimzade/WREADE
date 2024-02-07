@@ -298,7 +298,14 @@
 									<li><a href="shop-details.html">Shop Details</a></li>
 								</ul>
 							</li>
-							<a asp-action="register" asp-controller="appuser">Login</a>
+							@if (User.Identity.IsAuthenticated)
+							{
+								<a asp-action="logout" asp-controller="appuser">Logout</a>
+							}
+							else
+							{
+								<a asp-action="register" asp-controller="appuser">Login</a>
+							}
 							<li class="menu-item-has-child">
 								<a href="#!">SHORTCODES</a>
 								<ul class="submenu">

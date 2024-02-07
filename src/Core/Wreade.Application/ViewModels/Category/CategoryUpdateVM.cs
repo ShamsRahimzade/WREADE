@@ -10,12 +10,10 @@ namespace Wreade.Application.ViewModels
 {
     public class CategoryUpdateVM
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public IFormFile? Photo { get; set; }
-        public int? ImageId { get; set; }
-        public Image? Image { get; set; }
-        public int Rating { get; set; }
-        public List<Book>? books { get; set; }
-        public List<int>? BookIds { get; set; }
+        public string? Image { get; set; }
+       
+      
     }
 }

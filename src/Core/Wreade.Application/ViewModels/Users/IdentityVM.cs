@@ -8,8 +8,8 @@ namespace Wreade.Application.ViewModels.Users
 {
     public class IdentityVM
     {
-        public LoginVM Login { get; set; }
-        public RegisterVM Register { get; set; }
+        public LoginVM? Login { get; set; }
+        public RegisterVM? Register { get; set; }
 
     }
 }
