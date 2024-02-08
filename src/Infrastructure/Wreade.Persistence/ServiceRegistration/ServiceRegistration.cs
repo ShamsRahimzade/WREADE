@@ -47,6 +47,7 @@ namespace Wreade.Persistence.ServiceRegistration
 			services.AddScoped<IBookService, BookService>();
 			services.AddScoped<ICategoryService, CategoryService>();
 			services.AddScoped<ICategoryRepository, CategoryRepository>();
+			services.AddScoped<IFollowRepository, FollowRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagService, TagService>();
      

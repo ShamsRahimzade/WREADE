@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+
 using Wreade.Domain.Entities.Common;
 
 namespace Wreade.Application.Abstractions.Repostories.Generic
@@ -18,5 +19,5 @@ namespace Wreade.Application.Abstractions.Repostories.Generic
         void ReverseDelete(T entity);
         Task<bool> IsExistAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
-    }
+	}
 }

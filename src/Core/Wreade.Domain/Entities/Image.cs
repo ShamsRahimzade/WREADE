@@ -9,7 +9,7 @@ namespace Wreade.Domain.Entities
       
         public int BookId { get; set; }
         public Book Book { get; set; }
-        public int AppUSerId { get; set; }
-        public AppUser User { get; set; }
+        public string? AppUSerId { get; set; }
+        public AppUser? User { get; set; }
     }
 }

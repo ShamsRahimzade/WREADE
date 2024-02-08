@@ -13,6 +13,6 @@ namespace Wreade.Application.ViewModels
 		public string UserName { get; set; }
 		public ICollection<BookCategory> MostReadCategory { get; set; }
 		public List<Book> ReadingHistory { get; set; }
-		public ICollection<AppUser> Users { get; set; }
+		
     }
 }

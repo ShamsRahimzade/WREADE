@@ -15,17 +15,13 @@
 	<section id="slider-section" class="slider-section clearfix">
 		<div id="agency-default-carousel" class="agency-default-carousel owl-carousel owl-theme">
 
-			@if (Model.Users != null)
+			@if (User.IsInRole("Author"))
 			{
-
-				@* @foreach (var item in Model.Users
-						.Where(u => u.Roles.Contains(UserRole.Author.ToString()))
-						.OrderByDescending(u => u.Books.Max(b => b.Rating))
+				@foreach (var item in Model.Books.OrderByDescending(b=>b.Rating)
 						.Take(3))
 				{
-					var top3Books = item.Books
-					.OrderByDescending(b => b.Rating)
-					.Take(3);
+					
+					
 					<div class="item bg-gray d-flex align-items-center">
 						<div class="container">
 							<div class="row align-items-center">
@@ -36,7 +32,7 @@
 											@item.Name
 										</h3>
 										<p>
-											@item.SelfInformation
+											@item.User.SelfInformation
 										</p>
 										<a href="#!" class="btn">Go Profile</a>
 									</div>
@@ -44,7 +40,8 @@
 
 								<div class="col-5">
 									<div class="slider-image">
-										@foreach (var book in top3Books)
+										@foreach (var book in @item.User.Books.OrderByDescending(b => b.Rating)
+												.Take(3))
 										{
 											<div class="child-image child-image-1">
 												<img src="~/assets/images/slider/@book.Images.FirstOrDefault(bi=>bi.IsPrimary==true)?.URL" alt="image_not_found">
@@ -61,15 +58,15 @@
 							<div class="container">
 								<div class="social-links-text ul-li clearfix">
 									<ul class="clearfix">
-										<li><a href="@item.Facebook">facebook</a></li>
-										<li><a href="@item.Twitter">twitter</a></li>
-										<li><a href="@item.Instagram">instagram</a></li>
+										<li><a href="@item.User.Facebook">facebook</a></li>
+										<li><a href="@item.User.Twitter">twitter</a></li>
+										<li><a href="@item.User.Instagram">instagram</a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
-				} *@
+				}
 			}
 
 		</div>
@@ -141,24 +138,25 @@
 	================================================== -->
 	<!-- service-section - start
 	================================================== -->
-	@if (@Model.Users is not null)
+	@if (User.IsInRole("Author"))
 	{
 		<section id="service-section" class="service-section sec-ptb-100 bg-light-gray clearfix">
 			<div class="container">
 				<div class="row mt--60">
-					@* @foreach (var item in Model.Users.Where(u => u.Roles.Contains(UserRole.Author.ToString())))
+					@foreach (var item in Model.Books.OrderByDescending(b=>b.Rating)
+					.Take(3))
 					{
 						count++;
 						<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 							<div class="service-default" data-aos="fade-up" data-aos-delay="100">
 								<span class="serial-number">@count</span>
-								<h3 class="item-title">@item.UserName</h3>
+								<h3 class="item-title">@item.User.Name</h3>
 								<p class="mb-0">
-									@item.SelfInformation
+									@item.User.SelfInformation
 								</p>
 							</div>
 						</div>
-					} *@
+					}
 				</div>
 			</div>
 		</section>

@@ -4,7 +4,7 @@
 
 namespace Wreade.Persistence.DAL.Migrations
 {
-    public partial class tabless : Migration
+    public partial class table : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

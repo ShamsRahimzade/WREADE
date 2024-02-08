@@ -57,6 +57,7 @@ namespace Wreade.Persistence.Implementations.Repositories.Generic
             query = _addIncludes(query, includes);
             return await query.FirstOrDefaultAsync();
         }
+       
         public IQueryable<T> GetPagination(int skip = 0, int take = 0, bool IgnoreQuery = true)
         {
             IQueryable<T> query = _context.Set<T>();
@@ -115,7 +116,7 @@ namespace Wreade.Persistence.Implementations.Repositories.Generic
             Update(entity);
         }
 
-
+        
 
         public async Task SaveChangeAsync()
         {

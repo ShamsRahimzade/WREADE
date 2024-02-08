@@ -12,8 +12,8 @@ using Wreade.Persistence.DAL;
 namespace Wreade.Persistence.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240206220531_tabless")]
-    partial class tabless
+    [Migration("20240208124338_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -268,8 +268,8 @@ namespace Wreade.Persistence.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -301,12 +301,9 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Books");
                 });
@@ -432,8 +429,8 @@ namespace Wreade.Persistence.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AppUSerId")
-                        .HasColumnType("int");
+                    b.Property<string>("AppUSerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
@@ -458,14 +455,11 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("AppUSerId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("BookId");
 
                     b.ToTable("Images");
                 });
@@ -629,7 +623,7 @@ namespace Wreade.Persistence.DAL.Migrations
                 {
                     b.HasOne("Wreade.Domain.Entities.AppUser", "User")
                         .WithMany("Books")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AppUserId");
 
                     b.Navigation("User");
                 });
@@ -671,15 +665,15 @@ namespace Wreade.Persistence.DAL.Migrations
 
             modelBuilder.Entity("Wreade.Domain.Entities.Image", b =>
                 {
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("AppUSerId");
+
                     b.HasOne("Wreade.Domain.Entities.Book", "Book")
                         .WithMany("Images")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Wreade.Domain.Entities.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
 
                     b.Navigation("Book");
 

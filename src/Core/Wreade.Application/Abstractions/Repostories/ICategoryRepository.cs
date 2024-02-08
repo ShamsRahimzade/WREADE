@@ -8,7 +8,9 @@ using Wreade.Domain.Entities;
 
 namespace Wreade.Application.Abstractions.Repostories
 {
+
     public interface ICategoryRepository:IRepository<Category>
     {
-    }
+		
+	}
 }

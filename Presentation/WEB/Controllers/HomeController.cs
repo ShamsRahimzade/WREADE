@@ -37,7 +37,6 @@ namespace WEB.Controllers
 				MostReadCategory = mostReadCategory,
 				ReadingHistory = readingHistory,
 				Books = vm.Books,
-				Users = vm.Users
 			};
 
 			return View(viewModel);

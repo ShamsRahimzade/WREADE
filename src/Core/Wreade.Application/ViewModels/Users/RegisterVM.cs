@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Wreade.Domain.Enums;
 
 namespace Wreade.Application.ViewModels
@@ -18,7 +17,7 @@ namespace Wreade.Application.ViewModels
 		[MaxLength(50, ErrorMessage = "Soyadin uzunlugu 50`den boyuk omas")]
 		public string Surname { get; set; }
 		[Required(ErrorMessage = "Mail addressi bosh gonderile bilmez")]
-		[MinLength(3, ErrorMessage = "Mail adi uzunlugu 8`den kichik omas")]
+		[MinLength(3, ErrorMessage = "Mail adi uzunlugu 3`den kichik omas")]
 		[MaxLength(320, ErrorMessage = "Mail adi uzunlugu 320`den boyuk omas")]
 		[DataType(DataType.EmailAddress)]
         public string Email { get; set; }
@@ -30,7 +29,7 @@ namespace Wreade.Application.ViewModels
 		[Compare(nameof(Password))]
 		public string ConfirmPassword { get; set; }
 		[Required(ErrorMessage = "Istifadechi adi bosh gonderile bilmez")]
-		[MinLength(8, ErrorMessage = "Adin uzunlugu 8`den kichik omas")]
+		[MinLength(8, ErrorMessage = "Username uzunlugu 8`den kichik omas")]
 		[MaxLength(100, ErrorMessage = "Adin uzunlugu 100`den boyuk omas")]
 		public string UserName { get; set; }
 		[Required(ErrorMessage = "Birthday bosh gonderile bilmez")]
@@ -39,8 +38,8 @@ namespace Wreade.Application.ViewModels
 		public IFormFile? MainImage { get; set; }
 		public IFormFile? BackImage { get; set; }
         [Required(ErrorMessage = "Please select a role.")]
-        [Display(Name = "Select a Role")]
-        public string SelectedRole { get; set; }
+      
+        public UserRole Role { get; set; }
 
 
     }

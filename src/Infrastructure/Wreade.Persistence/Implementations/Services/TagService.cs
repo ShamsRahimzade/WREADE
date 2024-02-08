@@ -58,8 +58,10 @@ namespace Wreade.Persistence.Implementations.Services
 		{
 			ICollection<Tag> tag = await _tagrepo.GetPagination(skip: (page - 1) * take, take: take).ToListAsync();
 
-			int count = await _tagrepo.GetAll().OrderBy(c => c.CreatedAt).Include(t => t.BookTags).ThenInclude(bt => bt.Book).CountAsync();
-			double totalpage = Math.Ceiling((double)count / take);
+            int count = await _tagrepo.GetAll(includes: "BookTags.Book")
+      .OrderBy(c => c.CreatedAt)
+      .CountAsync();
+            double totalpage = Math.Ceiling((double)count / take);
 			PaginationVM<Tag> vm = new PaginationVM<Tag>
 			{
 				Items = tag,

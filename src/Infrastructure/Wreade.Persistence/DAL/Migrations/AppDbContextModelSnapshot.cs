@@ -184,6 +184,12 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<string>("Facebook")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FollowerCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowingCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Instagram")
                         .HasColumnType("nvarchar(max)");
 
@@ -266,8 +272,8 @@ namespace Wreade.Persistence.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -299,12 +305,13 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Books");
                 });
@@ -422,6 +429,84 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Wreade.Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("CommentedBookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Isdeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CommentedBookId");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Wreade.Domain.Entities.Follow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FolloweeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FollowerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Isdeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FolloweeId");
+
+                    b.HasIndex("FollowerId");
+
+                    b.ToTable("Follows");
+                });
+
             modelBuilder.Entity("Wreade.Domain.Entities.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -430,8 +515,8 @@ namespace Wreade.Persistence.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AppUSerId")
-                        .HasColumnType("int");
+                    b.Property<string>("AppUSerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
@@ -456,14 +541,11 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("AppUSerId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("BookId");
 
                     b.ToTable("Images");
                 });
@@ -627,7 +709,8 @@ namespace Wreade.Persistence.DAL.Migrations
                 {
                     b.HasOne("Wreade.Domain.Entities.AppUser", "User")
                         .WithMany("Books")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
                 });
@@ -667,17 +750,52 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("Wreade.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "Author")
+                        .WithMany("Comments")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Wreade.Domain.Entities.Book", "CommentedBook")
+                        .WithMany("Comments")
+                        .HasForeignKey("CommentedBookId");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("CommentedBook");
+                });
+
+            modelBuilder.Entity("Wreade.Domain.Entities.Follow", b =>
+                {
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "Follower")
+                        .WithMany("Followees")
+                        .HasForeignKey("FolloweeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "Followee")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Followee");
+
+                    b.Navigation("Follower");
+                });
+
             modelBuilder.Entity("Wreade.Domain.Entities.Image", b =>
                 {
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("AppUSerId");
+
                     b.HasOne("Wreade.Domain.Entities.Book", "Book")
                         .WithMany("Images")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Wreade.Domain.Entities.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
 
                     b.Navigation("Book");
 
@@ -687,6 +805,12 @@ namespace Wreade.Persistence.DAL.Migrations
             modelBuilder.Entity("Wreade.Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("Books");
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("Followees");
+
+                    b.Navigation("Followers");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Book", b =>
@@ -694,6 +818,8 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("BookCategories");
 
                     b.Navigation("BookTags");
+
+                    b.Navigation("Comments");
 
                     b.Navigation("Images");
                 });

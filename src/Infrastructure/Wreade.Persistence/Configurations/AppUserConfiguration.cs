@@ -20,7 +20,7 @@ namespace Wreade.Persistence.Configurations
 			builder.Property(x => x.Surname)
 				 .IsRequired()
 				 .HasMaxLength(50);
-			builder.Ignore(u => u.Roles);
+			
 		}
 	}
 }

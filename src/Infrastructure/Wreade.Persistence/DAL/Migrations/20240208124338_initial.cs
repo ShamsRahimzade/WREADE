@@ -246,8 +246,7 @@ namespace Wreade.Persistence.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Part = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    AppUserId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Rating = table.Column<double>(type: "float", nullable: false),
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -260,8 +259,8 @@ namespace Wreade.Persistence.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Books_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Books_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -333,8 +332,7 @@ namespace Wreade.Persistence.DAL.Migrations
                     URL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPrimary = table.Column<bool>(type: "bit", nullable: true),
                     BookId = table.Column<int>(type: "int", nullable: false),
-                    AppUSerId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AppUSerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Isdeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -344,8 +342,8 @@ namespace Wreade.Persistence.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Images_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Images_AspNetUsers_AppUSerId",
+                        column: x => x.AppUSerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -411,9 +409,9 @@ namespace Wreade.Persistence.DAL.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_UserId",
+                name: "IX_Books_AppUserId",
                 table: "Books",
-                column: "UserId");
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookTag_BookId",
@@ -432,14 +430,14 @@ namespace Wreade.Persistence.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Images_AppUSerId",
+                table: "Images",
+                column: "AppUSerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_BookId",
                 table: "Images",
                 column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_UserId",
-                table: "Images",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Status_Name",

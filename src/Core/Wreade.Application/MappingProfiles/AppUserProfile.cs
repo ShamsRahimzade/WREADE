@@ -14,6 +14,8 @@ namespace Wreade.Application.MappingProfiles
         public AppUserProfile()
         {
 			CreateMap<RegisterVM, AppUser>();
-		}
+            CreateMap<AppUser, EditProfileVM>().ReverseMap();
+
+        }
     }
 }
