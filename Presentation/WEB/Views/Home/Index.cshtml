@@ -17,11 +17,11 @@
 
 			@if (User.IsInRole("Author"))
 			{
-				@foreach (var item in Model.Books.OrderByDescending(b=>b.Rating)
+				@foreach (var item in Model.Books.OrderByDescending(b => b.Rating)
 						.Take(3))
 				{
-					
-					
+
+
 					<div class="item bg-gray d-flex align-items-center">
 						<div class="container">
 							<div class="row align-items-center">
@@ -82,13 +82,14 @@
 
 				<div class="section-title text-center mb-60" data-aos="fade-up" data-aos-delay="100">
 					@if (User.Identity.IsAuthenticated)
-						{
+					{
 						<h2 class="title-text mb-15">
 							My Library
 						</h2>
-							}
-						else
-						{	<h2 class="title-text mb-15">
+					}
+					else
+					{
+						<h2 class="title-text mb-15">
 							We Think You`ll Enjoy
 						</h2>
 					}
@@ -143,8 +144,8 @@
 		<section id="service-section" class="service-section sec-ptb-100 bg-light-gray clearfix">
 			<div class="container">
 				<div class="row mt--60">
-					@foreach (var item in Model.Books.OrderByDescending(b=>b.Rating)
-					.Take(3))
+					@foreach (var item in Model.Books.OrderByDescending(b => b.Rating)
+							.Take(3))
 					{
 						count++;
 						<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -224,7 +225,7 @@
 	================================================== -->
 	<!-- blog-section - start
 	================================================== -->
-@if (Model.MostReadCategory is not null && User.Identity.IsAuthenticated)
+	@if (Model.MostReadCategory is not null && User.Identity.IsAuthenticated)
 	{
 		<section id="blog-section" class="blog-section sec-ptb-100 clearfix">
 			<div class="container">
@@ -235,7 +236,7 @@
 				</div>
 
 				<div class="row">
-				@foreach (var item in Model.MostReadCategory)
+					@foreach (var item in Model.MostReadCategory)
 					{
 						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 							<div class="blog-grid clearfix" data-aos="fade-up" data-aos-delay="100">
@@ -257,13 +258,13 @@
 						</div>
 					}
 
-				
+
 				</div>
 
 			</div>
 		</section>
 	}
-	
+
 	<!-- blog-section - end
 	================================================== -->
 	<!-- partners-section - start
@@ -271,57 +272,23 @@
 	<div id="partners-section" class="partners-section sec-ptb-100 bg-light-gray clearfix">
 		<div class="container" data-aos="fade-up" data-aos-delay="100">
 			<div id="partners-carousel" class="partners-carousel arrow-left-right owl-carousel owl-theme">
-
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_5.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_5.png" alt="image_not_found">
+				@* @if (User.IsInRole("Author")) *@
+				@* { *@
+					@foreach (var item in Model.Users)
+					{
+						<div class="item">
+							<a class="partner-logo" asp-controller="profile" asp-action="user"  asp-route-username="@item.UserName">
+								<img class="before-image" src="~/assets/images/@item.MainImage" alt="image_not_found">
+								<img class="after-image" src="~/assets/images/@item.BackImage" alt="image_not_found">
+							</a>
+						</div>
+				@* } *@
+				<h3 class="item-title">
+					<a href="#!">
+						@item.Name
 					</a>
-				</div>
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_6.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_6.png" alt="image_not_found">
-					</a>
-				</div>
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_7.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_7.png" alt="image_not_found">
-					</a>
-				</div>
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_8.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_8.png" alt="image_not_found">
-					</a>
-				</div>
-
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_5.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_5.png" alt="image_not_found">
-					</a>
-				</div>
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_6.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_6.png" alt="image_not_found">
-					</a>
-				</div>
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_7.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_7.png" alt="image_not_found">
-					</a>
-				</div>
-				<div class="item">
-					<a class="partner-logo" href="#!">
-						<img class="before-image" src="~/assets/images/partners/img_8.png" alt="image_not_found">
-						<img class="after-image" src="~/assets/images/partners/img_8.png" alt="image_not_found">
-					</a>
-				</div>
-
+				</h3>
+					}
 			</div>
 		</div>
 	</div>

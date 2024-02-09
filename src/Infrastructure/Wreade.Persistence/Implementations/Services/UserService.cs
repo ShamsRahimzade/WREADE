@@ -280,14 +280,14 @@ namespace Wreade.Persistence.Implementations.Services
             followed.FollowerCount++;
             user.FollowingCount++;
 
-            Follow foll = new Follow
+            Follow follow = new Follow
             {
 
                 FolloweeId = followedId,
                 FollowerId = userId
             };
 
-            await _followRepo.AddAsync(foll);
+            await _followRepo.AddAsync(follow);
             await _followRepo.SaveChangeAsync();
         }
         public async Task Unfollow(string followedId)

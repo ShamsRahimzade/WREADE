@@ -23,10 +23,10 @@
             <form method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly"></div>
                 <h1>Create Account</h1>
-                <div col-6>
+             
                     <input asp-for="Register.Name" placeholder="Name">
                     <span asp-validation-for="Register.Name"></span>
-                </div>
+               
                 
                 <input asp-for="Register.Surname" placeholder="Surname">
                 <span asp-validation-for="Register.Surname"></span>
@@ -51,7 +51,7 @@
                         }
                     </select>
                 </div>
-            <button type="submit">SignUp</button>
+                <button asp-action="register" asp-controller="appuser" type="submit">SignUp</button>
             </form>
         </div>
         <div class="form-container sign-in">

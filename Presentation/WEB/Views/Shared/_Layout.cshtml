@@ -301,6 +301,7 @@
 							@if (User.Identity.IsAuthenticated)
 							{
 								<a asp-action="logout" asp-controller="appuser">Logout</a>
+								<a asp-action="user" asp-controller="profile" asp-route-username="@User.Identity.Name">Detail</a>
 							}
 							else
 							{
@@ -523,7 +524,7 @@
 	<!-- header-section - end
 	================================================== -->
 	@RenderBody()
-	================================================== -->
+	
 	<!-- footer-section - start
 	================================================== -->
 	<footer id="footer-section" class="footer-section sec-ptb-100 clearfix">
@@ -532,7 +533,7 @@
 
 				<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
 					<div class="brand-logo clearfix">
-						<a href="index.html">
+						<a asp-controller="home" asp-action="index">
 							<img src="~/assets/images/logo/logo_1.png" alt="logo_not_found">
 						</a>
 					</div>

@@ -22,8 +22,8 @@ namespace Wreade.Domain.Entities
 		public string BackImage { get; set; } = "profile.png";
 		public int? StatusId { get; set; }
         public Status? Status { get; set; }
-        public int FollowingCount { get; set; }
-        public int FollowerCount { get; set; }
+        public int FollowingCount { get; set; } = 0;
+        public int FollowerCount { get; set; } = 0;
         public ICollection<Follow> Followers { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Follow> Followees { get; set; }
@@ -31,6 +31,7 @@ namespace Wreade.Domain.Entities
 		{
 			MainImage = "profile.png";
 			BackImage = "profile.png";
+
 		}
 	}
 }
