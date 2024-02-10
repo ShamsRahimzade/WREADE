@@ -62,7 +62,8 @@
                 <input asp-for="Login.UserNameOrEmail" placeholder="UserNameOrEmail">
                 <span asp-validation-for="Login.UserNameOrEmail"></span>
 
-                <input asp-for="Login.Password"  placeholder="Password">
+                <input asp-for="Login.Password" id="passwordInput">
+                <i class="fas fa-eye" id="showPassword"></i>
                 <span asp-validation-for="Login.Password"></span>
                
                 <button asp-action="login" asp-controller="appuser" type="submit">Login</button>
@@ -79,6 +80,7 @@
                     <h1>Welcome, Friend!</h1>
                     <p>Enter your personal details to use all of site features</p>
                     <button class="hidden" id="register">Sign Up</button>
+                    <a asp-action="ForgotPassword">forgot Password?</a>
                 </div>
             </div>
         </div>
@@ -88,3 +90,29 @@
 </body>
 
 </html>
+<script>
+    function showPassword() {
+        var passwordInput = document.getElementById("passwordInput");
+        passwordInput.type = "text";
+    }
+
+    function hidePassword() {
+        var passwordInput = document.getElementById("passwordInput");
+        passwordInput.type = "password";
+    }
+
+    const passwordInput = document.getElementById("passwordInput");
+    const showPasswordButton = document.getElementById("showPassword");
+
+    showPasswordButton.addEventListener("click", function () {
+        if (passwordInput.type === "password") {
+            showPassword();
+            showPasswordButton.classList.remove("fa-eye");
+            showPasswordButton.classList.add("fa-eye-slash");
+        } else {
+            hidePassword();
+            showPasswordButton.classList.remove("fa-eye-slash");
+            showPasswordButton.classList.add("fa-eye");
+        }
+    });
+</script>

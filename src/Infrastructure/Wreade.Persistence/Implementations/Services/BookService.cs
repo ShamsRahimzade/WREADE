@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wreade.Application.Abstractions.Services;
+using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
 using Wreade.Persistence.DAL;
 
@@ -25,6 +26,6 @@ namespace Wreade.Persistence.Implementations.Services
 			return readingHistory;
 		}
 
-
+		//public async Task<bool> CreateAsync(BookCreateVM vm)
 	}
 }

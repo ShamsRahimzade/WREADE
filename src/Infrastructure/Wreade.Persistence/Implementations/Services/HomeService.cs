@@ -20,7 +20,7 @@ namespace Wreade.Persistence.Implementations.Services
 		}
         public async Task<HomeVM> GetAllAsync()
         {
-           List<Book> book=await _book.GetAll().Include(b=>b.User).Include(b=>b.Images).ToListAsync();
+           List<Book> book=await _book.GetAll().Include(b=>b.User).ToListAsync();
 			List<AppUser> users = await _userManager.Users.ToListAsync();
 			HomeVM vm = new HomeVM
             {

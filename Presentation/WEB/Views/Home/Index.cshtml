@@ -44,7 +44,7 @@
 												.Take(3))
 										{
 											<div class="child-image child-image-1">
-												<img src="~/assets/images/slider/@book.Images.FirstOrDefault(bi=>bi.IsPrimary==true)?.URL" alt="image_not_found">
+												<img src="~/assets/images/slider/@book.CoverPhoto" alt="image_not_found">
 											</div>
 										}
 
@@ -111,7 +111,7 @@
 						{
 							<div class="grid-item">
 								<a href="#!" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
-									<img src="~/assets/images/portfolio/@item.Images.FirstOrDefault(bi=>bi.IsPrimary==true)?.URL" alt="image_not_found">
+									<img src="~/assets/images/portfolio/@item.CoverPhoto" alt="image_not_found">
 									<span class="item-content-2">
 										<strong class="item-title">@item.Name</strong>
 										<small class="item-brand">@item.Part</small>
@@ -181,7 +181,7 @@
 					{
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 							<div class="team-fullimage text-center clearfix" data-aos="fade-up" data-aos-delay="100">
-								<img src="~/assets/images/team/@item.Images.FirstOrDefault(bi=>bi.IsPrimary==true)?.URL" alt="image_not_found">
+								<img src="~/assets/images/team/@item.CoverPhoto" alt="image_not_found">
 								<div class="item-content">
 									<div class="person-name"><h3>@item.User.Name</h3></div>
 									<div class="person-title"><span>@item.Part</span></div>
@@ -241,7 +241,7 @@
 						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 							<div class="blog-grid clearfix" data-aos="fade-up" data-aos-delay="100">
 								<a href="#!" class="blog-image">
-									<img src="~/assets/images/blogs/@item.Book.Images.FirstOrDefault(bi=>bi.IsPrimary==true)?.URL" alt="image_not_found">
+									<img src="~/assets/images/blogs/@item.Book.CoverPhoto" alt="image_not_found">
 								</a>
 								<h3 class="item-title">
 									<a href="#!">

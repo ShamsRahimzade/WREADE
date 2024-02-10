@@ -1,163 +1,181 @@
 ﻿
+using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Wreade.Application.Abstractions.Repostories;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.Utilities.Extensions;
 using Wreade.Application.ViewModels;
+using Wreade.Application.ViewModels.Users;
 using Wreade.Domain.Entities;
 using Wreade.Domain.Enums;
 using static System.Net.WebRequestMethods;
 
 namespace Wreade.Persistence.Implementations.Services
 {
-	public class UserService : IUserService
-	{
-		private readonly UserManager<AppUser> _user;
-		private readonly IMapper _mapper;
-		private readonly SignInManager<AppUser> _signman;
-		private readonly RoleManager<IdentityRole> _roleman;
-		private readonly IWebHostEnvironment _env;
+    public class UserService : IUserService
+    {
+        private readonly UserManager<AppUser> _user;
+        private readonly IMapper _mapper;
+        private readonly SignInManager<AppUser> _signman;
+        private readonly RoleManager<IdentityRole> _roleman;
+        private readonly IWebHostEnvironment _env;
         private readonly IHttpContextAccessor _http;
         private readonly IFollowRepository _followRepo;
+        //private readonly IUrlHelper _help;
+        //private readonly IActionContextAccessor _actionContextAccessor;
 
-        public UserService(UserManager<AppUser> user, IMapper mapper, SignInManager<AppUser> signman, RoleManager<IdentityRole> roleman, IWebHostEnvironment env,IHttpContextAccessor http, IFollowRepository followRepo)
-		{
-			_user = user;
-			_mapper = mapper;
-			_signman = signman;
-			_roleman = roleman;
-			_env = env;
+        public UserService(
+         UserManager<AppUser> user,
+         IMapper mapper,
+         SignInManager<AppUser> signman,
+         RoleManager<IdentityRole> roleman,
+         IWebHostEnvironment env,
+         IHttpContextAccessor http,
+         IFollowRepository followRepo
+         //IUrlHelper help,
+         //IActionContextAccessor actionContextAccessor)
+         )
+        {
+            _user = user;
+            _mapper = mapper;
+            _signman = signman;
+            _roleman = roleman;
+            _env = env;
             _http = http;
             _followRepo = followRepo;
+            //_help = help;
+            //_actionContextAccessor = actionContextAccessor;
         }
 
-		public async Task CreateRoleAsync()
-		{
-			foreach (UserRole role in Enum.GetValues(typeof(UserRole)))
-			{
-				if (!await _roleman.RoleExistsAsync(role.ToString()))
-				{
-					await _roleman.CreateAsync(new IdentityRole
-					{
-						Name = role.ToString(),
-					});
+        public async Task CreateRoleAsync()
+        {
+            foreach (UserRole role in Enum.GetValues(typeof(UserRole)))
+            {
+                if (!await _roleman.RoleExistsAsync(role.ToString()))
+                {
+                    await _roleman.CreateAsync(new IdentityRole
+                    {
+                        Name = role.ToString(),
+                    });
 
-				}
-			}
-		}
+                }
+            }
+        }
 
-		public async Task<bool> Login(LoginVM login, ModelStateDictionary modelstate)
-		{
-			if (!modelstate.IsValid) return false;
-			AppUser user = await _user.FindByEmailAsync(login.UserNameOrEmail);
-			if (user == null)
-			{
-				user = await _user.FindByNameAsync(login.UserNameOrEmail);
-				if (user == null)
-				{
-					modelstate.AddModelError(string.Empty,"user empty");
-					return false;
+        public async Task<bool> Login(LoginVM login, ModelStateDictionary modelstate)
+        {
+            if (!modelstate.IsValid) return false;
+            AppUser user = await _user.FindByEmailAsync(login.UserNameOrEmail);
+            if (user == null)
+            {
+                user = await _user.FindByNameAsync(login.UserNameOrEmail);
+                if (user == null)
+                {
+                    modelstate.AddModelError(string.Empty, "user empty");
+                    return false;
 
-				}
-			}
-			var result = await _signman.PasswordSignInAsync(user, login.Password, login.IsRemembered, true);
-			if (result.IsLockedOut)
-			{
-				modelstate.AddModelError(string.Empty, "bloked");
-				return false;
-			}
-			if (!result.Succeeded)
-			{
-				modelstate.AddModelError(string.Empty, "not succeeded");
-				return false;
-			}
-			return true;
-		}
+                }
+            }
+            var result = await _signman.PasswordSignInAsync(user, login.Password, login.IsRemembered, true);
+            if (result.IsLockedOut)
+            {
+                modelstate.AddModelError(string.Empty, "bloked");
+                return false;
+            }
+            if (!result.Succeeded)
+            {
+                modelstate.AddModelError(string.Empty, "not succeeded");
+                return false;
+            }
+            return true;
+        }
 
-		public async Task Logout()
-		{
-			await _signman.SignOutAsync();
+        public async Task Logout()
+        {
+            await _signman.SignOutAsync();
 
-		}
+        }
 
-		public async Task<bool> Register(RegisterVM register, ModelStateDictionary modelstate)
-		{
-			if (!modelstate.IsValid) return false;
-			if (!register.Name.IsLetter())
-			{
-				modelstate.AddModelError("Name", "letter");
-				return false;
-			}
-			if (!register.Email.CheeckEmail())
-			{
-				modelstate.AddModelError("Name", "mail");
-				return false;
-			}
-			register.Name.Capitalize();
-			register.Surname.Capitalize();
-			AppUser user = new AppUser
-			{
-				Name = register.Name,
-				UserName = register.UserName,
-				Surname = register.Surname,
-				Email = register.Email,
-				Birthday = register.BirthDay,
+        public async Task<bool> Register(RegisterVM register, ModelStateDictionary modelstate)
+        {
+            if (!modelstate.IsValid) return false;
+            if (!register.Name.IsLetter())
+            {
+                modelstate.AddModelError("Name", "letter");
+                return false;
+            }
+            if (!register.Email.CheeckEmail())
+            {
+                modelstate.AddModelError("Name", "mail");
+                return false;
+            }
+            register.Name.Capitalize();
+            register.Surname.Capitalize();
+            AppUser user = new AppUser
+            {
+                Name = register.Name,
+                UserName = register.UserName,
+                Surname = register.Surname,
+                Email = register.Email,
+                Birthday = register.BirthDay,
 
-			};
+            };
 
-			if (register.MainImage is not null)
-			{
-				if (!register.MainImage.CheckType("image/"))
-				{
-					modelstate.AddModelError("MainImage", "wrong image type");
-					return false;
-				}
-				if (!register.MainImage.ValidateSize(7))
-				{
-					modelstate.AddModelError("MainImage", "wrong image size");
-					return false;
-				}
-				user.MainImage = await register.MainImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
-			}
+            if (register.MainImage is not null)
+            {
+                if (!register.MainImage.CheckType("image/"))
+                {
+                    modelstate.AddModelError("MainImage", "wrong image type");
+                    return false;
+                }
+                if (!register.MainImage.ValidateSize(7))
+                {
+                    modelstate.AddModelError("MainImage", "wrong image size");
+                    return false;
+                }
+                user.MainImage = await register.MainImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
+            }
             if (register.BackImage is not null)
             {
                 if (!register.BackImage.CheckType("image/"))
                 {
-					modelstate.AddModelError("BackImage", "wrong image type");
-					return false;
-				}
+                    modelstate.AddModelError("BackImage", "wrong image type");
+                    return false;
+                }
                 if (!register.BackImage.ValidateSize(7))
                 {
-					modelstate.AddModelError("BackImage", "wrong image size");
-					return false;
-				}
+                    modelstate.AddModelError("BackImage", "wrong image size");
+                    return false;
+                }
                 user.BackImage = await register.BackImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
             }
             IdentityResult result = await _user.CreateAsync(user, register.Password);
-			if (!result.Succeeded)
-			{
-				foreach (var error in result.Errors)
-				{
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
 
-					modelstate.AddModelError(string.Empty, error.Description);
-					
-				}
-				return false;
-			}
+                    modelstate.AddModelError(string.Empty, error.Description);
+
+                }
+                return false;
+            }
 
             await _signman.SignInAsync(user, isPersistent: false);
             if (user != null)
             {
                 await AssignRoleToUser(user, register.Role.ToString());
             }
-			return true;
+            return true;
 
-		}
+        }
         public async Task<List<string>> UpdateUser(AppUser user, EditProfileVM vm)
         {
             List<string> str = new List<string>();
@@ -332,5 +350,34 @@ namespace Wreade.Persistence.Implementations.Services
         {
             return await _user.FindByIdAsync(userId);
         }
+        //public async Task<bool> resetPassword(string userId, string token)
+        //{
+        //    if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token)) return false;
+        //    var user = await _user.FindByIdAsync(userId);
+        //    if (user is null) return false;
+        //    return true;
+        //}
+        //public async Task<bool> ForgotPassword(ForgotPasswordVM vm, ModelStateDictionary ms)
+        //{
+        //    if (!ms.IsValid) return false;
+        //    var user = await _user.FindByEmailAsync(vm.Email);
+        //    if (user is null) return false;
+        //    string token = await _user.GeneratePasswordResetTokenAsync(user);
+        //    string link = _help.Action("ResetPassword", "AppUser", new { userId = user.Id, token = token }
+        //    , _actionContextAccessor.ActionContext.HttpContext.Request.Scheme);
+        //    return true;
+        //}
+
+       
+        //public async Task<bool> ResetPassword(ResetPasswordVM vm, string userId, string token, ModelStateDictionary ms)
+        //{
+        //    if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token)) return false;
+        //    if (!ms.IsValid) return false;
+        //    var user = await _user.FindByIdAsync(userId);
+        //    if (user is null) return false;
+        //    var identityUser = await _user.ResetPasswordAsync(user, token, vm.ConfirmPassword);
+
+        //    return true;
+        //}
     }
 }

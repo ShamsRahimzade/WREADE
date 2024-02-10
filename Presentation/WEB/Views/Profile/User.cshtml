@@ -17,38 +17,53 @@
 					<div class="pro-img"><img src="~/assets/images/@Model.MainImage" alt="user"></div>
 					<h3 class="m-b-0">@(Model.Name + Model.Surname)</h3>
 					<p>@@@Model.UserName</p>
-					@if (User.Identity.Name == Model.UserName)
+					@if (User.Identity.IsAuthenticated)
 					{
-						<div class="social-links">
-							<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
-								<li><a asp-action="Edit" asp-route-username="@Model.UserName"><i class="ri-pencil-line"></i></a></li>
-								<li><a href="javascript:void();"><i class="ri-settings-4-line"></i></a></li>
-							</ul>
-						</div>
 
-					}
-					else
-					{
-						if (!isFollowing)
+
+						@if (User.Identity.Name == Model.UserName)
 						{
 							<div class="social-links">
 								<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
-									<a asp-controller="Profile" asp-action="Follow" asp-route-followeeId="@Model.Id">
-									<li class=" rounded p-2  mr-3"> Follow</li></a>
-
+									<li><a asp-action="Edit" asp-route-username="@Model.UserName"><i class="ri-pencil-line"></i></a></li>
+									<li><a href="javascript:void();"><i class="ri-settings-4-line"></i></a></li>
 								</ul>
 							</div>
+
 						}
 						else
 						{
-							<div class="social-links">
-								<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
-									<a asp-controller="Profile" asp-action="Unfollow" asp-route-followeeId="@Model.Id">
-									<li class=" rounded p-2  mr-3"> Unfollow</li></a>
+							if (!isFollowing)
+							{
+								<div class="social-links">
+									<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
+										<a asp-controller="Profile" asp-action="Follow" asp-route-followeeId="@Model.Id">
+										<li class=" rounded p-2  mr-3"> Follow</li></a>
 
-								</ul>
-							</div>
+									</ul>
+								</div>
+							}
+							else
+							{
+								<div class="social-links">
+									<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
+										<a asp-controller="Profile" asp-action="Unfollow" asp-route-followeeId="@Model.Id">
+										<li class=" rounded p-2  mr-3"> Unfollow</li></a>
+
+									</ul>
+								</div>
+							}
 						}
+					}
+					else
+					{
+						<div class="social-links">
+							<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
+								<a asp-controller="appuser" asp-action="register" asp-route-followeeId="@Model.Id">
+								<li class=" rounded p-2  mr-3"> Follow</li></a>
+
+							</ul>
+						</div>
 					}
 					<div class="row text-center m-t-20">
 						<div class="col-lg-6 col-md-6 m-t-20">

@@ -15,6 +15,10 @@ using Wreade.Persistence.Implementations.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Wreade.Application.MappingProfiles;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Http;
 
 namespace Wreade.Persistence.ServiceRegistration
 {
@@ -23,15 +27,9 @@ namespace Wreade.Persistence.ServiceRegistration
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("default")));
-			//services.AddAutoMapper(typeof(TagProfile));
-			//services.AddAutoMapper(typeof(CategoryProfile));
 			services.AddAutoMapper(typeof(AppUserProfile));
-            services.AddAuthentication()
-               .AddGoogle(options =>
-               {
-                   options.ClientId = "YourClientId";
-                   options.ClientSecret = "YourClientSecret";
-               });
+            services.AddAuthentication();
+           
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
@@ -42,6 +40,11 @@ namespace Wreade.Persistence.ServiceRegistration
                 opt.Lockout.AllowedForNewUsers = true;
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<IBookRepository, BookRepository>();
+
+
+            //services.AddScoped<IActionContextAccessor, ActionContextAccessor>();
+            //services.AddSingleton<IUrlHelper, UrlHelper>();
+            //services.AddHttpContextAccessor();
             services.AddScoped<IHomeService, HomeService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IBookService, BookService>();
@@ -50,10 +53,9 @@ namespace Wreade.Persistence.ServiceRegistration
 			services.AddScoped<IFollowRepository, FollowRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagService, TagService>();
-     
+      
 
 
-        
 
 
             return services;

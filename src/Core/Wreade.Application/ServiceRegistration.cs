@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using Wreade.Application.MappingProfiles;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Wreade.Application
 {
@@ -18,7 +19,6 @@ namespace Wreade.Application
         {
             services.AddAutoMapper(typeof(AppUserProfile));
             //services.AddAutoMapper(typeof(CategoryProfile));
-
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.Extensions.DependencyInjection;
 using Wreade.Application;
 using Wreade.Persistence.ServiceRegistration;
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
+//builder.Services.AddHttpContextAccessor<IActionContextAccessor, ActionContextAccessor>();
+//builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

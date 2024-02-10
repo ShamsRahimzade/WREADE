@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Wreade.Domain.Entities;
@@ -67,9 +68,22 @@ namespace Wreade.Persistence.DAL
             });
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey, e.UserId });
+            });
+            modelBuilder.Entity<IdentityUserRole<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId });
+            });
+            modelBuilder.Entity<IdentityUserToken<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+            });
+            modelBuilder.Entity<ChapterImage>(entity =>
+            {
+                entity.HasKey(e => e.ChapterId); 
+            });
         }
 
         public DbSet<Tag> Tags { get; set; }
@@ -81,6 +95,9 @@ namespace Wreade.Persistence.DAL
         public DbSet<BookCategory> BookCategory { get; set; }
         public DbSet<BookTag> BookTag { get; set; }
         public DbSet<Setting> Setting { get; set; }
-  
+        public DbSet<Chapter> Chapters { get; set; }
+        public DbSet<ChapterImage> ChapterImages { get; set; }
+        public DbSet<ChapterViewCount> ChapterViewCounts { get; set; }
+
     }
 }

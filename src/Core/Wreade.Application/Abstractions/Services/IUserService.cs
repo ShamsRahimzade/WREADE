@@ -19,5 +19,8 @@ namespace Wreade.Application.Abstractions.Services
 		Task Unfollow(string followedId);
         Task<List<string>> LoginNoPass(string username);
 		Task<AppUser> GetUserById(string userId);
+		//Task<bool> ResetPassword(ResetPasswordVM vm, string userId, string token, ModelStateDictionary ms);
+		//Task<bool> resetPassword(string userId, string token);
+		//Task<bool> ForgotPassword(ForgotPasswordVM vm, ModelStateDictionary ms);
     }
 }

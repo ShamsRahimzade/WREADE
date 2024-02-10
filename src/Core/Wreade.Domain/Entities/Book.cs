@@ -9,7 +9,7 @@ namespace Wreade.Domain.Entities
         public string Description { get; set; }
         public string? AppUserId { get; set; }
         public AppUser? User { get; set; }
-        public List<Image> Images { get; set; }
+        public string CoverPhoto { get; set; }
         public List<BookTag > BookTags { get; set; }
         public List<BookCategory>? BookCategories { get; set; }
         public ICollection<Comment>? Comments { get; set; }
