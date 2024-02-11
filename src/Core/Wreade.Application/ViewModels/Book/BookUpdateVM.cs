@@ -12,9 +12,9 @@ namespace Wreade.Application.ViewModels
         public string Name { get; set; }
         public int Part { get; set; }
         public string Description { get; set; }
-        public List<Image>? Images { get; set; }
-        public List<BookTag>? BookTags { get; set; }
-        public List<BookCategory>? BookCategories { get; set; }
+        public ICollection<Image>? Images { get; set; }
+        public ICollection<BookTag>? BookTags { get; set; }
+        public ICollection<BookCategory>? BookCategories { get; set; }
         public double Rating { get; set; }
         public bool IsCompleted { get; set; }
     }

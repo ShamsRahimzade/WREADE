@@ -7,7 +7,7 @@ namespace Wreade.Application.Abstractions.Services
 	public interface IUserService
 	{
 		Task<bool> Register(RegisterVM register, ModelStateDictionary modelstate);
-		Task<bool> Login(LoginVM login, ModelStateDictionary modelstate);
+		Task<bool> Login(LoginVM vm, ModelStateDictionary modelstate);
 		Task Logout();
 		Task CreateRoleAsync();
         Task CreateAdminRoleAsync();
@@ -19,8 +19,6 @@ namespace Wreade.Application.Abstractions.Services
 		Task Unfollow(string followedId);
         Task<List<string>> LoginNoPass(string username);
 		Task<AppUser> GetUserById(string userId);
-		//Task<bool> ResetPassword(ResetPasswordVM vm, string userId, string token, ModelStateDictionary ms);
-		//Task<bool> resetPassword(string userId, string token);
-		//Task<bool> ForgotPassword(ForgotPasswordVM vm, ModelStateDictionary ms);
+		
     }
 }

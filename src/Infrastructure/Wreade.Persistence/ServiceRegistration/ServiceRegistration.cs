@@ -12,13 +12,10 @@ using Wreade.Application.Abstractions.Services;
 using Wreade.Persistence.Implementations.Services;
 using Wreade.Application.Abstractions.Repostories;
 using Wreade.Persistence.Implementations.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Hosting;
+
 using Wreade.Application.MappingProfiles;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Http;
+
+using Wreade.Application.Abstractions.Services.MailService;
 
 namespace Wreade.Persistence.ServiceRegistration
 {
@@ -29,8 +26,8 @@ namespace Wreade.Persistence.ServiceRegistration
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("default")));
 			services.AddAutoMapper(typeof(AppUserProfile));
             services.AddAuthentication();
-           
-            services.AddIdentity<AppUser, IdentityRole>(opt =>
+			services.AddScoped<IMailService, MailService>();
+			services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequiredLength = 8;
@@ -38,10 +35,12 @@ namespace Wreade.Persistence.ServiceRegistration
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 opt.Lockout.MaxFailedAccessAttempts = 5;
                 opt.Lockout.AllowedForNewUsers = true;
-            }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+				opt.SignIn.RequireConfirmedAccount = true;
+			}).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<IBookRepository, BookRepository>();
-
-
+            //services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
+            services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
+           
             //services.AddScoped<IActionContextAccessor, ActionContextAccessor>();
             //services.AddSingleton<IUrlHelper, UrlHelper>();
             //services.AddHttpContextAccessor();
@@ -51,14 +50,22 @@ namespace Wreade.Persistence.ServiceRegistration
 			services.AddScoped<ICategoryService, CategoryService>();
 			services.AddScoped<ICategoryRepository, CategoryRepository>();
 			services.AddScoped<IFollowRepository, FollowRepository>();
+			services.AddScoped<IChapterViewCountRepository, ChapterViewCountRepository>();
+			services.AddScoped<IChapterRepository, ChapterRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagService, TagService>();
-      
+
+	//		services
+	//.AddAuthentication(options =>
+	//{
+	//	options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+	//	options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+	//	options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+	//});
 
 
 
-
-            return services;
+			return services;
         }
     }
 }

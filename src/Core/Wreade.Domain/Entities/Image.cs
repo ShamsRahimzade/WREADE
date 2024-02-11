@@ -8,7 +8,7 @@ namespace Wreade.Domain.Entities
         public bool? IsPrimary { get; set; }
 
         public List<ChapterImage>? ChapterImages { get; set; }
-        public string? AppUSerId { get; set; }
-        public AppUser? User { get; set; }
+        public string AppUSerId { get; set; }
+        public AppUser User { get; set; }
     }
 }

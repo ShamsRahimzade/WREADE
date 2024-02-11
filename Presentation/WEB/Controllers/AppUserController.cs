@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wreade.Application.Abstractions.Services;
+using Wreade.Application.Abstractions.Services.MailService;
 using Wreade.Application.ViewModels;
 using Wreade.Application.ViewModels.Users;
 using Wreade.Domain.Entities;
+using Wreade.Persistence.Implementations.Services;
 
 namespace WEB.Controllers
 {
@@ -11,12 +13,14 @@ namespace WEB.Controllers
     {
         private readonly IUserService _service;
         private readonly UserManager<AppUser> _user;
+		private readonly IMailService _mailService;
 
-        public AppUserController(IUserService service, UserManager<AppUser> user)
+		public AppUserController(IUserService service, UserManager<AppUser> user, IMailService mailService)
         {
             _service = service;
             _user = user;
-        }
+			_mailService = mailService;
+		}
         public IActionResult Register()
         {
             return View();
@@ -73,8 +77,9 @@ namespace WEB.Controllers
             string token = await _user.GeneratePasswordResetTokenAsync(user);
             string link = Url.Action("ResetPassword", "AppUser", new { userId = user.Id, token = token }
             , HttpContext.Request.Scheme);
-            return Json(link);
-        }
+			await _mailService.SendEmailAsync(user.Email, "ResetPassword", link, false);
+			return RedirectToAction(nameof(Login));
+		}
         public async Task<IActionResult> ResetPassword(string userId, string token)
         {
             if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token)) return BadRequest();

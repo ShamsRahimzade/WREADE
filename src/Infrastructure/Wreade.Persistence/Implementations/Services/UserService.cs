@@ -28,8 +28,6 @@ namespace Wreade.Persistence.Implementations.Services
         private readonly IWebHostEnvironment _env;
         private readonly IHttpContextAccessor _http;
         private readonly IFollowRepository _followRepo;
-        //private readonly IUrlHelper _help;
-        //private readonly IActionContextAccessor _actionContextAccessor;
 
         public UserService(
          UserManager<AppUser> user,
@@ -39,8 +37,7 @@ namespace Wreade.Persistence.Implementations.Services
          IWebHostEnvironment env,
          IHttpContextAccessor http,
          IFollowRepository followRepo
-         //IUrlHelper help,
-         //IActionContextAccessor actionContextAccessor)
+      
          )
         {
             _user = user;
@@ -50,8 +47,7 @@ namespace Wreade.Persistence.Implementations.Services
             _env = env;
             _http = http;
             _followRepo = followRepo;
-            //_help = help;
-            //_actionContextAccessor = actionContextAccessor;
+          
         }
 
         public async Task CreateRoleAsync()
@@ -69,29 +65,24 @@ namespace Wreade.Persistence.Implementations.Services
             }
         }
 
-        public async Task<bool> Login(LoginVM login, ModelStateDictionary modelstate)
+        public async Task<bool> Login(LoginVM vm, ModelStateDictionary modelstate)
         {
             if (!modelstate.IsValid) return false;
-            AppUser user = await _user.FindByEmailAsync(login.UserNameOrEmail);
+            AppUser user = await _user.FindByEmailAsync(vm.UserNameOrEmail);
             if (user == null)
             {
-                user = await _user.FindByNameAsync(login.UserNameOrEmail);
-                if (user == null)
-                {
-                    modelstate.AddModelError(string.Empty, "user empty");
-                    return false;
-
-                }
+                modelstate.AddModelError(string.Empty, "Not found");
+                return false;
             }
-            var result = await _signman.PasswordSignInAsync(user, login.Password, login.IsRemembered, true);
+            var result = await _signman.PasswordSignInAsync(user, vm.Password, vm.IsRemembered, true);
             if (result.IsLockedOut)
             {
-                modelstate.AddModelError(string.Empty, "bloked");
+                modelstate.AddModelError(string.Empty, "Account is locked. Please try again after a few minutes.");
                 return false;
             }
             if (!result.Succeeded)
             {
-                modelstate.AddModelError(string.Empty, "not succeeded");
+                modelstate.AddModelError(string.Empty, "Password or email incorrect");
                 return false;
             }
             return true;
@@ -350,34 +341,6 @@ namespace Wreade.Persistence.Implementations.Services
         {
             return await _user.FindByIdAsync(userId);
         }
-        //public async Task<bool> resetPassword(string userId, string token)
-        //{
-        //    if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token)) return false;
-        //    var user = await _user.FindByIdAsync(userId);
-        //    if (user is null) return false;
-        //    return true;
-        //}
-        //public async Task<bool> ForgotPassword(ForgotPasswordVM vm, ModelStateDictionary ms)
-        //{
-        //    if (!ms.IsValid) return false;
-        //    var user = await _user.FindByEmailAsync(vm.Email);
-        //    if (user is null) return false;
-        //    string token = await _user.GeneratePasswordResetTokenAsync(user);
-        //    string link = _help.Action("ResetPassword", "AppUser", new { userId = user.Id, token = token }
-        //    , _actionContextAccessor.ActionContext.HttpContext.Request.Scheme);
-        //    return true;
-        //}
-
-       
-        //public async Task<bool> ResetPassword(ResetPasswordVM vm, string userId, string token, ModelStateDictionary ms)
-        //{
-        //    if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token)) return false;
-        //    if (!ms.IsValid) return false;
-        //    var user = await _user.FindByIdAsync(userId);
-        //    if (user is null) return false;
-        //    var identityUser = await _user.ResetPasswordAsync(user, token, vm.ConfirmPassword);
-
-        //    return true;
-        //}
+      
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 using Wreade.Application;
 using Wreade.Persistence.ServiceRegistration;
 var builder = WebApplication.CreateBuilder(args);
@@ -11,23 +12,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
-//builder.Services.AddHttpContextAccessor<IActionContextAccessor, ActionContextAccessor>();
-//builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
-
-app.UseRouting();
 app.UseAuthentication();
+app.UseRouting();
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
 	endpoints.MapControllerRoute(
 	  name: "areas",
-	  pattern: "{area:exists}/{controller=DashBoard}/{action=Index}/{id?}"
+	  pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
 	);
 });
 app.MapControllerRoute(

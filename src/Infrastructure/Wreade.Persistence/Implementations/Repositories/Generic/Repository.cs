@@ -58,13 +58,25 @@ namespace Wreade.Persistence.Implementations.Repositories.Generic
             return await query.FirstOrDefaultAsync();
         }
        
-        public IQueryable<T> GetPagination(int skip = 0, int take = 0, bool IgnoreQuery = true)
+        public IQueryable<T> GetPagination(int skip = 0, int take = 0, bool IgnoreQuery = true, Expression<Func<T, object>>? orderExpression = null, bool IsDescending = false, params string[] includes)
         {
             IQueryable<T> query = _context.Set<T>();
             if (skip != 0) query = query.Skip(skip);
             if (take != 0) query = query.Take(take);
-           
-            if (IgnoreQuery)
+			if (orderExpression != null)
+			{
+				if (IsDescending)
+				{
+					query = query.OrderByDescending(orderExpression);
+				}
+				else
+				{
+					query = query.OrderBy(orderExpression);
+				}
+
+			}
+			query = _addIncludes(query, includes);
+			if (IgnoreQuery)
             {
                 query = query.IgnoreQueryFilters();
             }

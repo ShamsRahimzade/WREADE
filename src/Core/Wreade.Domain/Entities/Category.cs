@@ -6,6 +6,6 @@ namespace Wreade.Domain.Entities
     {
         public string Image { get; set; }
         public int Rating { get; set; }
-        public List<BookCategory>? BookCategories { get; set; }
+        public ICollection<BookCategory>? BookCategories { get; set; }
     }
 }

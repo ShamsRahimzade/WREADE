@@ -4,7 +4,7 @@ namespace Wreade.Domain.Entities
 {
     public class Tag:BaseNameableEntity
     {
-        public List<BookTag> BookTags { get; set; }
+        public ICollection<BookTag>? BookTags { get; set; }
         public int Rating { get; set; }
     }
 }

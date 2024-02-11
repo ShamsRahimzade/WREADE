@@ -13,6 +13,10 @@ namespace Wreade.Application.Abstractions.Services
 	public interface IBookService
 	{
 		List<Book> GetReadingHistoryForUser(string userName);
-       
-    }
+		Task<PaginationVM<Book>> GetAllAsync(int page = 1, int take = 5);
+		Task<BookCreateVM> CreatedAsync(BookCreateVM vm);
+		Task<bool> CreateAsync(BookCreateVM vm, ModelStateDictionary ms);
+
+
+	}
 }

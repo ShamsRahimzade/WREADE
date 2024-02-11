@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cBQhNMx/7s6m4fYAkGnk4NMUH5H/VoqMvJoYJ7le+ApjA7i607jUNIqtj1ANf8tW/eh847AFOCFkTwvCOVJb8Q==",
+  "dgSpecHash": "xcNeXEnqgZcjtTdUtr0jDIWFt2Da5gv0n/aToEZohTxjumqhsgK3I/nmIO+g18Qip1Vglsqpb1xzZ9vxh/i4TA==",
   "success": true,
   "projectFilePath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Persistence\\Wreade.Persistence.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,6 @@
     "C:\\Users\\rehim\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "C:\\Users\\rehim\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.0\\fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
     "C:\\Users\\rehim\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\rehim\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.25\\microsoft.aspnetcore.authentication.google.6.0.25.nupkg.sha512",
     "C:\\Users\\rehim\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.25\\microsoft.aspnetcore.authentication.jwtbearer.6.0.25.nupkg.sha512",
     "C:\\Users\\rehim\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.25\\microsoft.aspnetcore.cryptography.internal.6.0.25.nupkg.sha512",
     "C:\\Users\\rehim\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.25\\microsoft.aspnetcore.cryptography.keyderivation.6.0.25.nupkg.sha512",
