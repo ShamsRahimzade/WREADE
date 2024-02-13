@@ -289,6 +289,9 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsAdult")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
@@ -463,21 +466,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("Chapters");
-                });
-
-            modelBuilder.Entity("Wreade.Domain.Entities.ChapterImage", b =>
-                {
-                    b.Property<int?>("ChapterId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ChapterId", "ImageId");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("ChapterImages");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.ChapterViewCount", b =>
@@ -838,25 +826,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("Wreade.Domain.Entities.ChapterImage", b =>
-                {
-                    b.HasOne("Wreade.Domain.Entities.Chapter", "Chapter")
-                        .WithMany()
-                        .HasForeignKey("ChapterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Wreade.Domain.Entities.Image", "Image")
-                        .WithMany("ChapterImages")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chapter");
-
-                    b.Navigation("Image");
-                });
-
             modelBuilder.Entity("Wreade.Domain.Entities.ChapterViewCount", b =>
                 {
                     b.HasOne("Wreade.Domain.Entities.Chapter", "Chapter")
@@ -951,11 +920,6 @@ namespace Wreade.Persistence.DAL.Migrations
             modelBuilder.Entity("Wreade.Domain.Entities.Chapter", b =>
                 {
                     b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("Wreade.Domain.Entities.Image", b =>
-                {
-                    b.Navigation("ChapterImages");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Status", b =>

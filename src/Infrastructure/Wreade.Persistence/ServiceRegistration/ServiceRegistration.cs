@@ -35,19 +35,17 @@ namespace Wreade.Persistence.ServiceRegistration
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 opt.Lockout.MaxFailedAccessAttempts = 5;
                 opt.Lockout.AllowedForNewUsers = true;
-				opt.SignIn.RequireConfirmedAccount = true;
 			}).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<IBookRepository, BookRepository>();
-            //services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
             services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
            
-            //services.AddScoped<IActionContextAccessor, ActionContextAccessor>();
-            //services.AddSingleton<IUrlHelper, UrlHelper>();
-            //services.AddHttpContextAccessor();
+            
             services.AddScoped<IHomeService, HomeService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IBookService, BookService>();
 			services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<IChapterService, ChapterService>();
+			services.AddScoped<IChapterRepository, ChapterRepository>();
 			services.AddScoped<ICategoryRepository, CategoryRepository>();
 			services.AddScoped<IFollowRepository, FollowRepository>();
 			services.AddScoped<IChapterViewCountRepository, ChapterViewCountRepository>();
@@ -55,13 +53,7 @@ namespace Wreade.Persistence.ServiceRegistration
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagService, TagService>();
 
-	//		services
-	//.AddAuthentication(options =>
-	//{
-	//	options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-	//	options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-	//	options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
-	//});
+
 
 
 

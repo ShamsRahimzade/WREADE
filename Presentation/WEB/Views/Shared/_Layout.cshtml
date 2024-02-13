@@ -74,7 +74,16 @@
 
 				<div class="col-lg-8">
 					<nav class="main-menu ul-li-right clearfix">
+
 						<ul class="clearfix">
+						@if (User.Identity.IsAuthenticated)
+							{
+								@if (User.IsInRole("Author"))
+								{
+									<li><a asp-action="index" asp-controller="book">Book</a></li>
+								}
+							}
+							<li><a asp-action="index" asp-controller="book">Book</a></li>
 							<li class="menu-item-has-child">
 								<a href="#!">HOME</a>
 								<div class="mega-menu">

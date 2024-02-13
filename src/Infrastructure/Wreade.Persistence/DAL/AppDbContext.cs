@@ -61,12 +61,7 @@ namespace Wreade.Persistence.DAL
 				.OnDelete(DeleteBehavior.Restrict);
 			});
 
-			modelBuilder.Entity<Image>()
-			.HasMany(image => image.ChapterImages)
-			.WithOne(chapterImage => chapterImage.Image)
-			.HasForeignKey(chapterImage => chapterImage.ImageId);
-			modelBuilder.Entity<ChapterImage>()
-			.HasKey(ci => new { ci.ChapterId, ci.ImageId });
+			
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 			base.OnModelCreating(modelBuilder);//IdentityUserLogin<string>
 		}
@@ -80,7 +75,6 @@ namespace Wreade.Persistence.DAL
 		public DbSet<BookTag> BookTag { get; set; }
 		public DbSet<Setting> Setting { get; set; }
 		public DbSet<Chapter> Chapters { get; set; }
-		public DbSet<ChapterImage> ChapterImages { get; set; }
 		public DbSet<ChapterViewCount> ChapterViewCounts { get; set; }
 	}
 }

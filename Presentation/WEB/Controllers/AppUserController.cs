@@ -39,6 +39,10 @@ namespace WEB.Controllers
         }
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View("register");
         }
         [HttpPost]
@@ -77,9 +81,9 @@ namespace WEB.Controllers
             string token = await _user.GeneratePasswordResetTokenAsync(user);
             string link = Url.Action("ResetPassword", "AppUser", new { userId = user.Id, token = token }
             , HttpContext.Request.Scheme);
-			await _mailService.SendEmailAsync(user.Email, "ResetPassword", link, false);
-			return RedirectToAction(nameof(Login));
-		}
+            await _mailService.SendEmailAsync(user.Email, "ResetPassword", link, false);
+            return RedirectToAction(nameof(Login));
+        }
         public async Task<IActionResult> ResetPassword(string userId, string token)
         {
             if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token)) return BadRequest();

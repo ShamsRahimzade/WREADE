@@ -71,8 +71,14 @@ namespace Wreade.Persistence.Implementations.Services
             AppUser user = await _user.FindByEmailAsync(vm.UserNameOrEmail);
             if (user == null)
             {
-                modelstate.AddModelError(string.Empty, "Not found");
-                return false;
+                user = await _user.FindByNameAsync(vm.UserNameOrEmail);
+                if (user is null)
+                {
+                    modelstate.AddModelError(string.Empty, "Not found");
+                    return false;
+                }
+               
+               
             }
             var result = await _signman.PasswordSignInAsync(user, vm.Password, vm.IsRemembered, true);
             if (result.IsLockedOut)
@@ -85,6 +91,7 @@ namespace Wreade.Persistence.Implementations.Services
                 modelstate.AddModelError(string.Empty, "Password or email incorrect");
                 return false;
             }
+
             return true;
         }
 
@@ -147,7 +154,7 @@ namespace Wreade.Persistence.Implementations.Services
                 }
                 user.BackImage = await register.BackImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
             }
-            IdentityResult result = await _user.CreateAsync(user, register.Password);
+            var result = await _user.CreateAsync(user, register.Password);
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)

@@ -6,8 +6,6 @@ namespace Wreade.Domain.Entities
     {
         public string URL { get; set; }
         public bool? IsPrimary { get; set; }
-
-        public List<ChapterImage>? ChapterImages { get; set; }
         public string AppUSerId { get; set; }
         public AppUser User { get; set; }
     }

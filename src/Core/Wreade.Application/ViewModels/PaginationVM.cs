@@ -11,5 +11,6 @@ namespace Wreade.Application.ViewModels
         public ICollection<T> Items { get; set; }
         public double TotalPage { get; set; }
         public int CurrentPage { get; set; }
-    }
+		public int BookId { get; set; }
+	}
 }

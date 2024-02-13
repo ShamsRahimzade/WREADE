@@ -15,5 +15,6 @@ namespace Wreade.Domain.Entities
         public ICollection<Comment>? Comments { get; set; }
         public double Rating { get; set; }
         public bool IsCompleted { get; set; }
+        public bool IsAdult { get; set; }
     }
 }

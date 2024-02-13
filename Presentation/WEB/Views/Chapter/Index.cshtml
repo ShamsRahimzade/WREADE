@@ -1,0 +1,87 @@
+﻿@using Wreade.Domain.Entities;
+@model PaginationVM<Chapter>
+@{
+	int count = 0;
+	
+}
+
+<main>
+
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body padding:9rem;" style="padding:9rem;">
+				<h4 class="card-title">Chapter Table</h4>
+				<input asp-action="Search" type="search" placeholder="Name">
+
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th> NO </th>
+								<th> Image</th>
+								<th> NAME </th>
+								<th> Rating </th>
+								<th> CreateTime </th>
+								<th> ViewCount </th>
+								<th> SETTINGS </th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Items)
+							{
+								count++;
+								<tr>
+									<td> @count</td>
+									<td class="py-1">
+										<img style="width:100px; height:100px;" src="~/assets/images/@item.ChapterImage" alt="image">
+									</td>
+									<td> @item.Title </td>
+									<td>@item.CreatedAt</td>
+									@if (@item.ChapterViewCount is not null)
+									{
+										<td>@item.ChapterViewCount.ViewCount</td>
+
+									}
+									else
+									{
+										<span>0</span>
+									}
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<div class="w-100 d-flex justify-content-center">
+					<nav>
+						<ul class="pagination justify-content-center">
+							<li class="page-item @(Model.CurrentPage<=1 ? "disabled" : "active")">
+								<a class="page-link " asp-route-page="@(Model.CurrentPage-1)" asp-action="index" asp-controller="chapter" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							@for (int i = 0; i < Model.TotalPage; i++)
+							{
+								<li class="page-item @(Model.CurrentPage-1==i ? "btn-success active disabled" : "")">
+									<a class="page-link" asp-route-page="@(i+1)" asp-action="index" asp-controller="chapter">@(i + 1)</a>
+								</li>
+							}
+							<li class="page-item @(Model.TotalPage==Model.CurrentPage ? "disabled" : "active")">
+								<a class="page-link " asp-route-page="@(Model.CurrentPage+1)" asp-action="chapter" asp-controller="book" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+						</ul>
+						<a asp-action="create" asp-controller="chapter" asp-route-bookId="@Model.BookId"><button>Create</button></a>
+
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</main>

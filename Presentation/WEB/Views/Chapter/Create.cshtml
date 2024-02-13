@@ -1,0 +1,48 @@
+﻿@model CreateChapterVM
+<main>
+	<div class="container">
+		<div class="page-title-container">
+
+			<a asp-action="index" asp-controller="home" class="muted-link pb-1 d-inline-block breadcrumb-back">
+				<i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
+				<span class="text-small align-middle">Home</span>
+			</a>
+			<h1 class="mb-0 pb-0 display-4" id="title">Chapter </h1>
+			<div class="col-md-6 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Create Chapter</h4>
+						<p class="card-description">
+							Basic form layout
+						</p>
+						<form method="post" enctype="multipart/form-data">
+							<div asp-validation-summary="ModelOnly"></div>
+							<div class="form-group">
+								<label asp-for="Image" for="exampleInputUsername1">Image</label>
+								<input asp-for="Image" class="form-control" id="exampleInputUsername1" placeholder="Image">
+								<span asp-validation-for="Image" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label asp-for="Title" for="exampleInputUsername1">Title</label>
+								<input asp-for="Title" class="form-control" id="exampleInputUsername1" placeholder="Title">
+								<span asp-validation-for="Title" class="text-danger"></span>
+							</div>
+
+							
+							<div class="form-group">
+								<label asp-for="Text" for="exampleInputUsername1">Text</label>
+								<input asp-for="Text" class="form-control" id="exampleInputUsername1" placeholder="Text">
+								<span asp-validation-for="Text" class="text-danger"></span>
+							</div>
+							
+							<button type="submit" class="btn btn-primary mr-2">Submit</button>
+							<button asp-action="index" asp-controller="book" class="btn btn-light">Cancel</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</main>

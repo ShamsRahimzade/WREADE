@@ -90,8 +90,8 @@ namespace Wreade.Persistence.Implementations.Services
 				Description=vm.Description,
 				IsCompleted=vm.IsCompleted,
 				AppUserId=User.Id,
-
-				BookTags=new List<BookTag>(),
+				CreatedBy= User.UserName,
+                BookTags =new List<BookTag>(),
 				BookCategories=new List<BookCategory>(),
 			};
 

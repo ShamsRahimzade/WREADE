@@ -30,13 +30,16 @@
                 
                 <input asp-for="Register.Surname" placeholder="Surname">
                 <span asp-validation-for="Register.Surname"></span>
+
                 <input asp-for="Register.UserName" placeholder="UserName">
                 <span asp-validation-for="Register.UserName"></span>
+
                 <input asp-for="Register.Email" placeholder="Email">
                 <span asp-validation-for="Register.Email"></span>
 
                 <input asp-for="Register.Password" for="Regsiter.Password"  placeholder="Password">
                 <span asp-validation-for="Register.Password"></span>
+
                 <input asp-for="Register.ConfirmPassword" placeholder="Confirm Password">
                 <span asp-validation-for="Register.ConfirmPassword"></span>
 
@@ -55,18 +58,19 @@
             </form>
         </div>
         <div class="form-container sign-in">
-            <form method="post" enctype="multipart/form-data"  asp-action="login">
+            <form method="post"  asp-action="login" asp-controller="appuser">
                 <div asp-validation-summary="ModelOnly"></div>
                 <h1>Sign In</h1>
                
                 <input asp-for="Login.UserNameOrEmail" placeholder="UserNameOrEmail">
                 <span asp-validation-for="Login.UserNameOrEmail"></span>
 
-                <input asp-for="Login.Password" id="passwordInput">
-                <i class="fas fa-eye" id="showPassword"></i>
+                <input asp-for="Login.Password" placeholder="password">
+                 <i class="fas fa-eye" id="showPassword"></i> 
                 <span asp-validation-for="Login.Password"></span>
                
-                <button asp-action="login" asp-controller="appuser" type="submit">Login</button>
+                    <a asp-action="ForgotPassword">forgot Password?</a>
+                <button asp-action="Login" asp-controller="appuser" type="submit">Login</button>
             </form>
         </div>
         <div class="toggle-container">
@@ -80,7 +84,6 @@
                     <h1>Welcome, Friend!</h1>
                     <p>Enter your personal details to use all of site features</p>
                     <button class="hidden" id="register">Sign Up</button>
-                    <a asp-action="ForgotPassword">forgot Password?</a>
                 </div>
             </div>
         </div>
@@ -115,4 +118,4 @@
             showPasswordButton.classList.add("fa-eye");
         }
     });
-</script>
+</script> 

@@ -251,6 +251,7 @@ namespace Wreade.Persistence.DAL.Migrations
                     CoverPhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<double>(type: "float", nullable: false),
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsAdult = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Isdeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -408,30 +409,6 @@ namespace Wreade.Persistence.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChapterImages",
-                columns: table => new
-                {
-                    ImageId = table.Column<int>(type: "int", nullable: false),
-                    ChapterId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChapterImages", x => new { x.ChapterId, x.ImageId });
-                    table.ForeignKey(
-                        name: "FK_ChapterImages_Chapters_ChapterId",
-                        column: x => x.ChapterId,
-                        principalTable: "Chapters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ChapterImages_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ChapterViewCounts",
                 columns: table => new
                 {
@@ -563,11 +540,6 @@ namespace Wreade.Persistence.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChapterImages_ImageId",
-                table: "ChapterImages",
-                column: "ImageId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Chapters_BookId",
                 table: "Chapters",
                 column: "BookId");
@@ -644,9 +616,6 @@ namespace Wreade.Persistence.DAL.Migrations
                 name: "BookTag");
 
             migrationBuilder.DropTable(
-                name: "ChapterImages");
-
-            migrationBuilder.DropTable(
                 name: "ChapterViewCounts");
 
             migrationBuilder.DropTable(
@@ -654,6 +623,9 @@ namespace Wreade.Persistence.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Follows");
+
+            migrationBuilder.DropTable(
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Setting");
@@ -666,9 +638,6 @@ namespace Wreade.Persistence.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tags");
-
-            migrationBuilder.DropTable(
-                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Chapters");
