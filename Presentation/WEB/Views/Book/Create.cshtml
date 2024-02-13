@@ -52,6 +52,11 @@
 								<input asp-for="IsCompleted" class="form-control" id="exampleInputUsername1" placeholder="IsCompleted">
 								<span asp-validation-for="IsCompleted" class="text-danger"></span>
 							</div>
+							<div class="form-group">
+								<label asp-for="IsAdult" for="exampleInputUsername1">IsAdult</label>
+								<input asp-for="IsAdult" class="form-control" id="exampleInputUsername1" placeholder="IsAdult">
+								<span asp-validation-for="IsAdult" class="text-danger"></span>
+							</div>
 							<button type="submit" class="btn btn-primary mr-2">Submit</button>
 							<button asp-action="index" asp-asp-controller="book" class="btn btn-light">Cancel</button>
 						</form>

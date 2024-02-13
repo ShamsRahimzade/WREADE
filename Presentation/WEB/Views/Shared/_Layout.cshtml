@@ -80,10 +80,9 @@
 							{
 								@if (User.IsInRole("Author"))
 								{
-									<li><a asp-action="index" asp-controller="book">Book</a></li>
+									<li><a asp-action="index" asp-controller="book" asp-route-id="@User.Identity.Name">Book</a></li>
 								}
 							}
-							<li><a asp-action="index" asp-controller="book">Book</a></li>
 							<li class="menu-item-has-child">
 								<a href="#!">HOME</a>
 								<div class="mega-menu">

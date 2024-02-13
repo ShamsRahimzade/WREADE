@@ -9,7 +9,7 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body padding:9rem;" style="padding:9rem;" >
-				<h4 class="card-title">CATEGORY Table</h4>
+				<h4 class="card-title">Book Table</h4>
 				<input asp-action="Search" type="search" placeholder="Name">
 
 				<div class="table-responsive">
@@ -19,7 +19,6 @@
 								<th> NO </th>
 								<th> Image</th>
 								<th> NAME </th>
-								<th> Rating </th>
 								<th> ChapterCount </th>
 								<th> IsCompleted </th>
 
@@ -37,9 +36,9 @@
 									</td>
 									<td> @item.Name </td>
 									<td>
-										@if	(@item.Chapters is not null)
+										@if	(@item.Chapters !=null)
 										{
-											@item.Chapters.Count
+											<span>@item.Chapters.Count</span>
 										}
 										else
 										{
@@ -50,6 +49,7 @@
 									<td>@item.IsCompleted</td>
 									<td>@item.User</td>
 									<td><a asp-action="index" asp-controller="chapter" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Create new chapter</button></a></td>
+									<td><a asp-action="delete" asp-controller="book" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Delete</button></a></td>
 								</tr>
 							}
 						</tbody>

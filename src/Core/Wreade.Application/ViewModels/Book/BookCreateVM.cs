@@ -18,5 +18,6 @@ namespace Wreade.Application.ViewModels
         public ICollection<Tag>? Tags { get; set; }
         public ICollection<int>? TagIds { get; set; }
         public bool IsCompleted { get; set; }
-    }
+        public bool IsAdult { get; set; }
+	}
 }

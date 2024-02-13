@@ -67,7 +67,7 @@ namespace Wreade.Persistence.Implementations.Services
                     ms.AddModelError(string.Empty, "wrong size");
                     return false;
                 }
-                string file = await vm.Image.CreateFileAsync(_env.WebRootPath, "assets", "images");
+                string file = await vm.Image.CreateFileAsync(_env.WebRootPath, "assets", "images","chapters");
                 chapter.ChapterImage = file;
             }
             
@@ -92,7 +92,67 @@ namespace Wreade.Persistence.Implementations.Services
 			};
 			return vm;
 		}
+		public async Task<bool> DeleteAsync(int id)
+		{
+			if (id < 1) throw new Exception("id");
+			Chapter exist = await _chaprepo.GetByIdAsync(id);
+			if (exist is null) throw new Exception("not found");
+			
+			if (exist.ChapterImage is not null)
+			{
+				exist.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "images","chapters");
+			}
+			_chaprepo.Delete(exist);
+			await _chaprepo.SaveChangeAsync();
+			return true;
+		}
+		public async Task<UpdateChapterVM> UpdatedAsync(int id, UpdateChapterVM vm)
+		{
+			if (id <= 0) throw new Exception("id");
+			Chapter exist = await _chaprepo.GetByIdAsync(id);
+			if (exist == null) throw new Exception("not found");
+			vm.Image = exist.ChapterImage;
+			vm.Title = exist.Title;
+			vm.Text = exist.Text;
+			//vm.Image = exist.Image;
+			return vm;
+		}
+		public async Task<bool> UpdateAsync(int id, UpdateChapterVM vm, ModelStateDictionary modelstate)
+		{
+			if (id <= 0) throw new Exception("BadRequest");
+			if (!modelstate.IsValid) return false;
+			Chapter chapter = await _chaprepo.GetByIdAsync(id);
+			if (chapter is null) throw new Exception("not found");
+			if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title) && await _chaprepo.IsExistAsync(c => c.BookId == chapter.BookId)&&await _chaprepo.IsExistAsync(c=>c.Id!=id))
+			{
+				modelstate.AddModelError("Title", "this title is exist");
+				return false;
+			}
 
+			if (vm.Photo is not null)
+			{
+				if (!vm.Photo.CheckType("image/"))
+				{
 
+					modelstate.AddModelError("Photo", "filetype");
+					return false;
+				}
+				if (!vm.Photo.ValidateSize(7))
+				{
+
+					modelstate.AddModelError("Photo", "filesize");
+					return false;
+				}
+				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "chapters");
+				chapter.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "images", "chapters");
+				chapter.ChapterImage = main;
+			}
+			chapter.Title = vm.Title;
+			chapter.Text = vm.Text;
+			chapter.ModifiedAt = DateTime.UtcNow;
+			_chaprepo.Update(chapter);
+			await _chaprepo.SaveChangeAsync();
+			return true;
+		}
 	}
 }

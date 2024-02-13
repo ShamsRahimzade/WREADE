@@ -33,7 +33,7 @@
 								<tr>
 									<td> @count</td>
 									<td class="py-1">
-										<img style="width:100px; height:100px;" src="~/assets/images/@item.ChapterImage" alt="image">
+										<img style="width:100px; height:100px;" src="~/assets/images/chapters/@item.ChapterImage" alt="image">
 									</td>
 									<td> @item.Title </td>
 									<td>@item.CreatedAt</td>
@@ -46,6 +46,9 @@
 									{
 										<span>0</span>
 									}
+									<td><a asp-action="delete" asp-controller="chapter" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Delete</button></a></td>
+									<td><a asp-action="update" asp-controller="chapter" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
+
 								</tr>
 							}
 						</tbody>

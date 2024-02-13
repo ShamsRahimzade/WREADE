@@ -15,6 +15,7 @@ namespace WEB.Controllers
         }
         public async Task<IActionResult> Index(int page = 1, int take = 5)
         {
+
             PaginationVM<Book> vm = await _service.GetAllAsync(page, take);
             if (vm.Items == null) return NotFound();
             return View(vm);
@@ -32,5 +33,11 @@ namespace WEB.Controllers
 				return RedirectToAction(nameof(Index));
 			return View(await _service.CreatedAsync(vm));
 		}
-    }
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (await _service.DeleteAsync(id))
+				return RedirectToAction(nameof(Index));
+			return NotFound();
+		}
+	}
 }

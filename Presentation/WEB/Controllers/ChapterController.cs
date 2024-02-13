@@ -35,5 +35,24 @@ namespace WEB.Controllers
 				return RedirectToAction(nameof(Index), new { id = vm.bookId }); // Yeni oluşturulan chapter'ın kitap ID'siyle Index'e yönlendirin
 			return View(await _chapservice.CreatedAsync(vm));
 		}
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (await _chapservice.DeleteAsync(id))
+				return RedirectToAction(nameof(Index));
+			return NotFound();
+		}
+		public async Task<IActionResult> Update(int id)
+		{
+			UpdateChapterVM vm = new UpdateChapterVM();
+			vm = await _chapservice.UpdatedAsync(id, vm);
+			return View(vm);
+		}
+		[HttpPost]
+		public async Task<IActionResult> Update(int id, UpdateChapterVM vm)
+		{
+			if (await _chapservice.UpdateAsync(id, vm, ModelState))
+				return RedirectToAction(nameof(Index));
+			return View(await _chapservice.UpdatedAsync(id, vm));
+		}
 	}
 }

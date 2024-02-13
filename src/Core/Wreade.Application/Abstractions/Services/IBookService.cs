@@ -16,7 +16,7 @@ namespace Wreade.Application.Abstractions.Services
 		Task<PaginationVM<Book>> GetAllAsync(int page = 1, int take = 5);
 		Task<BookCreateVM> CreatedAsync(BookCreateVM vm);
 		Task<bool> CreateAsync(BookCreateVM vm, ModelStateDictionary ms);
-
+		Task<bool> DeleteAsync(int id);
 
 	}
 }

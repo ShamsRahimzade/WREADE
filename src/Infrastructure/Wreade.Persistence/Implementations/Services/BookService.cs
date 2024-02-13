@@ -60,7 +60,12 @@ namespace Wreade.Persistence.Implementations.Services
 		public async Task<PaginationVM<Book>> GetAllAsync(int page=1,int take = 5)
 		{
             if (page < 1 || take < 1) throw new Exception("Bad request");
-            ICollection<Book> books = await _repo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id, IsDescending: true,includes: new string[] { "BookCategories", "BookCategories.Category","BookTags","BookTags.Tag" }).ToListAsync();
+            ICollection<Book> books = await _repo.GetPagination(skip: (page - 1) * take, take: take,
+				orderExpression: x => x.Id, IsDescending: true,
+				includes: new string[] {  "BookCategories.Category","BookTags","BookTags.Tag" })
+				.ToListAsync();
+			AppUser User = await _user.GetUser(_http.HttpContext.User.Identity.Name);
+			books = await _repo.GetAllWhere(b => b.AppUserId==User.Id).Include(b=>b.Chapters).ToListAsync();
             if (books == null) throw new Exception("Not Found");
             int count = await _repo.GetAll().CountAsync();
             if (count < 0) throw new Exception("Not Found");
@@ -89,10 +94,12 @@ namespace Wreade.Persistence.Implementations.Services
 				CreatedAt = DateTime.UtcNow,
 				Description=vm.Description,
 				IsCompleted=vm.IsCompleted,
-				AppUserId=User.Id,
+				IsAdult=vm.IsAdult,
+				AppUserId =User.Id,
 				CreatedBy= User.UserName,
                 BookTags =new List<BookTag>(),
 				BookCategories=new List<BookCategory>(),
+
 			};
 
 			if (vm.TagIds is not null)
@@ -144,6 +151,23 @@ namespace Wreade.Persistence.Implementations.Services
 				book.CoverPhoto = file;
 			}
 			await _repo.AddAsync(book);
+			await _repo.SaveChangeAsync();
+			return true;
+		}
+		public async Task<bool> DeleteAsync(int id)
+		{
+			if (id < 1) throw new Exception("id");
+			Book exist = await _repo.GetByIdAsync(id);
+			if (exist is null) throw new Exception("not found");
+			if (exist.Chapters is not null)
+			{
+				exist.Chapters.RemoveAll(c => c.BookId == exist.Id);
+			}
+			if (exist.CoverPhoto is not null)
+			{
+				exist.CoverPhoto.DeleteFile(_env.WebRootPath, "assets", "images");
+			}
+			_repo.Delete(exist);
 			await _repo.SaveChangeAsync();
 			return true;
 		}

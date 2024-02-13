@@ -96,5 +96,6 @@ namespace Wreade.Persistence.Implementations.Services
 			vm.Name = exist.Name.Trim();
 			return vm;
 		}
+
 	}
 }
