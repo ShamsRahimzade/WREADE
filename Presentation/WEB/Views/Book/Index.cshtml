@@ -50,6 +50,7 @@
 									<td>@item.User</td>
 									<td><a asp-action="index" asp-controller="chapter" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Create new chapter</button></a></td>
 									<td><a asp-action="delete" asp-controller="book" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Delete</button></a></td>
+									<td><a asp-action="update" asp-controller="book" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
 								</tr>
 							}
 						</tbody>

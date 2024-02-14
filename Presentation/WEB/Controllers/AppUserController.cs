@@ -46,8 +46,10 @@ namespace WEB.Controllers
             return View("register");
         }
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM login)
+        public async Task<IActionResult> Login(LoginVM login,string? returnUrl)
         {
+            if (returnUrl is null) return RedirectToAction("Index", "Home");
+			
             var combinevm = new IdentityVM
             {
                 Login = login

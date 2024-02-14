@@ -24,7 +24,7 @@ namespace WEB.Controllers
 		public async Task<IActionResult> Create(int bookId)
 		{
 			CreateChapterVM vm = new CreateChapterVM();
-			vm.bookId = bookId; // Kitabın ID'sini ViewModel'e aktarın
+			vm.bookId = bookId; 
 			vm = await _chapservice.CreatedAsync(vm);
 			return View(vm);
 		}
@@ -32,7 +32,7 @@ namespace WEB.Controllers
 		public async Task<IActionResult> Create(CreateChapterVM vm)
 		{
 			if (await _chapservice.CreateAsync(vm, ModelState))
-				return RedirectToAction(nameof(Index), new { id = vm.bookId }); // Yeni oluşturulan chapter'ın kitap ID'siyle Index'e yönlendirin
+				return RedirectToAction(nameof(Index), new { id = vm.bookId }); 
 			return View(await _chapservice.CreatedAsync(vm));
 		}
 		public async Task<IActionResult> Delete(int id)
@@ -48,11 +48,27 @@ namespace WEB.Controllers
 			return View(vm);
 		}
 		[HttpPost]
-		public async Task<IActionResult> Update(int id, UpdateChapterVM vm)
+		public async Task<IActionResult> Update(int id, UpdateChapterVM vm,string? returnurl)
 		{
+			if(returnurl is null) return RedirectToAction("Index","Home");
 			if (await _chapservice.UpdateAsync(id, vm, ModelState))
-				return RedirectToAction(nameof(Index));
+
+				return Redirect(returnurl);
 			return View(await _chapservice.UpdatedAsync(id, vm));
+		}
+		public async Task<IActionResult> LikePost(int chapid,string? returnUrl)
+		{
+			if (returnUrl is null) return RedirectToAction("Index", "Book");
+			await _chapservice.LikeChapter(chapid);
+
+			return Redirect(returnUrl);
+		}
+		public async Task<IActionResult> UnlikePost(int chapid, string? returnUrl)
+		{
+			if (returnUrl is null) return RedirectToAction("Index", "Book");
+			await _chapservice.UnlikeChap(chapid);
+
+			return Redirect(returnUrl);
 		}
 	}
 }

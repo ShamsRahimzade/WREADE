@@ -39,5 +39,20 @@ namespace WEB.Controllers
 				return RedirectToAction(nameof(Index));
 			return NotFound();
 		}
+		public async Task<IActionResult> Update(int id)
+		{
+			BookUpdateVM vm = new BookUpdateVM();
+			vm = await _service.UpdatedAsync(id, vm);
+			return View(vm);
+		}
+		[HttpPost]
+		public async Task<IActionResult> Update(int id, BookUpdateVM vm)
+		{
+			
+			if (await _service.UpdateAsync(id, vm, ModelState))
+
+				return RedirectToAction(nameof(Index));
+			return View(await _service.UpdatedAsync(id, vm));
+		}
 	}
 }

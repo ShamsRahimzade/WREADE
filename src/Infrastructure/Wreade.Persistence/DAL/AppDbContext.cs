@@ -43,9 +43,7 @@ namespace Wreade.Persistence.DAL
 				.OnDelete(DeleteBehavior.Restrict);
 
 
-				entity.HasOne(p => p.CommentedBook)
-				.WithMany(c => c.Comments)
-				.HasForeignKey(pId => pId.CommentedBookId);
+				
 
 			});
 			modelBuilder.Entity<AppUser>(entity =>

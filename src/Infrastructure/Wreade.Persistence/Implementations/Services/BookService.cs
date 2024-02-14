@@ -171,5 +171,103 @@ namespace Wreade.Persistence.Implementations.Services
 			await _repo.SaveChangeAsync();
 			return true;
 		}
+		public async Task<BookUpdateVM> UpdatedAsync(int id, BookUpdateVM vm)
+		{
+			if (id <= 0) throw new Exception("id");
+			Book exist = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories","BookCategories.Category", "BookTags", "BookTags.Tag" });
+			if (exist == null) throw new Exception("not found");
+			vm.Image = exist.CoverPhoto;
+			vm.Name = exist.Name;
+			vm.Description = exist.Description;
+			vm.IsCompleted = exist.IsCompleted;
+			vm.IsAdult = exist.IsAdult;
+			vm.Rating = exist.Rating;
+			vm.IsAdult = exist.IsAdult;
+			vm.Tags = await _tag.GetAll().ToListAsync();
+			vm.TagIds = exist.BookTags.Select(gs => gs.TagId).ToList();
+			vm.Categories = await _category.GetAll().ToListAsync();
+			vm.TagIds = exist.BookCategories.Select(gs => gs.CategoryId).ToList();
+			vm.AppUserId = exist.AppUserId;
+			return vm;
+		}
+		public async Task<bool> UpdateAsync(int id, BookUpdateVM vm, ModelStateDictionary modelstate)
+		{
+			if (id <= 0) throw new Exception("BadRequest");
+			if (!modelstate.IsValid) return false;
+			Book book = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag" });
+			if (book is null) throw new Exception("not found");
+			if (await _repo.IsExistAsync(b => b.Name == vm.Name && b.Id != id ))
+			{
+				modelstate.AddModelError("Name", "this name is exist");
+				return false;
+			}
+
+			if (vm.Photo is not null)
+			{
+				if (!vm.Photo.CheckType("image/"))
+				{
+
+					modelstate.AddModelError("Photo", "filetype");
+					return false;
+				}
+				if (!vm.Photo.ValidateSize(7))
+				{
+
+					modelstate.AddModelError("Photo", "filesize");
+					return false;
+				}
+				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images");
+				book.CoverPhoto.DeleteFile(_env.WebRootPath, "assets", "images");
+				book.CoverPhoto = main;
+			}
+			if (vm.TagIds != null)
+			{
+				foreach (var item in vm.TagIds)
+				{
+					if (!book.BookTags.Any(bt => bt.TagId == item))
+					{
+						if (!await _tag.IsExistAsync(t => t.Id == item))
+						{
+							modelstate.AddModelError(String.Empty, "This tag isn't available");
+							return false;
+						}
+						book.BookTags.Add(new BookTag { TagId = item });
+					}
+				}
+				book.BookTags = book.BookTags.Where(bt => vm.TagIds.Any(b => bt.TagId == b)).ToList();
+			}
+			else
+			{
+				book.BookTags = new List<BookTag>();
+			}
+			if (vm.CategoryIds != null)
+			{
+				foreach (var item in vm.CategoryIds)
+				{
+					if (!book.BookCategories.Any(bc=> bc.CategoryId == item))
+					{
+						if (!await _category.IsExistAsync(c => c.Id == item))
+						{
+							modelstate.AddModelError(String.Empty, "This category isn't available");
+							return false;
+						}
+						book.BookCategories.Add(new BookCategory { CategoryId = item });
+					}
+				}
+				book.BookCategories = book.BookCategories.Where(bc => vm.TagIds.Any(b => bc.CategoryId == b)).ToList();
+			}
+			else
+			{
+				book.BookCategories = new List<BookCategory>();
+			}
+			book.Name = vm.Name;
+			book.IsAdult = vm.IsAdult;
+			book.IsCompleted = vm.IsCompleted;
+			book.Description = vm.Description;
+			book.ModifiedAt = DateTime.UtcNow;
+			_repo.Update(book);
+			await _repo.SaveChangeAsync();
+			return true;
+		}
 	}
 }

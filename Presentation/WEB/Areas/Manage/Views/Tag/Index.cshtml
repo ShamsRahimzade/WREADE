@@ -40,8 +40,12 @@
 										<span>0</span>
 									}
 								</td>
+								<td><a asp-action="create" asp-controller="tag" ><button type="button" class="btn btn-inverse-dark btn-fw">Create</button></a></td>
 
-								<td>3</td>
+								<td><a asp-action="update" asp-controller="tag" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
+
+								<td><a asp-action="delete" asp-controller="tag" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Delete</button></a></td>
+
 							</tr>
 						}
 					</tbody>

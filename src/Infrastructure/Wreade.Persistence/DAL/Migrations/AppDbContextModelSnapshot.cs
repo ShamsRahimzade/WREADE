@@ -440,6 +440,10 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ChapterImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -484,7 +488,8 @@ namespace Wreade.Persistence.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChapterId");
+                    b.HasIndex("ChapterId")
+                        .IsUnique();
 
                     b.ToTable("ChapterViewCounts");
                 });
@@ -829,8 +834,8 @@ namespace Wreade.Persistence.DAL.Migrations
             modelBuilder.Entity("Wreade.Domain.Entities.ChapterViewCount", b =>
                 {
                     b.HasOne("Wreade.Domain.Entities.Chapter", "Chapter")
-                        .WithMany()
-                        .HasForeignKey("ChapterId")
+                        .WithOne("ChapterViewCount")
+                        .HasForeignKey("Wreade.Domain.Entities.ChapterViewCount", "ChapterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -919,6 +924,9 @@ namespace Wreade.Persistence.DAL.Migrations
 
             modelBuilder.Entity("Wreade.Domain.Entities.Chapter", b =>
                 {
+                    b.Navigation("ChapterViewCount")
+                        .IsRequired();
+
                     b.Navigation("Comments");
                 });
 

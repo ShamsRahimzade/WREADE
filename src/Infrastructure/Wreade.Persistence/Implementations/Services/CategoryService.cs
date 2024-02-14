@@ -113,6 +113,7 @@ namespace Wreade.Persistence.Implementations.Services
 				category.Image = main;
 			}
 			category.Name = vm.Name;
+			category.ModifiedAt = DateTime.UtcNow;
 			_categoryrepo.Update(category);
 			await _categoryrepo.SaveChangeAsync();
 			return true;
@@ -125,7 +126,7 @@ namespace Wreade.Persistence.Implementations.Services
 			if (exist == null) throw new Exception("not found");
 			vm.Image=exist.Image;
 			vm.Name = exist.Name.Trim();
-			//vm.Image = exist.Image;
+
 			return vm;
 		}
 		public async Task<bool> DeleteAsync(int id)

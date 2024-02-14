@@ -83,6 +83,7 @@ namespace Wreade.Persistence.Implementations.Services
 				return false;
 			}
 			tag.Name = vm.Name;
+			tag.ModifiedAt = DateTime.UtcNow;
 			_tagrepo.Update(tag);
 			await _tagrepo.SaveChangeAsync();
 			return true;

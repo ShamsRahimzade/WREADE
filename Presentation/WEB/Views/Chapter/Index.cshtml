@@ -47,7 +47,7 @@
 										<span>0</span>
 									}
 									<td><a asp-action="delete" asp-controller="chapter" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Delete</button></a></td>
-									<td><a asp-action="update" asp-controller="chapter" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
+									<td><a asp-action="update" asp-controller="chapter" asp-route-id="@item.Id" asp-route-returnurl="@Context.Request.Path.Value"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
 
 								</tr>
 							}

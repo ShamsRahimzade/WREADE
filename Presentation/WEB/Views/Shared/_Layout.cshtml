@@ -313,7 +313,7 @@
 							}
 							else
 							{
-								<a asp-action="register" asp-controller="appuser">Login</a>
+								<a asp-action="register" asp-controller="appuser" asp-route-returnurl="@Context.Request.Path.Value">Login</a>
 							}
 							<li class="menu-item-has-child">
 								<a href="#!">SHORTCODES</a>

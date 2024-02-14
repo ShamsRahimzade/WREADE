@@ -22,13 +22,17 @@ namespace Wreade.Persistence.Implementations.Services
         private readonly IWebHostEnvironment _env;
 		private readonly IBookRepository _bookrepo;
 		private readonly UserManager<AppUser> _user;
+		private readonly IHttpContextAccessor _http;
+		private readonly ILikeRepository _like;
 
-		public ChapterService(IChapterRepository chaprepo,IWebHostEnvironment env,IBookRepository bookrepo, UserManager<AppUser> user)
+		public ChapterService(IChapterRepository chaprepo,IWebHostEnvironment env,IBookRepository bookrepo, UserManager<AppUser> user,IHttpContextAccessor http,ILikeRepository like)
         {
             _chaprepo = chaprepo;
             _env = env;
 			_bookrepo = bookrepo;
 			_user = user;
+			_http = http;
+			_like = like;
 		}
         public async Task<CreateChapterVM> CreatedAsync(CreateChapterVM vm)
         {
@@ -114,7 +118,7 @@ namespace Wreade.Persistence.Implementations.Services
 			vm.Image = exist.ChapterImage;
 			vm.Title = exist.Title;
 			vm.Text = exist.Text;
-			//vm.Image = exist.Image;
+			vm.Comments = exist.Comments;
 			return vm;
 		}
 		public async Task<bool> UpdateAsync(int id, UpdateChapterVM vm, ModelStateDictionary modelstate)
@@ -123,7 +127,7 @@ namespace Wreade.Persistence.Implementations.Services
 			if (!modelstate.IsValid) return false;
 			Chapter chapter = await _chaprepo.GetByIdAsync(id);
 			if (chapter is null) throw new Exception("not found");
-			if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title) && await _chaprepo.IsExistAsync(c => c.BookId == chapter.BookId)&&await _chaprepo.IsExistAsync(c=>c.Id!=id))
+			if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title&& c.Id!=id&&c.BookId==chapter.BookId))
 			{
 				modelstate.AddModelError("Title", "this title is exist");
 				return false;
@@ -153,6 +157,52 @@ namespace Wreade.Persistence.Implementations.Services
 			_chaprepo.Update(chapter);
 			await _chaprepo.SaveChangeAsync();
 			return true;
+		}
+		public async Task LikeChapter(int chapid)
+		{
+			var currentUserId = _http.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+			var currentUser = await _user.Users
+				.SingleOrDefaultAsync(u => u.Id == currentUserId);
+
+			var chapter = await _chaprepo.GetByExpressionAsync(c => c.Id == chapid);
+
+			var existingLike = await _like.GetByExpressionAsync(l => l.ChapterId == chapid && l.LikerId == currentUser.Id);
+
+			var like = new Like
+			{
+				LikerId = currentUser.Id,
+				ChapterId = chapid
+			};
+
+			await _like.AddAsync(like);
+
+			chapter.LikeCount++;
+
+			_chaprepo.Update(chapter);
+
+			await _chaprepo.SaveChangeAsync();
+		}
+		public async Task UnlikeChap(int chapid)
+		{
+			var currentUserId = _http.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+			var currentUser = await _user.Users
+				.SingleOrDefaultAsync(u => u.Id == currentUserId);
+
+			var existingLike = await _like.GetByExpressionAsync(l => l.ChapterId == chapid && l.LikerId == currentUser.Id);
+
+			if (existingLike != null)
+			{
+				_like.Delete(existingLike);
+
+				var chap = await _chaprepo.GetByExpressionAsync(c => c.Id == chapid);
+				if (chap != null && chap.LikeCount > 0)
+				{
+					chap.LikeCount--;
+					_chaprepo.Update(chap);
+				}
+
+				await _like.SaveChangeAsync();
+			}
 		}
 	}
 }

@@ -17,6 +17,8 @@ namespace Wreade.Application.Abstractions.Services
 		Task<BookCreateVM> CreatedAsync(BookCreateVM vm);
 		Task<bool> CreateAsync(BookCreateVM vm, ModelStateDictionary ms);
 		Task<bool> DeleteAsync(int id);
+		Task<BookUpdateVM> UpdatedAsync(int id, BookUpdateVM vm);
+		Task<bool> UpdateAsync(int id, BookUpdateVM vm, ModelStateDictionary modelstate);
 
 	}
 }
