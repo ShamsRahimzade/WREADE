@@ -1165,7 +1165,7 @@ button {
   transform: rotate(360deg);
 }
 .header-section .main-menu > ul > .menu-item-has-child .submenu {
-  left: 0px;
+  right: -15px;
   top: 100%;
   margin: 0px;
   height: auto;

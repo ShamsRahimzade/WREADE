@@ -15,6 +15,7 @@ using Wreade.Application.ViewModels;
 using Wreade.Application.ViewModels.Users;
 using Wreade.Domain.Entities;
 using Wreade.Domain.Enums;
+using Wreade.Persistence.DAL;
 using static System.Net.WebRequestMethods;
 
 namespace Wreade.Persistence.Implementations.Services
@@ -28,15 +29,17 @@ namespace Wreade.Persistence.Implementations.Services
         private readonly IWebHostEnvironment _env;
         private readonly IHttpContextAccessor _http;
         private readonly IFollowRepository _followRepo;
+		private readonly AppDbContext _context;
 
-        public UserService(
+		public UserService(
          UserManager<AppUser> user,
          IMapper mapper,
          SignInManager<AppUser> signman,
          RoleManager<IdentityRole> roleman,
          IWebHostEnvironment env,
          IHttpContextAccessor http,
-         IFollowRepository followRepo
+         IFollowRepository followRepo,
+         AppDbContext context
       
          )
         {
@@ -47,8 +50,8 @@ namespace Wreade.Persistence.Implementations.Services
             _env = env;
             _http = http;
             _followRepo = followRepo;
-          
-        }
+			_context = context;
+		}
 
         public async Task CreateRoleAsync()
         {
@@ -342,10 +345,37 @@ namespace Wreade.Persistence.Implementations.Services
 
             return new List<string>();
         }
-        public async Task<AppUser> GetUserById(string userId)
-        {
-            return await _user.FindByIdAsync(userId);
-        }
-      
-    }
+       
+
+		public async Task<bool> UpgradeToPremiumAsync(string userId)
+		{
+			var user = await _context.Users.FindAsync(userId);
+			if (user != null)
+			{
+				user.IsPremium = true;
+				user.PremiumStartDate = DateTime.Now;
+				user.PremiumEndDate = DateTime.Now.AddMonths(1); 
+				await _context.SaveChangesAsync();
+				return true;
+			}
+			return false;
+		}
+
+		public async Task<bool> DowngradeFromPremiumAsync(string userId)
+		{
+			var user = await _context.Users.FindAsync(userId);
+			if (user != null)
+			{
+				user.IsPremium = false;
+				await _context.SaveChangesAsync();
+				return true;
+			}
+			return false;
+		}
+
+		public async Task<AppUser> GetUserById(string userId)
+		{
+			return await _context.Users.FindAsync(userId);
+		}
+	}
 }

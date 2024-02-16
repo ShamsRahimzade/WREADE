@@ -10,7 +10,9 @@
 		<div class="card-body">
 			<h4 class="card-title">CATEGORY Table</h4>
 			<input asp-action="Search" type="search"  placeholder="Name">
-			
+			<a asp-action="create" asp-controller="category" style="font-size: 24px;">
+				<i class="mdi mdi-library-plus"></i>
+			</a>
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
@@ -44,7 +46,7 @@
 										<span>0</span>
 									}
 								</td>
-								<td><a asp-action="create" asp-controller="category"><button type="button" class="btn btn-inverse-dark btn-fw">Create</button></a></td>
+							
 
 								<td><a asp-action="update" asp-controller="category" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
 

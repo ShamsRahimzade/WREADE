@@ -13,28 +13,28 @@ namespace WEB.Controllers
 	{
 		private readonly IHomeService _service;
 		private readonly IBookService _book;
+		private readonly ICategoryService _categoryService;
 
-		public HomeController(IHomeService service, IBookService book)
+		public HomeController(IHomeService service, IBookService book,ICategoryService categoryService)
 		{
 			_service = service;
 			_book = book;
+			_categoryService = categoryService;
 		}
 
 		public async Task<IActionResult> Index(string UserName)
 		{
 			HomeVM vm = await _service.GetAllAsync();
-			var readingHistory = _book.GetReadingHistoryForUser(UserName);
-
-			var mostReadCategory = readingHistory.GroupBy(book => book.BookCategories)
-												 .OrderByDescending(group => group.Count())
-												 .Select(group => group.Key)
-												 .FirstOrDefault();
+			ICollection<Book> readingHistory =await _book.GetAll();
+			ICollection<Category> categories = await _categoryService.GetAll();
+			
+			var mostReadCategory = readingHistory .OrderBy(g => g.Rating) .Take(3).ToList();
 
 			var viewModel = new HomeVM
 			{
 				
 				UserName = UserName,
-				MostReadCategory = mostReadCategory,
+				MostReadCategory = categories.OrderBy(x => x.Rating).ToList(),
 				ReadingHistory = readingHistory,
 				Books = vm.Books,
 				Users=vm.Users

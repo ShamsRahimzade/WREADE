@@ -1,0 +1,23 @@
+﻿@using Wreade.Application.ViewModels.Users;
+@model PremiumVM
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Premium Features</title>
+</head>
+<body>
+    <h1>Welcome, @Model.User.UserName!</h1>
+
+    @if (Model.IsPremium)
+    {
+        <p>Your Premium subscription is active.</p>
+        <p>Start Date: @Model.PremiumStartDate</p>
+        <p>End Date: @Model.PremiumEndDate</p>
+    }
+    else
+    {
+        <p>Your Premium subscription is not active. <a href="/Premium/Upgrade">Upgrade now!</a></p>
+    }
+</body>
+</html>

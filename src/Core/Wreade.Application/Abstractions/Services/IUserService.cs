@@ -19,6 +19,8 @@ namespace Wreade.Application.Abstractions.Services
 		Task Unfollow(string followedId);
         Task<List<string>> LoginNoPass(string username);
 		Task<AppUser> GetUserById(string userId);
-		
-    }
+		Task<bool> UpgradeToPremiumAsync(string userId);
+		Task<bool> DowngradeFromPremiumAsync(string userId);
+
+	}
 }

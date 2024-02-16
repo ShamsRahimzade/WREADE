@@ -20,13 +20,15 @@ namespace Wreade.Domain.Entities
         public List<Book>? Books { get; set; }
         public string MainImage { get; set; } = "default.jpg";
 		public string BackImage { get; set; } = "default.jpg";
-		public int? StatusId { get; set; }
-        public Status? Status { get; set; }
         public int FollowingCount { get; set; } = 0;
         public int FollowerCount { get; set; } = 0;
         public ICollection<Follow> Followers { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Follow> Followees { get; set; }
+		public bool IsPremium { get; set; }
+		public DateTime PremiumStartDate { get; set; }
+		public DateTime PremiumEndDate { get; set; }
+        public decimal Premiumprice { get; set; }
         public AppUser()
 		{
 			MainImage = "default.jpg";

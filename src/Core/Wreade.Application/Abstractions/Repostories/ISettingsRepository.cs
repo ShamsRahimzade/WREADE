@@ -1,11 +1,10 @@
-﻿using Wreade.Domain.Entities;
+﻿using Wreade.Application.Abstractions.Repostories.Generic;
+using Wreade.Domain.Entities;
 
 namespace Wreade.Application.Abstractions.Repostories
 {
-	public interface ISettingsRepository
+	public interface ISettingsRepository:IRepository<Setting>
 	{
-		Task<IEnumerable<Setting>> GetAllSettingsAsync();
-		Task<Setting> GetSettingByKeyAsync(string key);
-		Task UpdateSettingAsync(Setting setting);
+		
 	}
 }

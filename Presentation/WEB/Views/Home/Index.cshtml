@@ -2,8 +2,9 @@
 @using Wreade.Domain.Enums;
 @model HomeVM
 @{
-	int count = 0;
+	int count = 1;
 }
+
 
 <!-- main body - start
 	================================================== -->
@@ -15,59 +16,57 @@
 	<section id="slider-section" class="slider-section clearfix">
 		<div id="agency-default-carousel" class="agency-default-carousel owl-carousel owl-theme">
 
-			
-				@foreach (var item in Model.Books.OrderByDescending(b => b.Rating)
-						.Take(3))
-				{
+			 @foreach (var item in Model.MostReadCategory)
+			{
+				count = 1;
 
-					<div class="item bg-gray d-flex align-items-center">
-						<div class="container">
-							<div class="row align-items-center">
+				<div class="item bg-gray d-flex align-items-center">
+					<div class="container">
+						<div class="row align-items-center">
 
-								<div class="col-7">
-									<div class="slider-content">
-										<h3 class="item-title">
-											@item.Name
-										</h3>
-										<p>
-											@item.User.SelfInformation
-										</p>
-										<a href="#!" class="btn">Go Profile</a>
-									</div>
+							<div class="col-7">
+								<div class="slider-content">
+									<h3 class="item-title">
+										@item.Name
+									</h3>
+									<p>
+										@item.Rating
+									</p>
+									<a href="#!" class="btn">Go to detail</a>
 								</div>
-
-								<div class="col-5">
-								<div class="row">
-										@foreach (var book in @item.User.Books.OrderByDescending(b => b.Rating)
-												.Take(3))
-										{
-										<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-											<div class="team-fullimage text-center clearfix" data-aos="fade-up" data-aos-delay="100">
-												<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-												
-											</div>
-										</div>
-										}
-
-									</div>
-								</div>
-
 							</div>
-						</div>
 
-						<div class="absolute-social-wrap sec-ptb-60 pt-0">
-							<div class="container">
-								<div class="social-links-text ul-li clearfix">
-									<ul class="clearfix">
-										<li><a href="@item.User.Facebook">facebook</a></li>
-										<li><a href="@item.User.Twitter">twitter</a></li>
-										<li><a href="@item.User.Instagram">instagram</a></li>
-									</ul>
+							<div class="col-5">
+								<div class="slider-image">
+									@foreach (var book in item.BookCategories.Where(c=>c.BookId==c.Book.Id).OrderBy(x=>x.Book.Rating).Take(3).ToList())
+									{
+										
+										<div class="child-image child-image-@count">
+											<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+										</div>
+										count++;
+									}
 								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="absolute-social-wrap sec-ptb-60 pt-0">
+						<div class="container">
+							<div class="social-links-text ul-li clearfix">
+								<ul class="clearfix">
+									<li><a href="#!">facebook</a></li>
+									<li><a href="#!">twitter</a></li>
+									<li><a href="#!">instagram</a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
-				}
+				</div>
+			} 
+		
+
 			
 
 		</div>
@@ -87,6 +86,7 @@
 						<h2 class="title-text mb-15">
 							My Library
 						</h2>
+
 					}
 					else
 					{
@@ -159,8 +159,7 @@
 						count++;
 						<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 							<div class="service-default" data-aos="fade-up" data-aos-delay="100">
-								<span class="serial-number">@count</span>
-								<h3 class="item-title">@item.User.Name</h3>
+								<a asp-action="user" asp-controller="profile" asp-route-username="@item.User.UserName"><h3 class="item-title">@item.User.Name</h3></a>
 								<p class="mb-0">
 									@item.User.SelfInformation
 								</p>
@@ -178,7 +177,7 @@
 	@if (Model.Books.Count >= 1)
 	{
 		<section id="team-section" class="team-section sec-ptb-100 clearfix">
-			<div class="container">
+			<div   class="container">
 
 				<div class="section-title text-center mb-30" data-aos="fade-up" data-aos-delay="100">
 					<h2 class="title-text mb-15">Are You Want Read Book?</h2>
@@ -189,9 +188,9 @@
 					@foreach (var item in Model.Books.OrderByDescending(b => b.Id))
 					{
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-							<div class="team-fullimage text-center clearfix" data-aos="fade-up" data-aos-delay="100">
+							<div  class="team-fullimage text-center clearfix" data-aos="fade-up" data-aos-delay="100">
 								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-								<div class="item-content">
+								<div  class="item-content" >
 									<div class="person-name"><h3>@item.User.Name</h3></div>
 									@if (item != null && item.Chapters != null)
 									{
@@ -203,7 +202,7 @@
 										<span>0</span>
 									}
 									<div class="person-title"><span>@item.Rating</span></div>
-									<div class="person-title">
+									<div  class="person-title">
 										<span>
 											@if (@item.IsCompleted == true)
 											{
@@ -253,35 +252,7 @@
 				</div>
 
 				<div class="row">
-					@foreach (var item in Model.MostReadCategory)
-					{
-						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-							<div class="blog-grid clearfix" data-aos="fade-up" data-aos-delay="100">
-								<a href="#!" class="blog-image">
-									<img src="~/assets/images/@item.Book.CoverPhoto" alt="image_not_found">
-								</a>
-								<h3 class="item-title">
-									<a href="#!">
-										@item.Book.Name
-									</a>
-								</h3>
-								<div class="post-meta ul-li clearfix">
-									<ul class="clearfix">
-										@if (item != null && item.Book.Chapters != null)
-										{
-											<small class="item-brand">@item.Book.Chapters.Count</small>
-										}
-
-										else
-										{
-											<span>0</span>
-										}
-										<li><a href="#!">@item.Book.User.UserName</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					}
+		
 
 
 				</div>
@@ -297,8 +268,7 @@
 	<div id="partners-section" class="partners-section sec-ptb-100 bg-light-gray clearfix">
 		<div class="container" data-aos="fade-up" data-aos-delay="100">
 			<div id="partners-carousel" class="partners-carousel arrow-left-right owl-carousel owl-theme">
-				@* @if (User.IsInRole("Author")) *@
-				@* { *@
+			
 					@foreach (var item in Model.Users)
 					{
 						<div class="item">
@@ -307,7 +277,7 @@
 								<img class="after-image" src="~/assets/images/@item.BackImage" alt="image_not_found">
 							</a>
 						</div>
-				@* } *@
+				
 				<h3 class="item-title">
 					<a href="#!">
 						@item.Name
@@ -322,4 +292,3 @@
 
 
 </main>
-<!-- main body - end

@@ -9,7 +9,9 @@
 	<div class="card">
 		<div class="card-body">
 			<h4 class="card-title">TAG Table</h4>
-			
+			<a asp-action="create" asp-controller="tag" style="font-size: 24px;">
+				<i class="mdi mdi-library-plus"></i>
+			</a>
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
@@ -40,7 +42,6 @@
 										<span>0</span>
 									}
 								</td>
-								<td><a asp-action="create" asp-controller="tag" ><button type="button" class="btn btn-inverse-dark btn-fw">Create</button></a></td>
 
 								<td><a asp-action="update" asp-controller="tag" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
 

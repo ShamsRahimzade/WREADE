@@ -7,30 +7,18 @@ using Microsoft.EntityFrameworkCore;
 using Wreade.Application.Abstractions.Repostories;
 using Wreade.Domain.Entities;
 using Wreade.Persistence.DAL;
+using Wreade.Persistence.Implementations.Repositories.Generic;
 
 namespace Wreade.Persistence.Implementations.Repositories
 {
-	public class SettingsRepository:ISettingsRepository
+	public class SettingsRepository : Repository<Setting>, ISettingsRepository
 	{
-		private readonly AppDbContext _context;
 
-		public SettingsRepository(AppDbContext context)
+		public SettingsRepository(AppDbContext context):base(context)
 		{
-			_context = context;
+			
 		}
 
-		public async Task<IEnumerable<Setting>> GetAllSettingsAsync()
-		{
-			return await _context.Setting.ToListAsync();
-		}
-		public async Task<Setting> GetSettingByKeyAsync(string key)
-		{
-			return await _context.Setting.FirstOrDefaultAsync(s => s.Key == key);
-		}
-		public async Task UpdateSettingAsync(Setting setting)
-		{
-			_context.Setting.Update(setting);
-			await _context.SaveChangesAsync();
-		}
+		
 	}
 }

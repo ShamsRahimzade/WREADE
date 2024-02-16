@@ -38,7 +38,7 @@ namespace Wreade.Persistence.ServiceRegistration
 			}).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
-           
+        
             
             services.AddScoped<IHomeService, HomeService>();
 			services.AddScoped<IUserService, UserService>();

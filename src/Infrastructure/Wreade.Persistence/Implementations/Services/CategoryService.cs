@@ -65,7 +65,10 @@ namespace Wreade.Persistence.Implementations.Services
 
 			return vm;
 		}
-
+		public async Task<ICollection<Category>> GetAll(int page = 1, int take = 10)
+		{
+			return await _categoryrepo.GetAll(includes:new string[] { "BookCategories", "BookCategories.Book" }).ToListAsync();
+		}
 		public async Task<PaginationVM<Category>> GetAllAsync(int page = 1, int take = 10)
 		{
 			ICollection<Category> category = await _categoryrepo.GetPagination(skip: (page - 1) * take, take: take).ToListAsync();

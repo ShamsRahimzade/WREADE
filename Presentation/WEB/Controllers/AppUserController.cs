@@ -59,7 +59,34 @@ namespace WEB.Controllers
 
             return View("register");
         }
-        public async Task<IActionResult> Logout()
+		public async Task<IActionResult> UpgradeToPremium(string userId)
+		{
+			var result = await _service.UpgradeToPremiumAsync(userId);
+			if (result)
+			{
+				TempData["Message"] = "Upgrade to premium successful.";
+			}
+			else
+			{
+				TempData["Message"] = "Failed to upgrade to premium.";
+			}
+			return RedirectToAction("Index", "Home");
+		}
+
+		public async Task<IActionResult> DowngradeFromPremium(string userId)
+		{
+			var result = await _service.DowngradeFromPremiumAsync(userId);
+			if (result)
+			{
+				TempData["Message"] = "Downgrade from premium successful.";
+			}
+			else
+			{
+				TempData["Message"] = "Failed to downgrade from premium.";
+			}
+			return RedirectToAction("Index", "Home");
+		}
+		public async Task<IActionResult> Logout()
         {
             await _service.Logout();
             return RedirectToAction("Index", "Home");

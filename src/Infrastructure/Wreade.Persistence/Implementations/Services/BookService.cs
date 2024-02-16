@@ -50,6 +50,7 @@ namespace Wreade.Persistence.Implementations.Services
 			var readingHistory = _context.Books.Where(b => b.User.Name == userName).ToList();
 			return readingHistory;
 		}
+		
 		public async Task<List<Book>> GetUserBooksAsync()
 		{
 			return await _context.Books.OrderByDescending(b => b.Rating).Take(3).ToListAsync();
@@ -80,6 +81,10 @@ namespace Wreade.Persistence.Implementations.Services
             };
             return vm;
         }
+		public async Task<ICollection<Book>> GetAll(int page = 1, int take = 10)
+		{
+			return await _repo.GetAll(includes: new string[] { nameof(Book.Chapters)}).ToListAsync();
+		}
 		public async Task<PaginationVM<Book>> GetBooksCreatedByUserAsync(string userId, int page = 1, int take = 10)
 		{
 

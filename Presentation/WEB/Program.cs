@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
-using Microsoft.Extensions.DependencyInjection;
+
 using Stripe;
 using Wreade.Application;
 using Wreade.Persistence.ServiceRegistration;
@@ -14,8 +11,8 @@ builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 var app = builder.Build();
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

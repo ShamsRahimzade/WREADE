@@ -29,11 +29,11 @@ namespace WEB.Controllers
             if (vm.Items == null) return NotFound();
             return View(vm);
         }
-		public async Task<IActionResult> Index()
-		{
-			var userBooks = await _service.GetUserBooksAsync();
-			return View(userBooks);
-		}
+		//public async Task<IActionResult> Index()
+		//{
+		//	var userBooks = await _service.GetUserBooksAsync();
+		//	return View(userBooks);
+		//}
 		public async Task<IActionResult> Create()
         {
 			BookCreateVM vm = new BookCreateVM();

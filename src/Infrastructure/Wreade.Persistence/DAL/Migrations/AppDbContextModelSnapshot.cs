@@ -193,6 +193,9 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<string>("Instagram")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsPremium")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -225,14 +228,20 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("PremiumEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PremiumStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Premiumprice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SelfInformation")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StatusId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -258,8 +267,6 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("StatusId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -691,30 +698,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.ToTable("Setting");
                 });
 
-            modelBuilder.Entity("Wreade.Domain.Entities.Status", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Status");
-                });
-
             modelBuilder.Entity("Wreade.Domain.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -801,15 +784,6 @@ namespace Wreade.Persistence.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Wreade.Domain.Entities.AppUser", b =>
-                {
-                    b.HasOne("Wreade.Domain.Entities.Status", "Status")
-                        .WithMany("Users")
-                        .HasForeignKey("StatusId");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Book", b =>
@@ -987,11 +961,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
-                });
-
-            modelBuilder.Entity("Wreade.Domain.Entities.Status", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Tag", b =>
