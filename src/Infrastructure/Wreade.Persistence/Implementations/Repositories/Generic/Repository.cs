@@ -149,5 +149,22 @@ namespace Wreade.Persistence.Implementations.Repositories.Generic
         {
             return await _table.AnyAsync(expression);
         }
-    }
+
+		public IQueryable<T> GetPaginationB<T>(Expression<Func<T, bool>> filter = null, int skip = 0, int take = 10) where T : class
+		{
+			// Başlangıç sorgusu
+			IQueryable<T> query = _context.Set<T>();
+
+			// Filtreleme
+			if (filter != null)
+			{
+				query = query.Where(filter);
+			}
+
+			// Sayfalama
+			query = query.Skip(skip).Take(take);
+
+			return query;
+		}
+	}
 }

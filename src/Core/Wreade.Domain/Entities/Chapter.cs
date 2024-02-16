@@ -12,7 +12,8 @@ namespace Wreade.Domain.Entities
     {
         public string Title { get; set; }
         public string Text { get; set; }
-     
+        public string? AppUserId { get; set; }
+        public AppUser User { get; set; }
         public string ChapterImage { get; set; }
 		[ForeignKey("BookId")]
 		public int BookId { get; set; }

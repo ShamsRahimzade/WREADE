@@ -65,20 +65,18 @@ namespace Wreade.Persistence.Implementations.Services
             }
         }
 
-        public async Task<bool> Login(LoginVM vm, ModelStateDictionary modelstate)
+		public async Task<bool> Login(LoginVM vm, ModelStateDictionary modelstate)
         {
             if (!modelstate.IsValid) return false;
             AppUser user = await _user.FindByEmailAsync(vm.UserNameOrEmail);
-            if (user == null)
+            if (user is null)
             {
                 user = await _user.FindByNameAsync(vm.UserNameOrEmail);
                 if (user is null)
                 {
                     modelstate.AddModelError(string.Empty, "Not found");
                     return false;
-                }
-               
-               
+                } 
             }
             var result = await _signman.PasswordSignInAsync(user, vm.Password, vm.IsRemembered, true);
             if (result.IsLockedOut)
@@ -278,7 +276,7 @@ namespace Wreade.Persistence.Implementations.Services
         public async Task<AppUser> GetUser(string username)
         {
             return await _user.Users
-                .Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee)
+                .Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee).Include(u=>u.Books)
                 .FirstOrDefaultAsync(u => u.UserName == username);
         }
         public async Task<List<AppUser>> GetUsers(string searchTerm)

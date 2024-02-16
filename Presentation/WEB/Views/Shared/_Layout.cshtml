@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using Wreade.Persistence.Implementations.Services;
+@inject LayoutService service
+@inject UserManager<AppUser> _userManager;
+@{
+    Dictionary<string, string> settings = await service.GetSettingsAsync();
+    ICollection<Category> categories = await service.GetCategoriesAsync();
+    AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+}﻿
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -52,6 +61,13 @@
 						<a href="index.html">
 							<img src="~/assets/images/logo/logo_1.png" alt="logo_not_found">
 						</a>
+							@if (User.Identity.IsAuthenticated)
+							{
+								@if (User.IsInRole("Author"))
+								{
+									<li><a asp-action="index" asp-controller="book" asp-route-id="@User.Identity.Name">Book</a></li>
+								}
+							}
 						<div class="mobile-menu-btns float-right ul-li-right">
 							<ul class="clearfix">
 								<li>
@@ -76,98 +92,23 @@
 					<nav class="main-menu ul-li-right clearfix">
 
 						<ul class="clearfix">
-						@if (User.Identity.IsAuthenticated)
-							{
-								@if (User.IsInRole("Author"))
-								{
-									<li><a asp-action="index" asp-controller="book" asp-route-id="@User.Identity.Name">Book</a></li>
-								}
-							}
 							<li class="menu-item-has-child">
-								<a href="#!">HOME</a>
+								<a href="#!">Browse</a>
 								<div class="mega-menu">
 									<div class="row">
 
-										<div class="col-lg-2">
-											<div class="menu-list ul-li-block">
-												<h3 class="list-title">Agency PAGES</h3>
-												<ul class="clearfix">
-													<li><a href="home-agency-default.html">Agency Default</a></li>
-													<li><a href="home-agency-classic.html">Agency Classic</a></li>
-													<li><a href="home-agency-creative.html">Agency Creative</a></li>
-													<li><a href="home-studio-agency.html">Atudio Agency</a></li>
-													<li><a href="home-agency-minimal.html">Agency Minimal</a></li>
-													<li><a href="home-agency-startup.html">Agency Startup</a></li>
-													<li><a href="home-agency-marketing.html">Agency Marketing</a></li>
-													<li><a href="home-agency-simple.html">Agency Simple</a></li>
-												</ul>
-											</div>
-										</div>
-
-										<div class="col-lg-2">
-											<div class="menu-list ul-li-block">
-												<h3 class="list-title">PORTFOLIO PAGES</h3>
-												<ul class="clearfix">
-													<li><a href="home-portfolio-1.html">Portfolio V.1</a></li>
-													<li><a href="home-portfolio-2.html">Portfolio V.1</a></li>
-													<li><a href="home-portfolio-3.html">Portfolio V.3</a></li>
-													<li><a href="home-portfolio-4.html">Portfolio Dark</a></li>
-												</ul>
-											</div>
-										</div>
-
-										<div class="col-lg-6">
-											<h3 class="list-title">OTHER PAGES</h3>
-											<div class="row">
-												<div class="col-lg-4">
-													<div class="menu-list ul-li-block">
-														<ul class="clearfix">
-															<li><a href="home-photographer.html">Photographer</a></li>
-															<li><a href="home-freelancer.html">Freelancer</a></li>
-															<li><a href="home-designer.html">Designer</a></li>
-															<li><a href="home-personal.html">Personal</a></li>
-															<li><a href="home-app-landing.html">App Landing</a></li>
-														</ul>
-													</div>
-												</div>
-
-												<div class="col-lg-4">
-													<div class="menu-list ul-li-block">
-														<ul class="clearfix">
-															<li><a href="home-architecture.html">Architecture</a></li>
-															<li><a href="home-restaurant.html">Restaurant</a></li>
-															<li><a href="home-hotel.html">Hotel</a></li>
-															<li><a href="home-events.html">Events</a></li>
-															<li><a href="home-decoration.html">Decoration</a></li>
-														</ul>
-													</div>
-												</div>
-
-												<div class="col-lg-4">
-													<div class="menu-list ul-li-block">
-														<ul class="clearfix">
-															<li><a href="home-wedding.html">Wedding</a></li>
-															<li><a href="home-travel.html">Travel</a></li>
-															<li><a href="home-yoga.html">Yoga</a></li>
-															<li><a href="home-dlogger.html">Blogger</a></li>
-															<li><a href="home-project-showcase.html">Project Showcase</a></li>
-														</ul>
-													</div>
+										<span><h3 class="list-title">Categories></h3></span>
+										@foreach (var item in categories)
+										{
+											<div class="col-lg-2">
+												<div class="menu-list ul-li-block">
+													<ul class="clearfix">
+														<li><a href="home-agency-default.html">@item.Name</a></li>
+													
+													</ul>
 												</div>
 											</div>
-										</div>
-
-										<div class="col-lg-2">
-											<div class="menu-list ul-li-block">
-												<h3 class="list-title">SHOP PAGES</h3>
-												<ul class="clearfix">
-													<li><a href="home-shop-creative.html">Shop Creative</a></li>
-													<li><a href="home-shop-classic.html">Shop Classic</a></li>
-													<li><a href="home-shop-minimal.html">Shop Minimal</a></li>
-												</ul>
-											</div>
-										</div>
-
+										}
 									</div>
 								</div>
 							</li>
@@ -532,7 +473,7 @@
 	<!-- header-section - end
 	================================================== -->
 	@RenderBody()
-	
+
 	<!-- footer-section - start
 	================================================== -->
 	<footer id="footer-section" class="footer-section sec-ptb-100 clearfix">

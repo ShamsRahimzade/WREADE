@@ -19,6 +19,7 @@ namespace Wreade.Application.Abstractions.Services
 		Task<bool> DeleteAsync(int id);
 		Task<BookUpdateVM> UpdatedAsync(int id, BookUpdateVM vm);
 		Task<bool> UpdateAsync(int id, BookUpdateVM vm, ModelStateDictionary modelstate);
-
+		Task<PaginationVM<Book>> GetBooksCreatedByUserAsync(string userId, int page = 1, int take = 10);
+		Task<List<Book>> GetUserBooksAsync();
 	}
 }

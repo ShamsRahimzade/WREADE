@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Wreade.Application.Abstractions.Repostories;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
@@ -9,18 +12,29 @@ namespace WEB.Controllers
     {
         private readonly IBookService _service;
 
-        public BookController(IBookService service)
+		public BookController(IBookService service)
         {
             _service = service;
-        }
+			
+		}
         public async Task<IActionResult> Index(int page = 1, int take = 5)
         {
 
-            PaginationVM<Book> vm = await _service.GetAllAsync(page, take);
+			string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			//if (string.IsNullOrEmpty(userId))
+			//{
+			//	return RedirectToAction("Login", "AppUser");
+			//}
+			PaginationVM<Book> vm = await _service.GetBooksCreatedByUserAsync(userId,page, take);
             if (vm.Items == null) return NotFound();
             return View(vm);
         }
-        public async Task<IActionResult> Create()
+		public async Task<IActionResult> Index()
+		{
+			var userBooks = await _service.GetUserBooksAsync();
+			return View(userBooks);
+		}
+		public async Task<IActionResult> Create()
         {
 			BookCreateVM vm = new BookCreateVM();
 			vm = await _service.CreatedAsync(vm);

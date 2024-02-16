@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wreade.Application.ViewModels;
+﻿using Wreade.Application.ViewModels;
+using Wreade.Domain.Entities;
 
 namespace Wreade.Application.Abstractions.Services
 {
@@ -11,5 +7,7 @@ namespace Wreade.Application.Abstractions.Services
 	{
 		Task<Dictionary<string, string>> GetSettingsAsync();
 		Task<bool> UpdateSettingAsync(string key, UpdateSettingsVM vm);
-	}
+		Task<ICollection<Category>> GetCategoriesAsync();
+
+    }
 }

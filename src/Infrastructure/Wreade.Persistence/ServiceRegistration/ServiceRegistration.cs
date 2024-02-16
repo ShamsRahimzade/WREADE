@@ -53,13 +53,15 @@ namespace Wreade.Persistence.ServiceRegistration
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
+            services.AddScoped<ILikeRepository, LikeRepository>(); 
             services.AddScoped<ILayoutService, LayoutService>();
+            services.AddScoped< LayoutService>();
 
 
 
 
 
-			return services;
+            return services;
         }
     }
 }

@@ -24,8 +24,9 @@ namespace Wreade.Persistence.Implementations.Services
 		private readonly UserManager<AppUser> _user;
 		private readonly IHttpContextAccessor _http;
 		private readonly ILikeRepository _like;
+		private readonly IUserService _service;
 
-		public ChapterService(IChapterRepository chaprepo,IWebHostEnvironment env,IBookRepository bookrepo, UserManager<AppUser> user,IHttpContextAccessor http,ILikeRepository like)
+		public ChapterService(IChapterRepository chaprepo,IWebHostEnvironment env,IBookRepository bookrepo, UserManager<AppUser> user,IHttpContextAccessor http,ILikeRepository like,IUserService service)
         {
             _chaprepo = chaprepo;
             _env = env;
@@ -33,6 +34,7 @@ namespace Wreade.Persistence.Implementations.Services
 			_user = user;
 			_http = http;
 			_like = like;
+			_service = service;
 		}
         public async Task<CreateChapterVM> CreatedAsync(CreateChapterVM vm)
         {
@@ -46,13 +48,20 @@ namespace Wreade.Persistence.Implementations.Services
             if (!ms.IsValid) return false;
             if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title))
             {
-                ms.AddModelError("Name", "This title is already exist");
+                ms.AddModelError("Title", "This title is already exist");
                 return false;
             }
-            //vm.bookId = id;
-            Chapter chapter = new Chapter
+			string username = "";
+			if (_http.HttpContext.User.Identity != null)
+			{
+				username = _http.HttpContext.User.Identity.Name;
+			}
+			AppUser User = await _service.GetUser(username);
+			//vm.bookId = id;
+			Chapter chapter = new Chapter
             {
-                Title = vm.Title,
+				AppUserId = User.Id,
+				Title = vm.Title,
                 Text = vm.Text,
                 CreatedAt = DateTime.UtcNow,
                 BookId = vm.bookId

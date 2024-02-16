@@ -19,5 +19,7 @@ namespace Wreade.Application.Abstractions.Repostories.Generic
         void ReverseDelete(T entity);
         Task<bool> IsExistAsync(Expression<Func<T, bool>> expression);
         Task SaveChangeAsync();
+		IQueryable<T> GetPaginationB<T>(Expression<Func<T, bool>> filter = null, int skip = 0, int take = 10) where T : class;
+
 	}
 }

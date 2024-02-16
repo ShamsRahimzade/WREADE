@@ -18,8 +18,8 @@ namespace Wreade.Domain.Entities
         public string? Twitter { get; set; }
         public DateTime Birthday { get; set; }
         public List<Book>? Books { get; set; }
-        public string MainImage { get; set; } = "profile.png";
-		public string BackImage { get; set; } = "profile.png";
+        public string MainImage { get; set; } = "default.jpg";
+		public string BackImage { get; set; } = "default.jpg";
 		public int? StatusId { get; set; }
         public Status? Status { get; set; }
         public int FollowingCount { get; set; } = 0;
@@ -29,8 +29,8 @@ namespace Wreade.Domain.Entities
         public ICollection<Follow> Followees { get; set; }
         public AppUser()
 		{
-			MainImage = "profile.png";
-			BackImage = "profile.png";
+			MainImage = "default.jpg";
+			BackImage = "default.jpg";
 
 		}
 	}

@@ -12,8 +12,8 @@ using Wreade.Persistence.DAL;
 namespace Wreade.Persistence.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240213163024_chapterimagecolumn")]
-    partial class chapterimagecolumn
+    [Migration("20240215173745_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -439,6 +439,9 @@ namespace Wreade.Persistence.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
@@ -456,6 +459,9 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<bool>("Isdeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
@@ -468,6 +474,8 @@ namespace Wreade.Persistence.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("BookId");
 
@@ -508,9 +516,6 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("CommentedBookId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CommentedChapterId")
                         .HasColumnType("int");
 
@@ -534,8 +539,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("CommentedBookId");
 
                     b.HasIndex("CommentedChapterId");
 
@@ -617,6 +620,43 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.HasIndex("AppUSerId");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("Wreade.Domain.Entities.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Isdeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LikerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
+
+                    b.HasIndex("LikerId");
+
+                    b.ToTable("Like");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Setting", b =>
@@ -824,6 +864,10 @@ namespace Wreade.Persistence.DAL.Migrations
 
             modelBuilder.Entity("Wreade.Domain.Entities.Chapter", b =>
                 {
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("Wreade.Domain.Entities.Book", "Book")
                         .WithMany("Chapters")
                         .HasForeignKey("BookId")
@@ -831,6 +875,8 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.ChapterViewCount", b =>
@@ -852,17 +898,11 @@ namespace Wreade.Persistence.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Wreade.Domain.Entities.Book", "CommentedBook")
-                        .WithMany("Comments")
-                        .HasForeignKey("CommentedBookId");
-
                     b.HasOne("Wreade.Domain.Entities.Chapter", "CommentedChapter")
                         .WithMany("Comments")
                         .HasForeignKey("CommentedChapterId");
 
                     b.Navigation("Author");
-
-                    b.Navigation("CommentedBook");
 
                     b.Navigation("CommentedChapter");
                 });
@@ -897,6 +937,25 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Wreade.Domain.Entities.Like", b =>
+                {
+                    b.HasOne("Wreade.Domain.Entities.Chapter", "Chapter")
+                        .WithMany("Likes")
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "Liker")
+                        .WithMany()
+                        .HasForeignKey("LikerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
+
+                    b.Navigation("Liker");
+                });
+
             modelBuilder.Entity("Wreade.Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("Books");
@@ -915,8 +974,6 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("BookTags");
 
                     b.Navigation("Chapters");
-
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Category", b =>
@@ -930,6 +987,8 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Comments");
+
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Status", b =>

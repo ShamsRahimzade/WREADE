@@ -39,16 +39,16 @@ namespace WEB.Controllers
         }
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
             return View("register");
         }
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM login,string? returnUrl)
+        public async Task<IActionResult> Login(LoginVM login)
         {
-            if (returnUrl is null) return RedirectToAction("Index", "Home");
+            //if (returnUrl is null) return RedirectToAction("Index", "Home");
 			
             var combinevm = new IdentityVM
             {
@@ -105,5 +105,6 @@ namespace WEB.Controllers
 
             return RedirectToAction(nameof(Login));
         }
-    }
+		
+	}
 }

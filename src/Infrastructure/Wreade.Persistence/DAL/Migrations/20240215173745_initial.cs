@@ -391,7 +391,10 @@ namespace Wreade.Persistence.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ChapterImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
+                    LikeCount = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Isdeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -400,6 +403,11 @@ namespace Wreade.Persistence.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Chapters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Chapters_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Chapters_Books_BookId",
                         column: x => x.BookId,
@@ -436,7 +444,6 @@ namespace Wreade.Persistence.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CommentedBookId = table.Column<int>(type: "int", nullable: true),
                     CommentedChapterId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -453,15 +460,40 @@ namespace Wreade.Persistence.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comments_Books_CommentedBookId",
-                        column: x => x.CommentedBookId,
-                        principalTable: "Books",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Comments_Chapters_CommentedChapterId",
                         column: x => x.CommentedChapterId,
                         principalTable: "Chapters",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Like",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LikerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ChapterId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Isdeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Like", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Like_AspNetUsers_LikerId",
+                        column: x => x.LikerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Like_Chapters_ChapterId",
+                        column: x => x.ChapterId,
+                        principalTable: "Chapters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -540,6 +572,11 @@ namespace Wreade.Persistence.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Chapters_AppUserId",
+                table: "Chapters",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Chapters_BookId",
                 table: "Chapters",
                 column: "BookId");
@@ -547,17 +584,13 @@ namespace Wreade.Persistence.DAL.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ChapterViewCounts_ChapterId",
                 table: "ChapterViewCounts",
-                column: "ChapterId");
+                column: "ChapterId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_AppUserId",
                 table: "Comments",
                 column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_CommentedBookId",
-                table: "Comments",
-                column: "CommentedBookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_CommentedChapterId",
@@ -578,6 +611,16 @@ namespace Wreade.Persistence.DAL.Migrations
                 name: "IX_Images_AppUSerId",
                 table: "Images",
                 column: "AppUSerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Like_ChapterId",
+                table: "Like",
+                column: "ChapterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Like_LikerId",
+                table: "Like",
+                column: "LikerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Status_Name",
@@ -626,6 +669,9 @@ namespace Wreade.Persistence.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "Like");
 
             migrationBuilder.DropTable(
                 name: "Setting");

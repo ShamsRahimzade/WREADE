@@ -15,12 +15,10 @@
 	<section id="slider-section" class="slider-section clearfix">
 		<div id="agency-default-carousel" class="agency-default-carousel owl-carousel owl-theme">
 
-			@if (User.IsInRole("Author"))
-			{
+			
 				@foreach (var item in Model.Books.OrderByDescending(b => b.Rating)
 						.Take(3))
 				{
-
 
 					<div class="item bg-gray d-flex align-items-center">
 						<div class="container">
@@ -39,13 +37,16 @@
 								</div>
 
 								<div class="col-5">
-									<div class="slider-image">
+								<div class="row">
 										@foreach (var book in @item.User.Books.OrderByDescending(b => b.Rating)
 												.Take(3))
 										{
-											<div class="child-image child-image-1">
-												<img src="~/assets/images/@book.CoverPhoto" alt="image_not_found">
+										<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+											<div class="team-fullimage text-center clearfix" data-aos="fade-up" data-aos-delay="100">
+												<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
+												
 											</div>
+										</div>
 										}
 
 									</div>
@@ -67,7 +68,7 @@
 						</div>
 					</div>
 				}
-			}
+			
 
 		</div>
 	</section>

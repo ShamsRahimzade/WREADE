@@ -36,7 +36,6 @@
 										<img style="width:100px; height:100px;" src="~/assets/images/chapters/@item.ChapterImage" alt="image">
 									</td>
 									<td> @item.Title </td>
-									<td>@item.CreatedAt</td>
 									@if (@item.ChapterViewCount is not null)
 									{
 										<td>@item.ChapterViewCount.ViewCount</td>
@@ -44,8 +43,9 @@
 									}
 									else
 									{
-										<span>0</span>
+										<td>0</td>
 									}
+									<td>@item.CreatedAt.</td>
 									<td><a asp-action="delete" asp-controller="chapter" asp-route-id="@item.Id"><button type="button" class="btn btn-inverse-dark btn-fw">Delete</button></a></td>
 									<td><a asp-action="update" asp-controller="chapter" asp-route-id="@item.Id" asp-route-returnurl="@Context.Request.Path.Value"><button type="button" class="btn btn-inverse-dark btn-fw">Update</button></a></td>
 

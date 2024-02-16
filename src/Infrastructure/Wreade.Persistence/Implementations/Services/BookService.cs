@@ -50,7 +50,10 @@ namespace Wreade.Persistence.Implementations.Services
 			var readingHistory = _context.Books.Where(b => b.User.Name == userName).ToList();
 			return readingHistory;
 		}
-
+		public async Task<List<Book>> GetUserBooksAsync()
+		{
+			return await _context.Books.OrderByDescending(b => b.Rating).Take(3).ToListAsync();
+		}
 		public async Task<BookCreateVM> CreatedAsync(BookCreateVM vm)
 		{
 			vm.Tags = await _tag.GetAll().ToListAsync();
@@ -64,9 +67,8 @@ namespace Wreade.Persistence.Implementations.Services
 				orderExpression: x => x.Id, IsDescending: true,
 				includes: new string[] {  "BookCategories.Category","BookTags","BookTags.Tag" })
 				.ToListAsync();
-			AppUser User = await _user.GetUser(_http.HttpContext.User.Identity.Name);
-			books = await _repo.GetAllWhere(b => b.AppUserId==User.Id).Include(b=>b.Chapters).ToListAsync();
-            if (books == null) throw new Exception("Not Found");
+		
+			if (books == null) throw new Exception("Not Found");
             int count = await _repo.GetAll().CountAsync();
             if (count < 0) throw new Exception("Not Found");
             double totalpage = Math.Ceiling((double)count / take);
@@ -78,6 +80,25 @@ namespace Wreade.Persistence.Implementations.Services
             };
             return vm;
         }
+		public async Task<PaginationVM<Book>> GetBooksCreatedByUserAsync(string userId, int page = 1, int take = 10)
+		{
+
+
+			ICollection<Book> books = await _repo.GetPaginationB<Book>(c => c.AppUserId == userId, skip: (page - 1) * take, take: take).ToListAsync();
+
+
+			int count = await _repo.GetAll().CountAsync(c => c.AppUserId == userId);
+			double totalpage = Math.Ceiling((double)count / take);
+
+			PaginationVM<Book> vm = new PaginationVM<Book>
+			{
+				Items = books,
+				CurrentPage = page,
+				TotalPage = totalpage
+			};
+
+			return vm;
+		}
 		public async Task<bool> CreateAsync(BookCreateVM vm,ModelStateDictionary ms)
 		{
 			if (!ms.IsValid) return false;

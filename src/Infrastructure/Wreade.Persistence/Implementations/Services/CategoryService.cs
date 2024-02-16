@@ -69,7 +69,7 @@ namespace Wreade.Persistence.Implementations.Services
 		public async Task<PaginationVM<Category>> GetAllAsync(int page = 1, int take = 10)
 		{
 			ICollection<Category> category = await _categoryrepo.GetPagination(skip: (page - 1) * take, take: take).ToListAsync();
-
+			category = await _categoryrepo.GetOrderBy(c => c.Id).ToListAsync();
 			int count = await _categoryrepo.GetAll().Include(c => c.BookCategories).ThenInclude(bc => bc.Book).OrderBy(c => c.Id).CountAsync();
 			double totalpage = Math.Ceiling((double)count / take);
 			PaginationVM<Category> vm = new PaginationVM<Category>
@@ -129,6 +129,11 @@ namespace Wreade.Persistence.Implementations.Services
 
 			return vm;
 		}
+		//public async Task<List<Category>> GetCategory(string searchTerm)
+		//{
+
+		//	return await _.Where(x => x.UserName.ToLower().Contains(searchTerm.ToLower()) || x.Name.ToLower().Contains(searchTerm.ToLower()) || x.Surname.ToLower().Contains(searchTerm.ToLower())).ToListAsync();
+		//}
 		public async Task<bool> DeleteAsync(int id)
 		{
 			if (id < 1) throw new Exception("id");
@@ -141,6 +146,10 @@ namespace Wreade.Persistence.Implementations.Services
 			_categoryrepo.Delete(exist);
 			await _categoryrepo.SaveChangeAsync();
 			return true;
+		}
+		public async Task<ICollection<Category>> GetCategoriesAsync()
+		{
+			return await _categoryrepo.GetAll().ToListAsync();
 		}
 	}
 }

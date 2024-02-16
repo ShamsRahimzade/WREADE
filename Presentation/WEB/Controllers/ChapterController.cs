@@ -23,8 +23,11 @@ namespace WEB.Controllers
 		}
 		public async Task<IActionResult> Create(int bookId)
 		{
-			CreateChapterVM vm = new CreateChapterVM();
-			vm.bookId = bookId; 
+			CreateChapterVM vm = new CreateChapterVM
+			{
+				bookId=bookId
+			};
+			
 			vm = await _chapservice.CreatedAsync(vm);
 			return View(vm);
 		}
