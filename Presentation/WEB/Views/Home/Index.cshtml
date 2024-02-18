@@ -16,7 +16,7 @@
 	<section id="slider-section" class="slider-section clearfix">
 		<div id="agency-default-carousel" class="agency-default-carousel owl-carousel owl-theme">
 
-			 @foreach (var item in Model.MostReadCategory)
+			@foreach (var item in Model.MostReadCategory)
 			{
 				count = 1;
 
@@ -38,12 +38,49 @@
 
 							<div class="col-5">
 								<div class="slider-image">
-									@foreach (var book in item.BookCategories.Where(c=>c.BookId==c.Book.Id).OrderBy(x=>x.Book.Rating).Take(3).ToList())
+									@foreach (var book in item.BookCategories.Where(c => c.BookId == c.Book.Id).OrderBy(x => x.Book.Rating).Take(3).ToList())
 									{
-										
-										<div class="child-image child-image-@count">
-											<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+										<div @* style="bottom:230px;" *@  class="team-fullimage text-center clearfix aos-init aos-animate child-image child-image-@count"  data-aos="fade-up" data-aos-delay="100">
+											<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" class="blog-image">
+												<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+											</a>
+											<div class="item-content">
+												<div class="person-name">
+													<h3>
+														<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId">
+															@book.Book.Name
+														</a>
+													</h3>
+												</div>
+												<div class="person-title"><span><a href="#!">@book.Book.CreatedBy</a></span></div>
+												<div class="social-links ul-li-center clearfix">
+													<ul class="clearfix">
+														<li><a  ><i class="fab fa-facebook-f"></i></a></li>
+														<li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+														<li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+													</ul>
+												</div>
+											</div>
 										</div>
+										@* 	<div class="blog-grid clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
+								<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" class="blog-image">
+								<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+								</a>
+								<h3 class="item-title">
+								<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId">
+								@book.Book.Name
+								</a>
+								</h3>
+								<div class="post-meta ul-li clearfix">
+								<ul class="clearfix">
+								<li>@book.Book.CreatedAt</li>
+								<li><a href="#!">@book.Book.CreatedBy</a></li>
+								</ul>
+								</div>
+								</div> *@
+										@* <div class="child-image child-image-@count">
+								<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+								</div> *@
 										count++;
 									}
 								</div>
@@ -64,10 +101,10 @@
 						</div>
 					</div>
 				</div>
-			} 
-		
+			}
 
-			
+
+
 
 		</div>
 	</section>
@@ -101,34 +138,79 @@
 				<div class="masoney-grid mb-60">
 					<div class="grid-sizer"></div>
 
-					@if (User.Identity.IsAuthenticated)
-					{
 
-					}
-					else
+					@foreach (var item in Model.Books.Where(u => u.Rating == Model.Books.Max(b => b.Rating))
+							.Take(6))
 					{
-						@foreach (var item in Model.Books.Where(u => u.Rating == Model.Books.Max(b => b.Rating))
-								.Take(6))
-						{
-							<div class="grid-item">
-								<a href="#!" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
-									<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-									<span class="item-content-2">
-										<strong class="item-title">@item.Name</strong>
-										@if (item != null && item.Chapters != null)
-										{
-											<small class="item-brand">@item.Chapters.Count</small>
-										}
-										
-										else
-										{
-											<span>0</span>
-										}
-									</span>
-								</a>
+						@* <div class="product-grid aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+							<a class="item-image" href="#!">
+								<img src="assets/images/@item.CoverPhoto" alt="image_not_found">
+							</a>
+
+							<div class="item-content text-center">
+								<h3 class="item-title">
+									<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id">@item.Name</a>
+								</h3>
+								@if (@item.Chapters is not null)
+								{
+									<div class="col-sm-6 col-md-4 col-lg-3">
+										<span class="item-price">
+											<i class="mdi mdi-format-list-bulleted">@item.Chapters.Count</i>
+										</span>
+									</div>
+								}
+								else
+								{
+									<div class="col-sm-6 col-md-4 col-lg-3">
+										<span class="item-price">
+											<i class="mdi mdi-format-list-bulleted">0</i>
+										</span>
+									</div>
+								}
 							</div>
-						}
+
+							<div class="action-content clearfix">
+								<div class="btns-group ul-li-right clearfix">
+									<a href="#!" class="addtocart-btn"><i class="fas fa-plus mr-2"></i> add to cart</a>
+									<ul class="clearfix">
+										<li>
+											<button type="button"><i class="far fa-expand-arrows-alt"></i></button>
+										</li>
+										<li>
+											<button type="button"><i class="fas fa-heart"></i></button>
+										</li>
+									</ul>
+								</div>
+								<div class="rating-star ul-li clearfix">
+									<ul class="clearfix">
+										<li class="active"><i class="fas fa-star"></i></li>
+										<li class="active"><i class="fas fa-star"></i></li>
+										<li class="active"><i class="fas fa-star"></i></li>
+										<li class="active"><i class="fas fa-star"></i></li>
+										<li><i class="fas fa-star"></i></li>
+									</ul>
+								</div>
+							</div>
+						</div> *@
+						 <div class="grid-item">
+							<a href="#!" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
+								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
+								<span class="item-content-2">
+									<strong class="item-title">@item.Name</strong>
+									@if (item != null && item.Chapters != null)
+									{
+										<small class="item-brand">@item.Chapters.Count</small>
+									}
+
+									else
+									{
+										<span>0</span>
+									}
+								</span>
+							</a>
+						</div> 
 					}
+
 
 
 				</div>
@@ -177,7 +259,7 @@
 	@if (Model.Books.Count >= 1)
 	{
 		<section id="team-section" class="team-section sec-ptb-100 clearfix">
-			<div   class="container">
+			<div class="container">
 
 				<div class="section-title text-center mb-30" data-aos="fade-up" data-aos-delay="100">
 					<h2 class="title-text mb-15">Are You Want Read Book?</h2>
@@ -188,21 +270,23 @@
 					@foreach (var item in Model.Books.OrderByDescending(b => b.Id))
 					{
 						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-							<div  class="team-fullimage text-center clearfix" data-aos="fade-up" data-aos-delay="100">
-								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-								<div  class="item-content" >
-									<div class="person-name"><h3>@item.User.Name</h3></div>
-									@if (item != null && item.Chapters != null)
-									{
-										<small class="item-brand">@item.Chapters.Count</small>
-									}
+							<div class="team-fullimage text-center  add-effect" data-aos="fade-up" data-aos-delay="100">
+								<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><img src="~/assets/images/@item.CoverPhoto" alt="image_not_found"></a>
+								<div class="item-content">
+									<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><div class="person-name"><h3>@item.User.Name</h3></div></a>
+									<div class="person-title">
+										@if (item != null && item.Chapters != null)
+										{
+											<small class="item-brand">@item.Chapters.Count</small>
+										}
 
-									else
-									{
-										<span>0</span>
-									}
+										else
+										{
+											<span>0</span>
+										}
+									</div>
 									<div class="person-title"><span>@item.Rating</span></div>
-									<div  class="person-title">
+									<div class="person-title">
 										<span>
 											@if (@item.IsCompleted == true)
 											{
@@ -252,9 +336,6 @@
 				</div>
 
 				<div class="row">
-		
-
-
 				</div>
 
 			</div>
@@ -268,22 +349,22 @@
 	<div id="partners-section" class="partners-section sec-ptb-100 bg-light-gray clearfix">
 		<div class="container" data-aos="fade-up" data-aos-delay="100">
 			<div id="partners-carousel" class="partners-carousel arrow-left-right owl-carousel owl-theme">
-			
-					@foreach (var item in Model.Users)
-					{
-						<div class="item">
-							<a class="partner-logo" asp-controller="profile" asp-action="user"  asp-route-username="@item.UserName">
-								<img class="before-image" src="~/assets/images/@item.MainImage" alt="image_not_found">
-								<img class="after-image" src="~/assets/images/@item.BackImage" alt="image_not_found">
-							</a>
-						</div>
-				
-				<h3 class="item-title">
-					<a href="#!">
-						@item.Name
-					</a>
-				</h3>
-					}
+
+				@foreach (var item in Model.Users)
+				{
+					<div class="item">
+						<a class="partner-logo" asp-controller="profile" asp-action="user" asp-route-username="@item.UserName">
+							<img class="before-image" src="~/assets/images/@item.MainImage" alt="image_not_found">
+							<img class="after-image" src="~/assets/images/@item.BackImage" alt="image_not_found">
+						</a>
+					</div>
+
+					<h3 class="item-title">
+						<a href="#!">
+							@item.Name
+						</a>
+					</h3>
+				}
 			</div>
 		</div>
 	</div>

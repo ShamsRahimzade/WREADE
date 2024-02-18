@@ -80,12 +80,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwVXNlclxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/AppUser/Search.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwVXNlclxTZWFyY2guY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Index.cshtml]
@@ -110,6 +110,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Library/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Premium/Premium.cshtml]

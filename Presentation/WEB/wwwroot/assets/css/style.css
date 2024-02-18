@@ -3090,18 +3090,18 @@ button {
   margin-top: 30px;
   position: relative;
 }
-.blog-fullimage.add-effect:before {
-  top: 50%;
-  left: 50%;
-  width: 0%;
-  z-index: 1;
-  height: 85%;
-  content: "";
-  position: absolute;
-  transition: all 0.3s ease-in-out;
-  background-color: #000000;
-  transform: translate(-50%, -50%);
-}
+    .blog-fullimage.add-effect:before {
+        top: 50%;
+        left: 50%;
+        width: 0%;
+        z-index: 1;
+        height: 85%;
+        content: "";
+        position: absolute;
+        transition: all 0.3s ease-in-out;
+        background-color: rebeccapurple;
+        transform: translate(-50%, -50%);
+    }
 .blog-fullimage.add-effect:hover:before {
   width: 85%;
 }
@@ -3327,7 +3327,7 @@ button {
   content: "";
   position: absolute;
   transition: all 0.3s ease-in-out;
-  background-color: #000000;
+  background-color: rebeccapurple;
   transform: translate(-50%, -50%);
 }
 .portfolio-fullimage.add-effect:hover:before {
@@ -4728,12 +4728,12 @@ button {
   background-color: rgba(0, 0, 0, 0.2);
 }
 .agency-default-carousel .owl-dots .owl-dot:hover {
-  background-color: #000000;
+  background-color: rebeccapurple;
 }
 .agency-default-carousel .owl-dots .owl-dot.active > span {
   width: 60px;
   transform: scale(1);
-  background-color: #000000;
+  background-color: rebeccapurple;
 }
 .agency-default-carousel .owl-nav {
   display: none;

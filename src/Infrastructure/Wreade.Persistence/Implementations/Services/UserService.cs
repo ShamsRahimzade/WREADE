@@ -167,11 +167,11 @@ namespace Wreade.Persistence.Implementations.Services
                 return false;
             }
 
-            await _signman.SignInAsync(user, isPersistent: false);
             if (user != null)
             {
                 await AssignRoleToUser(user, register.Role.ToString());
             }
+            await _signman.SignInAsync(user, isPersistent: false);
             return true;
 
         }
@@ -282,11 +282,7 @@ namespace Wreade.Persistence.Implementations.Services
                 .Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee).Include(u=>u.Books)
                 .FirstOrDefaultAsync(u => u.UserName == username);
         }
-        public async Task<List<AppUser>> GetUsers(string searchTerm)
-        {
-
-            return await _user.Users.Where(x => x.UserName.ToLower().Contains(searchTerm.ToLower()) || x.Name.ToLower().Contains(searchTerm.ToLower()) || x.Surname.ToLower().Contains(searchTerm.ToLower())).ToListAsync();
-        }
+       
         public async Task Follow(string followedId)
         {
             string userId = _http.HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;

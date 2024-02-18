@@ -14,7 +14,7 @@ namespace Wreade.Application.Abstractions.Services
         Task AssignRoleToUser(AppUser user, string roleName);
 		Task<List<string>> UpdateUser(AppUser user, EditProfileVM vm);
 		Task<AppUser> GetUser(string username);
-		Task<List<AppUser>> GetUsers(string searchTerm);
+		
 		Task Follow(string followedId);
 		Task Unfollow(string followedId);
         Task<List<string>> LoginNoPass(string username);

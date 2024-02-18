@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Wreade.Application.Abstractions.Repostories;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.Utilities.Extensions;
+using Wreade.Application.ViewModels;
 using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
 using Wreade.Persistence.DAL;
@@ -294,6 +296,21 @@ namespace Wreade.Persistence.Implementations.Services
 			_repo.Update(book);
 			await _repo.SaveChangeAsync();
 			return true;
+		}
+		public async Task<BookDetailVM>  DetailAsync(int id)
+		{
+			if (id <= 0) throw new Exception("Id not found");
+			Book book = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Chapters" });
+			List<Book> books = await _repo.GetAll( includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Chapters" }).ToListAsync();
+			if (book is null) throw new Exception("not found");
+			if (books is null) throw new Exception("not found");
+			BookDetailVM vm = new BookDetailVM
+			{
+				Books=books,
+				book = book
+			};
+			return vm;
+			
 		}
 	}
 }

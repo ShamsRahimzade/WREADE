@@ -12,7 +12,7 @@ namespace Wreade.Domain.Entities
         public string CoverPhoto { get; set; }
         public ICollection<BookTag >? BookTags { get; set; }
         public ICollection<BookCategory>? BookCategories { get; set; }
-      
+        public List<LibraryItem> Libraries { get; set; }
         public double Rating { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsAdult { get; set; }
