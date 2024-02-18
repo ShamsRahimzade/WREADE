@@ -1,4 +1,5 @@
-﻿using Wreade.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Wreade.Domain.Entities.Common;
 
 namespace Wreade.Domain.Entities
 {
@@ -16,5 +17,6 @@ namespace Wreade.Domain.Entities
         public double Rating { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsAdult { get; set; }
+      
     }
 }

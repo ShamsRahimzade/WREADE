@@ -106,6 +106,7 @@ namespace Wreade.Persistence.Implementations.Services
 
 			return vm;
 		}
+		
 		public async Task<bool> CreateAsync(BookCreateVM vm,ModelStateDictionary ms)
 		{
 			if (!ms.IsValid) return false;

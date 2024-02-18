@@ -57,6 +57,7 @@ namespace Wreade.Persistence.ServiceRegistration
             services.AddScoped<ILikeRepository, LikeRepository>(); 
             services.AddScoped<ILayoutService, LayoutService>();
             services.AddScoped<ILibraryService, LibraryService>();
+            services.AddScoped<ILibraryRepository, LibraryRepository>();
 			services.AddScoped< LayoutService>();
 
 

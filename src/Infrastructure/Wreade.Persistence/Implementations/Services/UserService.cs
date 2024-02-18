@@ -279,7 +279,7 @@ namespace Wreade.Persistence.Implementations.Services
         public async Task<AppUser> GetUser(string username)
         {
             return await _user.Users
-                .Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee).Include(u=>u.Books)
+                .Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee).Include(u=>u.Books).Include(u=>u.LibraryItems)
                 .FirstOrDefaultAsync(u => u.UserName == username);
         }
        
@@ -371,7 +371,9 @@ namespace Wreade.Persistence.Implementations.Services
 
 		public async Task<AppUser> GetUserById(string userId)
 		{
-			return await _context.Users.FindAsync(userId);
+			return await _user.Users
+				.Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee).Include(u => u.Books).Include(u => u.LibraryItems)
+				.FirstOrDefaultAsync(u => u.Id == userId);
 		}
 	}
 }

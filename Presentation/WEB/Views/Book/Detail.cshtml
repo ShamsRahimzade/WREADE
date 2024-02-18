@@ -31,9 +31,10 @@
 
 				<div class="col-lg-5 col-md-6 col-sm-8 col-xs-12">
 					<div class="about-content" data-aos="fade-up" data-aos-delay="300">
-						<h2 class="item-title mb-60">
+						<h2 class="item-title mb-10">
 							@Model.book.Description
 						</h2>
+						<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@Model.book.Id" asp-route-userId="@Model.book.AppUserId"> <i style="font-size:23px;" class="mdi mdi-shape-rectangle-plus"></i></a>
 						<div class="about-service ul-li-block clearfix">
 							<ul class="clearfix">
 								@* <a asp-action="AddToLibrary" asp-controller="library" asp-route-userId="@Model.book.AppUserId" asp-route-bookId="@Model.book.Id">
@@ -41,16 +42,20 @@
 										Add
 									</p>
 								</a> *@
-								 <form asp-action="RemoveFromLibrary" asp-controller="Library" method="post">
+								@*  <form asp-action="RemoveFromLibrary" asp-controller="Library" method="post">
             <input type="hidden" name="bookId" value="@Model.book.Id" />
             <input type="hidden" name="userId" value="@Model.book.AppUserId" />
             <button type="submit">Kitaplıktan Kaldır</button>
         </form>
-								<form asp-action="AddToLibrary" asp-controller="library" method="post">
-									<input type="hidden" name="bookId" value="@Model.book.Id" />
+								<form asp-controller="Library" asp-action="AddToLibrary" method="post">
 									<input type="hidden" name="userId" value="@Model.book.AppUserId" />
-									<button type="submit">Add to Wishlist</button>
-								</form>
+									<div class="form-group">
+										<label for="bookId">Book Id:</label>
+										<input type="text" class="form-control" id="bookId" name="bookId" />
+									</div>
+									<button type="submit" class="btn btn-primary">Add</button>
+								</form> *@
+								
 								@foreach (var item in Model.book.Chapters.Where(b=>b.BookId==Model.book.Id).OrderByDescending(c=>c.Id))
 								{
 									<li data-aos="fade-up" data-aos-delay="100">
@@ -66,7 +71,36 @@
 										</div>
 									</li>
 								}
+								<li>
+									@if (Model.book.IsCompleted == true)
+									{
+										<button  class="btn btn-success btn-rounded btn-fw">Completed</button>
+									}
+									else
+									{
+										<button  class="btn btn-warning btn-rounded btn-fw">Ongoing</button>
+									}
+									@{
+										TimeSpan difference = DateTime.Now - Model.book.CreatedAt;
 
+										string timedifference = "";
+										if (difference.TotalDays >= 1)
+										{
+											timedifference = $"{(int)difference.TotalDays} days ago";
+										}
+										else if (difference.TotalHours >= 1)
+										{
+											timedifference = $"{(int)difference.TotalHours} hours ago";
+										}
+										else
+										{
+											timedifference = $"{(int)difference.TotalMinutes} minutes ago";
+										}
+									}
+
+									@timedifference
+
+								</li>
 								
 							</ul>
 						</div>

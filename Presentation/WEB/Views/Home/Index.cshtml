@@ -32,7 +32,7 @@
 									<p>
 										@item.Rating
 									</p>
-									<a href="#!" class="btn">Go to detail</a>
+									<a asp-action="detail" asp-controller="category" asp-route-id="@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id).CategoryId" class="btn">Go to detail</a>
 								</div>
 							</div>
 
@@ -42,7 +42,7 @@
 									{
 										<div @* style="bottom:230px;" *@  class="team-fullimage text-center clearfix aos-init aos-animate child-image child-image-@count"  data-aos="fade-up" data-aos-delay="100">
 											<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" class="blog-image">
-												<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+												<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
 											</a>
 											<div class="item-content">
 												<div class="person-name">
@@ -64,7 +64,7 @@
 										</div>
 										@* 	<div class="blog-grid clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
 								<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" class="blog-image">
-								<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+								<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
 								</a>
 								<h3 class="item-title">
 								<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId">
@@ -79,7 +79,7 @@
 								</div>
 								</div> *@
 										@* <div class="child-image child-image-@count">
-								<img src="assets/images/@book.Book.CoverPhoto" alt="image_not_found">
+								<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
 								</div> *@
 										count++;
 									}
@@ -144,7 +144,7 @@
 					{
 						@* <div class="product-grid aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 							<a class="item-image" href="#!">
-								<img src="assets/images/@item.CoverPhoto" alt="image_not_found">
+								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
 							</a>
 
 							<div class="item-content text-center">
@@ -193,7 +193,7 @@
 							</div>
 						</div> *@
 						 <div class="grid-item">
-							<a href="#!" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
+							<a asp-action="detail" asp-controller="book" asp-route-bookid="@item.Id" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
 								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
 								<span class="item-content-2">
 									<strong class="item-title">@item.Name</strong>

@@ -627,6 +627,43 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("Wreade.Domain.Entities.LibraryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Isdeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("LibraryItems");
+                });
+
             modelBuilder.Entity("Wreade.Domain.Entities.Like", b =>
                 {
                     b.Property<int>("Id")
@@ -909,6 +946,25 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Wreade.Domain.Entities.LibraryItem", b =>
+                {
+                    b.HasOne("Wreade.Domain.Entities.AppUser", "User")
+                        .WithMany("LibraryItems")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wreade.Domain.Entities.Book", "book")
+                        .WithMany("Libraries")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("book");
+                });
+
             modelBuilder.Entity("Wreade.Domain.Entities.Like", b =>
                 {
                     b.HasOne("Wreade.Domain.Entities.Chapter", "Chapter")
@@ -937,6 +993,8 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("Followees");
 
                     b.Navigation("Followers");
+
+                    b.Navigation("LibraryItems");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Book", b =>
@@ -946,6 +1004,8 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Navigation("BookTags");
 
                     b.Navigation("Chapters");
+
+                    b.Navigation("Libraries");
                 });
 
             modelBuilder.Entity("Wreade.Domain.Entities.Category", b =>

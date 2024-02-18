@@ -11,7 +11,7 @@ namespace Wreade.Application.ViewModels
 	{
         public int Id { get; set; }
         public string? AppUserid { get; set; }
-        public Book Book { get; set; }
+        public Book book { get; set; }
         public int BookId { get; set; }
     }
 }

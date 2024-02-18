@@ -232,7 +232,7 @@
 							</ul>
 							</li> *@
 
-							@* @if (User.Identity.IsAuthenticated)
+							@if (User.Identity.IsAuthenticated)
 							{
 								@if (User.IsInRole("Author"))
 								{
@@ -249,7 +249,7 @@
 									</li>
 								}
 							}
-							else
+							@* else
 							{
 								<li><a asp-action="register" asp-controller="appuser">Register</a></li>
 							}
@@ -267,7 +267,7 @@
 								</script>
 								*@
 
-							@* </li>  *@
+							
 							<li >
 								<a asp-action="index" asp-controller="library" asp-route-userId="@user.Id"><i style="font-size:23px;" class="mdi mdi-library"></i></a>
 							</li>

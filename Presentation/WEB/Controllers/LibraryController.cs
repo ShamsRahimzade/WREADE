@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Wreade.Application.Abstractions.Services;
+using Wreade.Application.ViewModels;
 
 namespace WEB.Controllers
 {
@@ -11,24 +12,17 @@ namespace WEB.Controllers
         {
 			_service = service;
 		}
-		public async Task<IActionResult> Index(string userId)
+
+		public async Task<IActionResult> Index()
 		{
-			var wishlist = await _service.GetLibraryAsync(userId);
-			return View(wishlist);
+			return View( await _service.GetLibraryItem());
+			
+		}
+		public async Task<IActionResult> AddLibrary(int bookid,string userId)
+		{
+			await _service.AddBasket(bookid,userId);
+			return RedirectToAction("Index", "Library", new { id = bookid });
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> AddToLibrary(int bookId,string userId)
-		{
-			await _service.AddToLibraryAsync(bookId, userId);
-			return RedirectToAction("Index", new { userId });
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> RemoveFromLibrary(int bookId,string userId)
-		{
-			await _service.RemoveFromLibraryAsync(bookId,userId);
-			return RedirectToAction("Index", new { userId });
-		}
 	}
 }

@@ -26,6 +26,7 @@ namespace Wreade.Domain.Entities
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Follow> Followees { get; set; }
 		public bool IsPremium { get; set; }
+		public List<LibraryItem> LibraryItems { get; set; }
 		public DateTime PremiumStartDate { get; set; }
 		public DateTime PremiumEndDate { get; set; }
         public decimal Premiumprice { get; set; }

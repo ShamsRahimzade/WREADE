@@ -73,6 +73,7 @@ namespace Wreade.Persistence.DAL
 		public DbSet<BookTag> BookTag { get; set; }
 		public DbSet<Setting> Setting { get; set; }
 		public DbSet<Chapter> Chapters { get; set; }
+		public DbSet<LibraryItem> LibraryItems { get; set; }
 		public DbSet<ChapterViewCount> ChapterViewCounts { get; set; }
 	}
 }

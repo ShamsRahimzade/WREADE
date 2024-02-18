@@ -9,13 +9,13 @@ namespace Wreade.Domain.Entities
 {
 	public class LibraryItem:BaseEntity
 	{
-	
 
-		//Relation properties
-		public int BookId { get; set; }
+       
+        //Relation properties
+        public int BookId { get; set; }
 		public Book book { get; set; }
-		public string? AppUserId { get; set; }
-		public AppUser? User { get; set; }
+		public string AppUserId { get; set; }
+		public AppUser User { get; set; }
 		
 	}
 }
