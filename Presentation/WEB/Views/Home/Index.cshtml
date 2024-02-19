@@ -53,13 +53,7 @@
 													</h3>
 												</div>
 												<div class="person-title"><span><a href="#!">@book.Book.CreatedBy</a></span></div>
-												<div class="social-links ul-li-center clearfix">
-													<ul class="clearfix">
-														<li><a  ><i class="fab fa-facebook-f"></i></a></li>
-														<li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-														<li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-													</ul>
-												</div>
+												
 											</div>
 										</div>
 										@* 	<div class="blog-grid clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
@@ -89,17 +83,7 @@
 						</div>
 					</div>
 
-					<div class="absolute-social-wrap sec-ptb-60 pt-0">
-						<div class="container">
-							<div class="social-links-text ul-li clearfix">
-								<ul class="clearfix">
-									<li><a href="#!">facebook</a></li>
-									<li><a href="#!">twitter</a></li>
-									<li><a href="#!">instagram</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			}
 
@@ -137,8 +121,32 @@
 
 				<div class="masoney-grid mb-60">
 					<div class="grid-sizer"></div>
+					@if (User.Identity.IsAuthenticated)
+					{
+						@* @foreach (var item in Model.Users.FirstOrDefault(u=>u.Name==User.Identity.Name).LibraryItems) *@
+						{
+						@* 	<div class="grid-item">
+								<a asp-action="detail" asp-controller="book" asp-route-bookid="@item.Id" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
+									<img src="~/assets/images/@item.book.CoverPhoto" alt="image_not_found">
+									<span class="item-content-2">
+										<strong class="item-title">@item.book.Name</strong>
+										@if (item != null && item.book.Chapters != null)
+										{
+											<small class="item-brand">@item.book.Chapters.Count</small>
+										}
 
-
+										else
+										{
+											<span>0</span>
+										}
+									</span>
+								</a>
+							</div> *@
+						}
+					}
+					else
+					{
+						
 					@foreach (var item in Model.Books.Where(u => u.Rating == Model.Books.Max(b => b.Rating))
 							.Take(6))
 					{
@@ -210,6 +218,7 @@
 							</a>
 						</div> 
 					}
+					}
 
 
 
@@ -222,10 +231,7 @@
 			</div>
 		</section>
 	}
-	else
-	{
-
-	}
+	
 	<!-- portfolio-section - end
 	================================================== -->
 	<!-- service-section - start

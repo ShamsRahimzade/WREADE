@@ -24,7 +24,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<title>01 - Home Agency Default - Afkar</title>
+	<title>WREADE</title>
 	<link rel="shortcut icon" href="~/assets/images/logo/favourite-icon.png">
 	<link rel="stylesheet" href="~/manage/vendors/flag-icon-css/css/flag-icon.min.css">
 	<link rel="stylesheet" href="~/manage/vendors/mdi/css/materialdesignicons.min.css">
@@ -74,10 +74,21 @@
 						<div class="mobile-menu-btns float-right ul-li-right">
 							<ul class="clearfix">
 								<li>
-									<button type="button" class="cart-btn">
-										<i class="icon-bag"></i>
-										<small class="count-text">3</small>
-									</button>
+									@if (User.Identity.IsAuthenticated)
+									{
+										var appUser = await _userManager.GetUserAsync(User);
+										@* if (appUser != null && appUser.MainImage != null)
+										{ *@
+											<a asp-action="user" asp-controller="profile" asp-route-username="@User.Identity.Name">
+
+											<img src="~/assets/images/@(appUser.MainImage)" style="margin-top:5px; width:30px; height:30px; border-radius:15px;" />
+											</a>
+										@* } *@
+										@* else
+										{
+											<img src="~/assets/images/default.jpg" style="font-size:25" />
+										} *@
+									}
 								</li>
 								<li>
 									<button type="button" class="menu-btn">
@@ -101,7 +112,7 @@
 									<form method="get" asp-controller="search" asp-action="search" class="searchbox">
 										<div class="form-item">
 											<input type="search" name="searchTerm" placeholder="Type Your Keywords">
-											<button type="submit" class="submit-btn"><i class="icon-magnifying-glass"></i></button>
+											<button style="background-color:white;" type="submit" class="submit-btn"><i class="icon-magnifying-glass"></i></button>
 										</div>
 
 									</form>
@@ -110,15 +121,15 @@
 							<li class="menu-item-has-child">
 								<a href="#!">Browse</a>
 								<div class="mega-menu">
-									<div class="row">
+									<div  class="row" style="flex-direction:column;">
 
-										<span><h3 class="list-title">Categories></h3></span>
+										<span><h3 class="list-title">Categories</h3></span>
 										@foreach (var item in categories)
 										{
 											<div class="col-lg-2">
 												<div class="menu-list ul-li-block">
-													<ul class="clearfix">
-														<li><a href="home-agency-default.html">@item.Name</a></li>
+													<ul style=" display:flex; flex-direction:column; gap:50px;" class="clearfix"  >
+														<li><a asp-action="detail" asp-controller="category" asp-route-id="@item.Id">@item.Name</a></li>
 
 													</ul>
 												</div>
@@ -128,7 +139,7 @@
 								</div>
 							</li>
 
-							<li class="menu-item-has-child">
+						@* 	<li class="menu-item-has-child">
 								<a href="#!">PAGES</a>
 								<div class="mega-menu">
 									<div class="row justify-content-lg-between">
@@ -201,7 +212,7 @@
 
 									</div>
 								</div>
-							</li>
+							</li> *@
 
 							@* <li class="menu-item-has-child">
 							<a href="#!">PORTFOLIO</a>
@@ -251,24 +262,24 @@
 							}
 							@* else
 							{
-								<li><a asp-action="register" asp-controller="appuser">Register</a></li>
+							<li><a asp-action="register" asp-controller="appuser">Register</a></li>
 							}
 							<li onchange="this.form.submit()">
-								<button class="button" style="vertical-align:middle"><a asp-action="premium" asp-controller="premium" asp-route-username="@user.UserName"><span>trypremium </span> </a></button>
-								@* <script src="//checkout.stripe.com/v2/checkout.js"
-								class="stripe-button"
-								data-key="@Stripe.Value.PublishableKey"
-								data-amount="@ViewBag.Total"
-								data-name="WREADE"
-								data-locale="en"
-								data-discription="Sample charge"
-								data-image="/assets/images/bg2.jpg"
-								data-zip-code="true">
-								</script>
-								*@
+							<button class="button" style="vertical-align:middle"><a asp-action="premium" asp-controller="premium" asp-route-username="@user.UserName"><span>trypremium </span> </a></button>
+							@* <script src="//checkout.stripe.com/v2/checkout.js"
+							class="stripe-button"
+							data-key="@Stripe.Value.PublishableKey"
+							data-amount="@ViewBag.Total"
+							data-name="WREADE"
+							data-locale="en"
+							data-discription="Sample charge"
+							data-image="/assets/images/bg2.jpg"
+							data-zip-code="true">
+							</script>
+							*@
 
-							
-							<li >
+
+							<li>
 								<a asp-action="index" asp-controller="library" asp-route-userId="@user.Id"><i style="font-size:23px;" class="mdi mdi-library"></i></a>
 							</li>
 							<li class="menu-item-has-child">
@@ -277,11 +288,11 @@
 									var appUser = await _userManager.GetUserAsync(User);
 									if (appUser != null && appUser.MainImage != null)
 									{
-										<img src="~/assets/images/@(appUser.MainImage)" style="width:30px; height:30px; border-radius:15px;" />
+										<img src="~/assets/images/@(appUser.MainImage)" style="margin-top:5px; width:30px; height:30px; border-radius:15px;" />
 									}
 									else
 									{
-										<img src="~/assets/images/default.jpg" style="font-size:25" />
+										<img src="~/assets/images/default.jpg" style="margin-top:5px; font-size:25" />
 									}
 
 									<ul class="submenu">
@@ -432,56 +443,26 @@
 
 			<div id="cart-sidebar" class="cart-sidebar">
 				<div class="dismiss text-right mb-60 clearfix">
-					<span class="close-btn"><i class="fal fa-times"></i></span>
+					
+						@if (User.Identity.IsAuthenticated)
+						{
+							var appUser = await _userManager.GetUserAsync(User);
+							@* if (appUser != null && appUser.MainImage != null)
+						{ *@
+							<a asp-action="user" asp-controller="profile" asp-route-username="@User.Identity.Name">
+
+								<img src="~/assets/images/@(appUser.MainImage)" style="margin-top:5px; width:30px; height:30px; border-radius:15px;" />
+							</a>
+							@* } *@
+							@* else
+						{
+						<img src="~/assets/images/default.jpg" style="font-size:25" />
+						} *@
+						}
+					
 				</div>
 
-				<div class="cart-items-list ul-li-block clearfix">
-					<ul class="clearfix">
-						<li>
-							<div class="item-image">
-								<img src="~/assets/images/cart/img_4.png" alt="image_not_found">
-							</div>
-							<div class="item-content">
-								<h4 class="item-title">Yellow Blouse</h4>
-								<span class="item-price">$36</span>
-							</div>
-							<button type="button" class="remove-btn"><i class="fal fa-trash-alt"></i></button>
-						</li>
-
-						<li>
-							<div class="item-image">
-								<img src="~/assets/images/cart/img_5.png" alt="image_not_found">
-							</div>
-							<div class="item-content">
-								<h4 class="item-title">Dress Summer Girl</h4>
-								<span class="item-price">$74</span>
-							</div>
-							<button type="button" class="remove-btn"><i class="fal fa-trash-alt"></i></button>
-						</li>
-
-						<li>
-							<div class="item-image">
-								<img src="~/assets/images/cart/img_6.png" alt="image_not_found">
-							</div>
-							<div class="item-content">
-								<h4 class="item-title">Yellow Blouse</h4>
-								<span class="item-price">#61.00</span>
-							</div>
-							<button type="button" class="remove-btn"><i class="fal fa-trash-alt"></i></button>
-						</li>
-
-						<li class="total-price">
-							<span>Sub Total</span>
-							<small>$180</small>
-						</li>
-						<li class="btns-group ul-li clearfix">
-							<ul class="clearfix">
-								<li><a href="shop-cart.html" class="btn btn-border border-white">View Cart</a></li>
-								<li><a href="shop-checkout.html" class="btn bg-white">Checkout</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
+				
 			</div>
 
 			<div class="overlay"></div>

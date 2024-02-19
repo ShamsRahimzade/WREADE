@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq.Expressions;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -369,11 +370,18 @@ namespace Wreade.Persistence.Implementations.Services
 			return false;
 		}
 
-		public async Task<AppUser> GetUserById(string userId)
+		public async Task<AppUser> GetUserById(string userId, params Expression<Func<AppUser, object>>[] includes)
 		{
-			return await _user.Users
-				.Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee).Include(u => u.Books).Include(u => u.LibraryItems)
-				.FirstOrDefaultAsync(u => u.Id == userId);
+			var query = _user.Users.AsQueryable();
+
+			foreach (var include in includes)
+			{
+				query = query.Include(include);
+			}
+
+			return await query.FirstOrDefaultAsync(u => u.Id == userId);
+			
 		}
+        
 	}
 }

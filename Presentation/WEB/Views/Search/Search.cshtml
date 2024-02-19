@@ -5,8 +5,8 @@
 					<h2 class="page-title mb-30">Recent Stories</h2>
 					<div class="breadcrumb-nev ul-li-center clearfix">
 						<ul class="clearfix">
-							<li><a href="index.html"><i class="fas fa-home mr-1"></i>Home</a></li>
-							<li><i class="fas fa-chevron-circle-right mr-1"></i> Blog List</li>
+							<li><a asp-action="index" asp-controller="home"><i class="fas fa-home mr-1"></i>Home</a></li>
+							<li><i class="fas fa-chevron-circle-right mr-1"></i>Search</li>
 						</ul>
 					</div>
 				</div>
@@ -17,13 +17,7 @@
 	<div class="container">
 		<div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
 			<div class="button-group filters-button-group ul-li clearfix aos-init aos-animate" data-aos="fade-right" data-aos-delay="200">
-				<ul class="clearfix">
-					<li><button class="button is-checked" data-filter="*">All</button></li>
-						<li><button asp-action="SearchBook" asp-controller="search" class="button" data-filter=".prints">Prints</button></li>
-					<li><button class="button" data-filter=".3ddesign">3D Design</button></li>
-					<li><button class="button" data-filter=".branding">Branding</button></li>
-					<li><button class="button" data-filter=".logos">Logos</button></li>
-				</ul>
+			
 			</div>
 			<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 				@if (Model.books.Any())

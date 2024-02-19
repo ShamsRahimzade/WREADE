@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
 
@@ -18,7 +19,7 @@ namespace Wreade.Application.Abstractions.Services
 		Task Follow(string followedId);
 		Task Unfollow(string followedId);
         Task<List<string>> LoginNoPass(string username);
-		Task<AppUser> GetUserById(string userId);
+		Task<AppUser> GetUserById(string userId, params Expression<Func<AppUser, object>>[] includes);
 		Task<bool> UpgradeToPremiumAsync(string userId);
 		Task<bool> DowngradeFromPremiumAsync(string userId);
 

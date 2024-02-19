@@ -74,13 +74,19 @@ namespace WEB.Controllers
         public async Task<IActionResult> Follow(string followeeId)
         {
             await _service.Follow(followeeId);
-            AppUser user = await _service.GetUserById(followeeId);
+            AppUser user = await _service.GetUserById(followeeId, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems,
+    u=>u.Books);
             return RedirectToAction("User", "Profile", new { username = user.UserName });
         }
         public async Task<IActionResult> Unfollow(string followeeId)
         {
             await _service.Unfollow(followeeId);
-            AppUser user = await _service.GetUserById(followeeId);
+            AppUser user = await _service.GetUserById(followeeId, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems,
+	u => u.Books);
             return RedirectToAction("User", "Profile", new { username = user.UserName });
         }
     }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bXtnKUvZREloCwbkXT5kPYhD+W0jeGa+rODcnkBGgso=",
+  "Hash": "qLfgVjmZULDf0U1GEt6QnbaovDu8c8CBR+qQti/ekR4=",
   "Source": "WEB",
   "BasePath": "_content/WEB",
   "Mode": "Default",
@@ -1817,23 +1817,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\8dbe8f7d-62fa-4c2b-bf41-496be814f6e3phot.png"
-    },
-    {
-      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\903ec770-1d7b-4c7c-9592-500d9a560e4bbg2.jpg",
-      "SourceId": "WEB",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
-      "BasePath": "_content/WEB",
-      "RelativePath": "assets/images/903ec770-1d7b-4c7c-9592-500d9a560e4bbg2.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\903ec770-1d7b-4c7c-9592-500d9a560e4bbg2.jpg"
     },
     {
       "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\908aff48-d0e0-4a73-a198-4081aa17e41bregister.jpg",
@@ -4265,6 +4248,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\chapters\\b07127bb-7a9e-4ca8-b4c8-616bd820a6b2bg2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\chapters\\db635e09-5b8a-49c4-97f2-1d05316fa8d9default.jpg",
+      "SourceId": "WEB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
+      "BasePath": "_content/WEB",
+      "RelativePath": "assets/images/chapters/db635e09-5b8a-49c4-97f2-1d05316fa8d9default.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\chapters\\db635e09-5b8a-49c4-97f2-1d05316fa8d9default.jpg"
     },
     {
       "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\chapters\\de4a49b7-9f80-4c7f-839c-9049da2fc703phot.png",

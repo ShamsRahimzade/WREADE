@@ -1,4 +1,4 @@
-﻿@model List<LibraryItem>
+﻿@model List<LibraryItemVM>
 <main>
 
 
@@ -66,7 +66,7 @@
 
 											<div class="action-content clearfix">
 												<div class="btns-group ul-li-right clearfix">
-													<a asp-action="AddToLibrary" asp-controller="library" asp-route-userId="@item.AppUserId" asp-route-bookId="@item.BookId" class="addtocart-btn"><i class="fas fa-plus mr-2"></i> add to library</a>
+													<a asp-action="AddToLibrary" asp-controller="library" asp-route-userId="@item.AppUserid" asp-route-bookId="@item.BookId" class="addtocart-btn"><i class="fas fa-plus mr-2"></i> add to library</a>
 													
 													<ul class="clearfix">
 														<li>

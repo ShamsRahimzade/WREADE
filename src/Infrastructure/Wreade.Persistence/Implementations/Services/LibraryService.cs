@@ -51,7 +51,9 @@ namespace Wreade.Persistence.Implementations.Services
 
 			if (!string.IsNullOrEmpty(_http.HttpContext.User.Identity.Name))
 			{
-				AppUser user = await _user.GetUserById(userId);
+				AppUser user = await _user.GetUserById(userId, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems);
 				if (user == null) throw new Exception("User not found:(");
 
 				LibraryItem item = user.LibraryItems.FirstOrDefault(bi => bi.BookId == book.Id);

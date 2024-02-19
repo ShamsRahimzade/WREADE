@@ -402,16 +402,25 @@ strong, span, small, label, i {
 }
 
 .ul-li-right > ul {
-  margin: 0px;
-  padding: 0px;
-  float: right;
-  display: table;
+   
+    margin: 0px;
+    padding: 0px;
+    float: right;
+    display: table;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 50px;
 }
-.ul-li-right > ul > li {
-  float: left;
-  list-style: none;
-  display: inline-block;
-}
+    .ul-li-right > ul > li {
+       
+        float: left;
+        list-style: none;
+        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
 
 .ul-li-center > ul {
   padding: 0px;
@@ -1112,19 +1121,23 @@ button {
   right: 6px;
 }
 .header-section .main-menu > ul > li {
-  padding: 10px 0px;
+  padding: 0px 8px;
   margin-right: 40px;
 }
 .header-section .main-menu > ul > li:last-child {
   margin-right: 0px !important;
 }
-.header-section .main-menu > ul > li > a {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  position: relative;
-  color: #000000;
-}
+    .header-section .main-menu > ul > li > a {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        position: relative;
+        color: #000000;
+     
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
 .header-section .main-menu > ul > li > a:before {
   width: 0px;
   left: auto;
@@ -1146,7 +1159,7 @@ button {
 }
 .header-section .main-menu > ul > .menu-item-has-child > a {
   position: relative;
-  padding-right: 16px;
+  padding-right: 25px;
 }
 .header-section .main-menu > ul > .menu-item-has-child > a:after {
   top: 6.6px;
@@ -1248,11 +1261,11 @@ button {
   width: auto;
   display: block;
   margin: -12px -20px;
-}
+}8
 .header-section .main-menu > ul > .menu-item-has-child .mega-menu .menu-list > ul > li > a {
   display: block;
   font-size: 14px;
-  line-height: 1.3;
+  line-height: 5;
   padding: 12px 20px;
   color: #434343;
 }
@@ -6655,10 +6668,11 @@ button {
     transform: unset;
   }
 
-  .header-section .main-menu > ul > .menu-item-has-child .mega-menu .menu-list > ul > li > a {
-    font-size: 12px;
-    padding: 10px 20px;
-  }
+    .header-section .main-menu > ul > .menu-item-has-child .mega-menu .menu-list > ul > li > a {
+        font-size: 12px;
+        padding: 10px 20px;
+        line-height: 6;
+    }
 
   .header-section .main-menu > ul > .menu-item-has-child .mega-menu .list-title {
     font-size: 13px;
@@ -8397,6 +8411,7 @@ button {
   }
   .breadcrumb-section .breadcrumb-nev.ul-li-right {
     margin-top: 20px;
+   
   }
   .breadcrumb-section .breadcrumb-nev.ul-li-right > ul {
     float: none;
