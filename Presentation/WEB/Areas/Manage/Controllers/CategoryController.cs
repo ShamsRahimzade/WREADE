@@ -22,6 +22,10 @@ namespace WEB.Areas.Manage.Controllers
 				return NotFound();
 			return View(vm);
 		}
+		public async Task<IActionResult> Detail(int id)
+		{
+			return View(await _service.DetailAsync(id));
+		}
 		public async Task<IActionResult> Create()
         {
 			return View();

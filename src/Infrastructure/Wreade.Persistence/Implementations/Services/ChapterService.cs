@@ -16,41 +16,41 @@ using Wreade.Domain.Entities;
 
 namespace Wreade.Persistence.Implementations.Services
 {
-    public class ChapterService:IChapterService
-    {
-        private readonly IChapterRepository _chaprepo;
-        private readonly IWebHostEnvironment _env;
+	public class ChapterService : IChapterService
+	{
+		private readonly IChapterRepository _chaprepo;
+		private readonly IWebHostEnvironment _env;
 		private readonly IBookRepository _bookrepo;
 		private readonly UserManager<AppUser> _user;
 		private readonly IHttpContextAccessor _http;
 		private readonly ILikeRepository _like;
 		private readonly IUserService _service;
 
-		public ChapterService(IChapterRepository chaprepo,IWebHostEnvironment env,IBookRepository bookrepo, UserManager<AppUser> user,IHttpContextAccessor http,ILikeRepository like,IUserService service)
-        {
-            _chaprepo = chaprepo;
-            _env = env;
+		public ChapterService(IChapterRepository chaprepo, IWebHostEnvironment env, IBookRepository bookrepo, UserManager<AppUser> user, IHttpContextAccessor http, ILikeRepository like, IUserService service)
+		{
+			_chaprepo = chaprepo;
+			_env = env;
 			_bookrepo = bookrepo;
 			_user = user;
 			_http = http;
 			_like = like;
 			_service = service;
 		}
-        public async Task<CreateChapterVM> CreatedAsync(CreateChapterVM vm)
-        {
-            //if (id <= 0) throw new Exception("this book is not fount");
+		public async Task<CreateChapterVM> CreatedAsync(CreateChapterVM vm)
+		{
+			//if (id <= 0) throw new Exception("this book is not fount");
 
-            return vm;
-        }
-		
+			return vm;
+		}
+
 		public async Task<bool> CreateAsync(CreateChapterVM vm, ModelStateDictionary ms)
-        {
-            if (!ms.IsValid) return false;
-            if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title))
-            {
-                ms.AddModelError("Title", "This title is already exist");
-                return false;
-            }
+		{
+			if (!ms.IsValid) return false;
+			if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title))
+			{
+				ms.AddModelError("Title", "This title is already exist");
+				return false;
+			}
 			string username = "";
 			if (_http.HttpContext.User.Identity != null)
 			{
@@ -59,40 +59,40 @@ namespace Wreade.Persistence.Implementations.Services
 			AppUser User = await _service.GetUser(username);
 			//vm.bookId = id;
 			Chapter chapter = new Chapter
-            {
+			{
 				AppUserId = User.Id,
 				Title = vm.Title,
-                Text = vm.Text,
-                CreatedAt = DateTime.UtcNow,
-                BookId = vm.bookId
+				Text = vm.Text,
+				CreatedAt = DateTime.UtcNow,
+				BookId = vm.bookId
 
-            };
-           //chapter= await _chaprepo.GetByExpressionAsync(c=>c.BookId==id);
-            if (vm.Image is not null )
-            {
-                if (!vm.Image.CheckType("image/"))
-                {
-                    ms.AddModelError(string.Empty, "wrong type");
-                    return false;
-                }
-                if (!vm.Image.ValidateSize(7))
-                {
-                    ms.AddModelError(string.Empty, "wrong size");
-                    return false;
-                }
-                string file = await vm.Image.CreateFileAsync(_env.WebRootPath, "assets", "images","chapters");
-                chapter.ChapterImage = file;
-            }
-            
-            await _chaprepo.AddAsync(chapter);
-            await _chaprepo.SaveChangeAsync();
-            return true;
+			};
+			//chapter= await _chaprepo.GetByExpressionAsync(c=>c.BookId==id);
+			if (vm.Image is not null)
+			{
+				if (!vm.Image.CheckType("image/"))
+				{
+					ms.AddModelError(string.Empty, "wrong type");
+					return false;
+				}
+				if (!vm.Image.ValidateSize(7))
+				{
+					ms.AddModelError(string.Empty, "wrong size");
+					return false;
+				}
+				string file = await vm.Image.CreateFileAsync(_env.WebRootPath, "assets", "images", "chapters");
+				chapter.ChapterImage = file;
+			}
 
-        }
-		public async Task<PaginationVM<Chapter>> GetAllAsync(int id,int page = 1, int take = 5)
+			await _chaprepo.AddAsync(chapter);
+			await _chaprepo.SaveChangeAsync();
+			return true;
+
+		}
+		public async Task<PaginationVM<Chapter>> GetAllAsync(int id, int page = 1, int take = 5)
 		{
 			if (page < 1 || take < 1) throw new Exception("Bad request");
-			ICollection<Chapter> chapter = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id, IsDescending: true, includes: nameof(Book)).Where(c=>c.BookId==id).ToListAsync();
+			ICollection<Chapter> chapter = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id, IsDescending: true, includes: nameof(Book)).Where(c => c.BookId == id).ToListAsync();
 			if (chapter == null) throw new Exception("Not Found");
 			int count = await _chaprepo.GetAll().CountAsync();
 			if (count < 0) throw new Exception("Not Found");
@@ -105,15 +105,29 @@ namespace Wreade.Persistence.Implementations.Services
 			};
 			return vm;
 		}
+		public async Task<ChapterDetailVM> Detail(int id)
+		{
+			if (id <= 0) throw new Exception("Id not found");
+			Chapter chapter = await _chaprepo.GetByIdAsync(id, includes: new string[] {  "Comments", "Likes" });
+			List<Chapter> chapters = await _chaprepo.GetAll(includes: new string[] { "Comments", "Likes" }).ToListAsync();
+			if (chapter is null) throw new Exception("not found");
+			if (chapters is null) throw new Exception("not found");
+			ChapterDetailVM vm = new ChapterDetailVM
+			{
+				Chapters = chapters,
+				chapter = chapter
+			};
+			return vm;
+		}
 		public async Task<bool> DeleteAsync(int id)
 		{
 			if (id < 1) throw new Exception("id");
 			Chapter exist = await _chaprepo.GetByIdAsync(id);
 			if (exist is null) throw new Exception("not found");
-			
+
 			if (exist.ChapterImage is not null)
 			{
-				exist.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "images","chapters");
+				exist.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "images", "chapters");
 			}
 			_chaprepo.Delete(exist);
 			await _chaprepo.SaveChangeAsync();
@@ -136,7 +150,7 @@ namespace Wreade.Persistence.Implementations.Services
 			if (!modelstate.IsValid) return false;
 			Chapter chapter = await _chaprepo.GetByIdAsync(id);
 			if (chapter is null) throw new Exception("not found");
-			if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title&& c.Id!=id&&c.BookId==chapter.BookId))
+			if (await _chaprepo.IsExistAsync(c => c.Title == vm.Title && c.Id != id && c.BookId == chapter.BookId))
 			{
 				modelstate.AddModelError("Title", "this title is exist");
 				return false;

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qLfgVjmZULDf0U1GEt6QnbaovDu8c8CBR+qQti/ekR4=",
+  "Hash": "NclfEVHoNKaZv4UhAFjdz82xRUk788IeuZ7ZBy8EUFU=",
   "Source": "WEB",
   "BasePath": "_content/WEB",
   "Mode": "Default",
@@ -1273,23 +1273,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\41b2360f-7e31-42a5-b046-5eb93c7bf2ecimmmmmmmmmmmgaaaaaaa.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\468f895c-d117-4a2b-bc32-3950fffc32cbgal.png",
-      "SourceId": "WEB",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
-      "BasePath": "_content/WEB",
-      "RelativePath": "assets/images/468f895c-d117-4a2b-bc32-3950fffc32cbgal.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\468f895c-d117-4a2b-bc32-3950fffc32cbgal.png"
     },
     {
       "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\4aa612de-ef89-49f4-b37d-c9e346b1bb54phot.png",

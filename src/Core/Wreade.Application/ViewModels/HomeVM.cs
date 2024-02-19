@@ -14,6 +14,6 @@ namespace Wreade.Application.ViewModels
         public List<AppUser> Users { get; set; }
         public ICollection<Category> MostReadCategory { get; set; }
 		public ICollection<Book> ReadingHistory { get; set; }
-		
-	}
+        public List<LibraryItem> libitem { get; set; }
+    }
 }

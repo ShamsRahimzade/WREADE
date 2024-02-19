@@ -121,7 +121,17 @@ namespace Wreade.Persistence.Implementations.Services
 			await _categoryrepo.SaveChangeAsync();
 			return true;
 		}
-
+		public async Task<CategoryDetailVM> DetailAsync(int id)
+		{
+			if (id <= 0) throw new Exception("Id not found");
+			Category category = await _categoryrepo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Book" });
+			if (category is null) throw new Exception("not found");
+			CategoryDetailVM vm = new CategoryDetailVM
+			{
+				category = category
+			};
+			return vm;
+		}
 		public async Task<CategoryUpdateVM> UpdatedAsync(int id, CategoryUpdateVM vm)
 		{
 			if (id <=0) throw new Exception("id");

@@ -97,6 +97,16 @@ namespace Wreade.Persistence.Implementations.Services
 			vm.Name = exist.Name.Trim();
 			return vm;
 		}
-
+		public async Task<TagDetailVM> DetailAsync(int id)
+		{
+			if (id <= 0) throw new Exception("Id not found");
+			Tag tag = await _tagrepo.GetByIdAsync(id, includes: new string[] { "BookTags", "BookTags.Book" });
+			if (tag is null) throw new Exception("not found");
+			TagDetailVM vm = new TagDetailVM
+			{
+				tag = tag
+			};
+			return vm;
+		}
 	}
 }

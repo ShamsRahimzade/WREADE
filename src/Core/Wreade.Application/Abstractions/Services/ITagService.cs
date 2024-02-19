@@ -17,6 +17,7 @@ namespace Wreade.Application.Abstractions.Services
 		Task<TagUpdateVM> UpdatedAsync(int id, TagUpdateVM vm);
 		Task<PaginationVM<Tag>> GetAllAsync(int page = 1, int take = 10);
 		Task<bool> DeleteAsync(int id);
+		Task<TagDetailVM> DetailAsync(int id);
 
 	}
 }

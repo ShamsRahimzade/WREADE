@@ -15,5 +15,6 @@ namespace Wreade.Application.Abstractions.Services
         Task<bool> UpdateAsync(int id, UpdateChapterVM vm, ModelStateDictionary modelstate);
         Task LikeChapter(int chapid);
         Task UnlikeChap(int chapid);
+        Task<ChapterDetailVM> Detail(int id);
 	}
 }

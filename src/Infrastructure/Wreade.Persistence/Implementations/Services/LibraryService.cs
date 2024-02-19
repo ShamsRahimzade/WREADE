@@ -46,7 +46,7 @@ namespace Wreade.Persistence.Implementations.Services
 		{
 			if (id <= 0) throw new Exception("Wrong query");
 		
-			Book book = await _bookrepo.GetByIdAsync(id);
+			Book book = await _bookrepo.GetByIdAsync(id,includes:new string[] { "Libraries" });
 			if (book == null) throw new Exception("Book not found :(");
 
 			if (!string.IsNullOrEmpty(_http.HttpContext.User.Identity.Name))

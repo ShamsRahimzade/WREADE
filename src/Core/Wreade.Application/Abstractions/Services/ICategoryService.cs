@@ -17,6 +17,7 @@ namespace Wreade.Application.Abstractions.Services
         Task<PaginationVM<Category>> GetAllAsync(int page = 1, int take = 10);
 		Task<bool> DeleteAsync(int id);
         Task<ICollection<Category>> GetCategoriesAsync();
+        Task<CategoryDetailVM> DetailAsync(int id);
 
-    }
+	}
 }

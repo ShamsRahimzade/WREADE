@@ -73,5 +73,9 @@ namespace WEB.Controllers
 
 			return Redirect(returnUrl);
 		}
+		public async Task<IActionResult> Detail(int id)
+		{
+			return View(await _chapservice.Detail(id));
+		}
 	}
 }

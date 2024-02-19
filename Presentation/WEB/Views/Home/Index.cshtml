@@ -32,7 +32,7 @@
 									<p>
 										@item.Rating
 									</p>
-									<a asp-action="detail" asp-controller="category" asp-route-id="@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id).CategoryId" class="btn">Go to detail</a>
+									<a asp-action="detail" asp-controller="category" asp-route-id="@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id)?.CategoryId" class="btn">Go to detail</a>
 								</div>
 							</div>
 
@@ -40,7 +40,7 @@
 								<div class="slider-image">
 									@foreach (var book in item.BookCategories.Where(c => c.BookId == c.Book.Id).OrderBy(x => x.Book.Rating).Take(3).ToList())
 									{
-										<div @* style="bottom:230px;" *@  class="team-fullimage text-center clearfix aos-init aos-animate child-image child-image-@count"  data-aos="fade-up" data-aos-delay="100">
+										<div @* style="bottom:230px;" *@ class="team-fullimage text-center clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
 											<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" class="blog-image">
 												<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
 											</a>
@@ -53,7 +53,7 @@
 													</h3>
 												</div>
 												<div class="person-title"><span><a href="#!">@book.Book.CreatedBy</a></span></div>
-												
+
 											</div>
 										</div>
 										@* 	<div class="blog-grid clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
@@ -83,7 +83,7 @@
 						</div>
 					</div>
 
-					
+
 				</div>
 			}
 
@@ -96,142 +96,67 @@
 	================================================== -->
 	<!-- portfolio-section - start
 	================================================== -->
-	@if (@Model.Books.Count >= 1)
-	{
-		<section id="portfolio-section" class="portfolio-section sec-ptb-100 pt-0 text-center clearfix">
-			<div class="container">
+	<section id="portfolio-section" class="portfolio-section sec-ptb-100 pt-0 text-center clearfix">
+		<div class="container">
 
-				<div class="section-title text-center mb-60" data-aos="fade-up" data-aos-delay="100">
-					@if (User.Identity.IsAuthenticated)
-					{
-						<h2 class="title-text mb-15">
-							My Library
-						</h2>
+			<div class="section-title text-center mb-60 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+				<h2 class="title-text mb-15">Our Works</h2>
+			</div>
 
-					}
-					else
-					{
-						<h2 class="title-text mb-15">
-							We Think You`ll Enjoy
-						</h2>
-					}
+			<div class="masoney-grid mb-60" style="position: relative; height: 1057.55px;">
+				<div class="grid-sizer"></div>
+				@if (Model.Books.Count > 0)
+				{
 
-					<p class="mb-0">Design is intelligence made visible</p>
-				</div>
-
-				<div class="masoney-grid mb-60">
-					<div class="grid-sizer"></div>
-					@if (User.Identity.IsAuthenticated)
+					@foreach (var item in Model.Books.OrderBy(b => b.Id))
 					{
-						@* @foreach (var item in Model.Users.FirstOrDefault(u=>u.Name==User.Identity.Name).LibraryItems) *@
-						{
-						@* 	<div class="grid-item">
-								<a asp-action="detail" asp-controller="book" asp-route-bookid="@item.Id" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
-									<img src="~/assets/images/@item.book.CoverPhoto" alt="image_not_found">
-									<span class="item-content-2">
-										<strong class="item-title">@item.book.Name</strong>
-										@if (item != null && item.book.Chapters != null)
-										{
-											<small class="item-brand">@item.book.Chapters.Count</small>
-										}
-
-										else
-										{
-											<span>0</span>
-										}
-									</span>
-								</a>
-							</div> *@
-						}
-					}
-					else
-					{
-						
-					@foreach (var item in Model.Books.Where(u => u.Rating == Model.Books.Max(b => b.Rating))
-							.Take(6))
-					{
-						@* <div class="product-grid aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-							<a class="item-image" href="#!">
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="position: absolute; left: 0%; top: 0px;">
+							<div class="team-fullimage text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-							</a>
+								<div class="item-content">
+									<div class="person-name"><h3>@item.User.Name</h3></div>
+									<div class="person-title"><span>@item.Name</span></div>
+									<div class="social-links ul-li-center clearfix">
+										<ul class="clearfix">
+											<li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+											<li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+											@* var appUser = await _userManager.GetUserAsync(User); *@
+											@* @if (item.Libraries is null)
+											{
+												<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" ><i class="mdi mdi-heart-outline"></i></a></li>
 
-							<div class="item-content text-center">
-								<h3 class="item-title">
-									<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id">@item.Name</a>
-								</h3>
-								@if (@item.Chapters is not null)
-								{
-									<div class="col-sm-6 col-md-4 col-lg-3">
-										<span class="item-price">
-											<i class="mdi mdi-format-list-bulleted">@item.Chapters.Count</i>
-										</span>
+											} *@
+											@* else
+											{ *@
+											 @* 	@foreach (var library in Model.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name)?.LibraryItems )
+												{
+													@if (library.book.Id != item.Id)
+													{
+														<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
+													}
+													else
+													{
+														<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" asp-route-returnUrl="@Context.Request.Path.Value"><i class="mdi mdi-heart"></i></a></li>
+													}
+												}  *@
+											
+										</ul>
 									</div>
-								}
-								else
-								{
-									<div class="col-sm-6 col-md-4 col-lg-3">
-										<span class="item-price">
-											<i class="mdi mdi-format-list-bulleted">0</i>
-										</span>
-									</div>
-								}
-							</div>
-
-							<div class="action-content clearfix">
-								<div class="btns-group ul-li-right clearfix">
-									<a href="#!" class="addtocart-btn"><i class="fas fa-plus mr-2"></i> add to cart</a>
-									<ul class="clearfix">
-										<li>
-											<button type="button"><i class="far fa-expand-arrows-alt"></i></button>
-										</li>
-										<li>
-											<button type="button"><i class="fas fa-heart"></i></button>
-										</li>
-									</ul>
-								</div>
-								<div class="rating-star ul-li clearfix">
-									<ul class="clearfix">
-										<li class="active"><i class="fas fa-star"></i></li>
-										<li class="active"><i class="fas fa-star"></i></li>
-										<li class="active"><i class="fas fa-star"></i></li>
-										<li class="active"><i class="fas fa-star"></i></li>
-										<li><i class="fas fa-star"></i></li>
-									</ul>
 								</div>
 							</div>
-						</div> *@
-						 <div class="grid-item">
-							<a asp-action="detail" asp-controller="book" asp-route-bookid="@item.Id" class="portfolio-fullimage add-effect" data-aos="fade-up" data-aos-delay="100">
-								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-								<span class="item-content-2">
-									<strong class="item-title">@item.Name</strong>
-									@if (item != null && item.Chapters != null)
-									{
-										<small class="item-brand">@item.Chapters.Count</small>
-									}
-
-									else
-									{
-										<span>0</span>
-									}
-								</span>
-							</a>
-						</div> 
+						</div>
 					}
-					}
-
-
-
-				</div>
-
-				<div class="btn-wrap text-center clearfix" data-aos="fade-up" data-aos-delay="100">
-					<a href="portfolio-gird-boxed.html" class="btn">View All Works</a>
-				</div>
+				}
 
 			</div>
-		</section>
-	}
-	
+
+			<div class="btn-wrap text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+				<a href="portfolio-gird-boxed.html" class="btn">View All Works</a>
+			</div>
+
+		</div>
+	</section>
+
 	<!-- portfolio-section - end
 	================================================== -->
 	<!-- service-section - start
@@ -320,7 +245,7 @@
 	================================================== -->
 	<!-- testimonial-section - start
 	================================================== -->
-	<div id="testimonial-section" class="testimonial-section sec-ptb-100 text-center clearfix" data-background="assets/images/backgrounds/book2.jpg">
+	<div id="testimonial-section" class="testimonial-section sec-ptb-100 text-center clearfix" data-background="~/assets/images/backgrounds/book2.jpg">
 		<div class="container" data-aos="fade-up" data-aos-delay="100">
 			<h1 style="color:#e5e5e5">Explore Premium Picks</h1>
 			<h3 style="color:#e5e5e5">Originals with any Premium or</h3>
