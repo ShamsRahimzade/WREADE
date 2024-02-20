@@ -4204,7 +4204,6 @@ button {
   max-width: 120px;
   max-width: 0px auto;
   position: relative;
-  background-color: red;
 }
 .details-section .details-content .quantity-input input {
   height: 38px;
@@ -4403,7 +4402,6 @@ button {
   max-width: 120px;
   max-width: 0px auto;
   position: relative;
-  background-color: red;
 }
 .cart-section .table-wrap .quantity-input input {
   height: 38px;
@@ -4750,7 +4748,6 @@ button {
 }
 .agency-default-carousel .owl-nav {
   display: none;
-  background: red;
   margin-top: 10px;
 }
 

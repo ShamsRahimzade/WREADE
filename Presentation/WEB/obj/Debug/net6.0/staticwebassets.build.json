@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NclfEVHoNKaZv4UhAFjdz82xRUk788IeuZ7ZBy8EUFU=",
+  "Hash": "SbGu9Ye6poVW4R1a2ProsNyZyHNn7ncYxfYwYOUkHyA=",
   "Source": "WEB",
   "BasePath": "_content/WEB",
   "Mode": "Default",
@@ -1290,23 +1290,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\4aa612de-ef89-49f4-b37d-c9e346b1bb54phot.png"
-    },
-    {
-      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\4e35fd10-1efc-4503-8322-4b7cd331e64bbggalaxy.jpg",
-      "SourceId": "WEB",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
-      "BasePath": "_content/WEB",
-      "RelativePath": "assets/images/4e35fd10-1efc-4503-8322-4b7cd331e64bbggalaxy.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\4e35fd10-1efc-4503-8322-4b7cd331e64bbggalaxy.jpg"
     },
     {
       "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\4e5eac6f-f1db-4bac-96a4-e0cb91a08927immmmmmmmmmmgaaaaaaa.jpg",
@@ -2701,6 +2684,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\backgrounds\\book2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\backgrounds\\dark.jpg",
+      "SourceId": "WEB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
+      "BasePath": "_content/WEB",
+      "RelativePath": "assets/images/backgrounds/dark.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\backgrounds\\dark.jpg"
     },
     {
       "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\backgrounds\\gal.png",
@@ -4197,6 +4197,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\chapters\\88311693-6ef1-4a70-a5af-9035f609ab5aslide1.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\chapters\\90cfcdf2-d817-43a7-ae87-bc28aeed4948bggalaxy.jpg",
+      "SourceId": "WEB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\",
+      "BasePath": "_content/WEB",
+      "RelativePath": "assets/images/chapters/90cfcdf2-d817-43a7-ae87-bc28aeed4948bggalaxy.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\chapters\\90cfcdf2-d817-43a7-ae87-bc28aeed4948bggalaxy.jpg"
     },
     {
       "Identity": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\chapters\\abc33c82-6bf8-4235-99e1-80014dff9eefphot.png",

@@ -15,7 +15,6 @@ namespace Wreade.Persistence.Implementations.Services
 {
 	public  class BookService:IBookService
 	{
-		private readonly AppDbContext _context;
         private readonly IBookRepository _repo;
         private readonly IChapterRepository _chapter;
         private readonly ITagRepository _tag;
@@ -26,8 +25,7 @@ namespace Wreade.Persistence.Implementations.Services
 
 		public BookService
 			(
-			AppDbContext context
-			,IBookRepository repo
+			 IBookRepository repo
 			,IChapterRepository chapter
 			,ITagRepository tag
 			,ICategoryRepository category
@@ -36,7 +34,6 @@ namespace Wreade.Persistence.Implementations.Services
 			,IUserService user
 			)
         {
-			_context = context;
             _repo = repo;
             _chapter = chapter;
             _tag = tag;
@@ -49,13 +46,13 @@ namespace Wreade.Persistence.Implementations.Services
 		public List<Book> GetReadingHistoryForUser(string userName)
 		{
 			
-			var readingHistory = _context.Books.Where(b => b.User.Name == userName).ToList();
+			var readingHistory = _repo.GetAllWhere(b => b.User.Name == userName).ToList();
 			return readingHistory;
 		}
 		
 		public async Task<List<Book>> GetUserBooksAsync()
 		{
-			return await _context.Books.OrderByDescending(b => b.Rating).Take(3).ToListAsync();
+			return await _repo.GetOrderBy(b => b.Rating).Take(3).ToListAsync();
 		}
 		public async Task<BookCreateVM> CreatedAsync(BookCreateVM vm)
 		{
@@ -68,7 +65,7 @@ namespace Wreade.Persistence.Implementations.Services
             if (page < 1 || take < 1) throw new Exception("Bad request");
             ICollection<Book> books = await _repo.GetPagination(skip: (page - 1) * take, take: take,
 				orderExpression: x => x.Id, IsDescending: true,
-				includes: new string[] {  "BookCategories.Category","BookTags","BookTags.Tag", "Libraries" })
+				includes: new string[] { "Chapters", "BookCategories.Category","BookTags","BookTags.Tag", "Libraries" })
 				.ToListAsync();
 		
 			if (books == null) throw new Exception("Not Found");
@@ -91,7 +88,7 @@ namespace Wreade.Persistence.Implementations.Services
 		{
 
 
-			ICollection<Book> books = await _repo.GetPaginationB<Book>(c => c.AppUserId == userId, skip: (page - 1) * take, take: take).ToListAsync();
+			ICollection<Book> books = await _repo.GetPagination( skip: (page - 1) * take, take: take, orderExpression: c => c.AppUserId == userId, includes:new string[] { "Chapters", "BookCategories.Category", "BookTags", "BookTags.Tag", "Libraries" }).ToListAsync();
 
 
 			int count = await _repo.GetAll().CountAsync(c => c.AppUserId == userId);

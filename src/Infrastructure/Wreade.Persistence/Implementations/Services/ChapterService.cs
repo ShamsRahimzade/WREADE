@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Wreade.Application.Abstractions.Repostories;
@@ -228,6 +229,18 @@ namespace Wreade.Persistence.Implementations.Services
 
 				await _like.SaveChangeAsync();
 			}
+		}
+		public async Task<bool> ViewChapter(int chapterId)
+		{
+			var chapter = await _chaprepo.GetByIdAsync(chapterId);
+			if (chapter == null) throw new Exception();
+			
+
+			chapter.ViewCount++; // Görüntüleme sayısını artır
+
+			_chaprepo.Update(chapter); // Bölümü güncelle
+			await _chaprepo.SaveChangeAsync();
+			return true;
 		}
 	}
 }

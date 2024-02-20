@@ -77,5 +77,9 @@ namespace WEB.Controllers
 		{
 			return View(await _chapservice.Detail(id));
 		}
+		public async Task<IActionResult> ViewCount(int chapid)
+		{
+			return View(await _chapservice.ViewChapter(chapid));
+		}
 	}
 }

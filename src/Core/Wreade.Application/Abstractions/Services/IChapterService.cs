@@ -16,5 +16,6 @@ namespace Wreade.Application.Abstractions.Services
         Task LikeChapter(int chapid);
         Task UnlikeChap(int chapid);
         Task<ChapterDetailVM> Detail(int id);
+        Task<bool> ViewChapter(int chapterId);
 	}
 }

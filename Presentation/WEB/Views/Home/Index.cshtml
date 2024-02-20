@@ -16,8 +16,10 @@
 
 	<!-- slider-section - start
 	================================================== -->
-	<section id="slider-section" class="slider-section clearfix">
-		<div id="agency-default-carousel" class="agency-default-carousel owl-carousel owl-theme">
+	<section id="slider-section" class="slider-section clearfix" style="background-image:url(/assets/images/backgrounds/dark.jpg);
+    /*  background-repeat:no-repeat; */
+     background-size:cover;" >
+		<div id="agency-default-carousel"  class="agency-default-carousel owl-carousel owl-theme">
 
 			@foreach (var item in Model.MostReadCategory)
 			{
@@ -32,9 +34,7 @@
 									<h3 class="item-title">
 										@item.Name
 									</h3>
-									<p>
-										@item.Rating
-									</p>
+									
 									<a asp-action="detail" asp-controller="category" asp-route-id="@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id)?.CategoryId" class="btn">Go to detail</a>
 								</div>
 							</div>
@@ -276,23 +276,32 @@
 
 										  @if (Model.Users.FirstOrDefault(b => b.UserName == User.Identity.Name).LibraryItems is null)
 										{
-											<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
+											<li>
+											<button type="button">
+												<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId">
+													<i class="fas fa-heart"></i>
+
+											</a>
+												</button>
+											</li>
 
 										}
 										else
 										{
 
-											@foreach (var book in Model.User.LibraryItems)
-											{
+											
 												@if (Model.Users.FirstOrDefault(b => b.UserName == User.Identity.Name)?.LibraryItems?.Any(li => li.BookId == item.Id) ?? false)
 												{
 													<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart"></i></a>
 												}
 												else
 												{
-													<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a>
+													<li>
+												<button type="button">	<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="fas fa-heart"></i></a></button>
+												</li>
+												
 												}
-											}
+											
 										} 
 										
 									</ul>

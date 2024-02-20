@@ -22,6 +22,6 @@ namespace Wreade.Domain.Entities
 		public virtual ChapterViewCount ChapterViewCount { get; set; }
 		public ICollection<Like>? Likes { get; set; }
 		public int LikeCount { get; set; }
-
-	}
+        public double ViewCount { get; set; }
+    }
 }

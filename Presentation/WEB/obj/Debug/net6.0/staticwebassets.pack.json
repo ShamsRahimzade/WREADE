@@ -297,10 +297,6 @@
       "PackagePath": "staticwebassets\\assets\\images\\4aa612de-ef89-49f4-b37d-c9e346b1bb54phot.png"
     },
     {
-      "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\4e35fd10-1efc-4503-8322-4b7cd331e64bbggalaxy.jpg",
-      "PackagePath": "staticwebassets\\assets\\images\\4e35fd10-1efc-4503-8322-4b7cd331e64bbggalaxy.jpg"
-    },
-    {
       "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\4e5eac6f-f1db-4bac-96a4-e0cb91a08927immmmmmmmmmmgaaaaaaa.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\4e5eac6f-f1db-4bac-96a4-e0cb91a08927immmmmmmmmmmgaaaaaaa.jpg"
     },
@@ -627,6 +623,10 @@
     {
       "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\backgrounds\\book2.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\backgrounds\\book2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\backgrounds\\dark.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\backgrounds\\dark.jpg"
     },
     {
       "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\backgrounds\\gal.png",
@@ -979,6 +979,10 @@
     {
       "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\chapters\\88311693-6ef1-4a70-a5af-9035f609ab5aslide1.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\chapters\\88311693-6ef1-4a70-a5af-9035f609ab5aslide1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\chapters\\90cfcdf2-d817-43a7-ae87-bc28aeed4948bggalaxy.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\chapters\\90cfcdf2-d817-43a7-ae87-bc28aeed4948bggalaxy.jpg"
     },
     {
       "Id": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\Presentation\\WEB\\wwwroot\\assets\\images\\chapters\\abc33c82-6bf8-4235-99e1-80014dff9eefphot.png",
