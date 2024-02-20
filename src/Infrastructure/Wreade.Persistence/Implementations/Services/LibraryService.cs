@@ -30,7 +30,9 @@ namespace Wreade.Persistence.Implementations.Services
 			ICollection<LibraryItemVM> libraryItemVM = new List<LibraryItemVM>();
 			if (_http.HttpContext.User.Identity.IsAuthenticated)
 			{
-				AppUser user = await _user.GetUser(_http.HttpContext.User.Identity.Name);
+				AppUser user = await _user.GetUser(_http.HttpContext.User.Identity.Name, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems, u => u.Books);
 				ICollection<LibraryItem> libraryItems = await _librepo.GetAllWhere(x => x.AppUserId == user.Id, includes: new string[] { nameof(LibraryItem.book) }).ToListAsync();
 				libraryItemVM = libraryItems.Select(libraryitem => new LibraryItemVM
 				{
@@ -42,7 +44,7 @@ namespace Wreade.Persistence.Implementations.Services
 			}
 			return libraryItemVM;
 		}
-		public async Task AddBasket(int id,string userId)
+		public async Task AddBasket(int id)
 		{
 			if (id <= 0) throw new Exception("Wrong query");
 		
@@ -51,7 +53,7 @@ namespace Wreade.Persistence.Implementations.Services
 
 			if (!string.IsNullOrEmpty(_http.HttpContext.User.Identity.Name))
 			{
-				AppUser user = await _user.GetUserById(userId, u => u.Followers,
+				AppUser user = await _user.GetUser(_http.HttpContext.User.Identity.Name, u => u.Followers,
 	u => u.Followees,
 	u => u.LibraryItems);
 				if (user == null) throw new Exception("User not found:(");

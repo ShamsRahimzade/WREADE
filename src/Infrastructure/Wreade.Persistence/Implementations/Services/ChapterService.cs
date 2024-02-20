@@ -56,7 +56,9 @@ namespace Wreade.Persistence.Implementations.Services
 			{
 				username = _http.HttpContext.User.Identity.Name;
 			}
-			AppUser User = await _service.GetUser(username);
+			AppUser User = await _service.GetUser(username, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems, u => u.Books);
 			//vm.bookId = id;
 			Chapter chapter = new Chapter
 			{

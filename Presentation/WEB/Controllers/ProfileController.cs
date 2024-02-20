@@ -19,7 +19,9 @@ namespace WEB.Controllers
         public async Task<IActionResult> User(string username)
         {
 
-            AppUser user = await _service.GetUser(username);
+            AppUser user = await _service.GetUser(username, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems, u => u.Books);
             if (user == null)
             {
                 return NotFound();
@@ -30,7 +32,9 @@ namespace WEB.Controllers
 
         public async Task<IActionResult> Edit(string username)
         {
-            AppUser user = await _service.GetUser(username);
+            AppUser user = await _service.GetUser(username, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems, u => u.Books);
             if (user.UserName != HttpContext.User.Identity.Name)
             {
                 return BadRequest();
@@ -45,7 +49,9 @@ namespace WEB.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditProfileVM vm)
         {
-            AppUser user = await _service.GetUser(HttpContext.User.Identity.Name);
+            AppUser user = await _service.GetUser(HttpContext.User.Identity.Name, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems,u=>u.Books);
             if (!ModelState.IsValid)
             {
                 vm.MainImage = user.MainImage;

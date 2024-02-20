@@ -40,7 +40,9 @@ namespace Wreade.Persistence.Implementations.Services
 				modelstate.AddModelError("Key", "This Setting is already exist");
 				return false;
 			}
-			AppUser User = await _user.GetUser(_accessor.HttpContext.User.Identity.Name);
+			AppUser User = await _user.GetUser(_accessor.HttpContext.User.Identity.Name, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems, u => u.Books);
 			await _repository.AddAsync(new Setting
 			{
 				CreatedBy = User.UserName,

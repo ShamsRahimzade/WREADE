@@ -18,9 +18,9 @@ namespace WEB.Controllers
 			return View( await _service.GetLibraryItem());
 			
 		}
-		public async Task<IActionResult> AddLibrary(int bookid,string userId)
+		public async Task<IActionResult> AddLibrary(int bookid)
 		{
-			await _service.AddBasket(bookid,userId);
+			await _service.AddBasket(bookid);
 			return RedirectToAction("Index", "Library", new { id = bookid });
 		}
 

@@ -277,11 +277,17 @@ namespace Wreade.Persistence.Implementations.Services
                 });
             }
         }
-        public async Task<AppUser> GetUser(string username)
+        public async Task<AppUser> GetUser(string username, params Expression<Func<AppUser, object>>[] includes)
         {
-            return await _user.Users
-                .Include(u => u.Followers).ThenInclude(x => x.Follower).Include(x => x.Followees).ThenInclude(x => x.Followee).Include(u=>u.Books).Include(u=>u.LibraryItems)
-                .FirstOrDefaultAsync(u => u.UserName == username);
+			var query = _user.Users.AsQueryable();
+
+			foreach (var include in includes)
+			{
+				query = query.Include(include);
+			}
+
+			return await query.FirstOrDefaultAsync(u => u.UserName == username);
+			
         }
        
         public async Task Follow(string followedId)

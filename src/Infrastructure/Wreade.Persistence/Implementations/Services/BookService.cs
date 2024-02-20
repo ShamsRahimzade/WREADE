@@ -68,7 +68,7 @@ namespace Wreade.Persistence.Implementations.Services
             if (page < 1 || take < 1) throw new Exception("Bad request");
             ICollection<Book> books = await _repo.GetPagination(skip: (page - 1) * take, take: take,
 				orderExpression: x => x.Id, IsDescending: true,
-				includes: new string[] {  "BookCategories.Category","BookTags","BookTags.Tag" })
+				includes: new string[] {  "BookCategories.Category","BookTags","BookTags.Tag", "Libraries" })
 				.ToListAsync();
 		
 			if (books == null) throw new Exception("Not Found");
@@ -115,7 +115,9 @@ namespace Wreade.Persistence.Implementations.Services
 				ms.AddModelError("Name", "This book is already exist");
 				return false;
 			}
-			AppUser User = await _user.GetUser(_http.HttpContext.User.Identity.Name);
+			AppUser User = await _user.GetUser(_http.HttpContext.User.Identity.Name, u => u.Followers,
+	u => u.Followees,
+	u => u.LibraryItems, u => u.Books);
 			Book book = new Book
 			{
 				Name = vm.Name,
@@ -203,7 +205,7 @@ namespace Wreade.Persistence.Implementations.Services
 		public async Task<BookUpdateVM> UpdatedAsync(int id, BookUpdateVM vm)
 		{
 			if (id <= 0) throw new Exception("id");
-			Book exist = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories","BookCategories.Category", "BookTags", "BookTags.Tag" });
+			Book exist = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories","BookCategories.Category", "BookTags", "BookTags.Tag", "Libraries" });
 			if (exist == null) throw new Exception("not found");
 			vm.Image = exist.CoverPhoto;
 			vm.Name = exist.Name;
@@ -223,7 +225,7 @@ namespace Wreade.Persistence.Implementations.Services
 		{
 			if (id <= 0) throw new Exception("BadRequest");
 			if (!modelstate.IsValid) return false;
-			Book book = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag" });
+			Book book = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Libraries" });
 			if (book is null) throw new Exception("not found");
 			if (await _repo.IsExistAsync(b => b.Name == vm.Name && b.Id != id ))
 			{
@@ -298,15 +300,18 @@ namespace Wreade.Persistence.Implementations.Services
 			await _repo.SaveChangeAsync();
 			return true;
 		}
-		public async Task<BookDetailVM>  DetailAsync(int id)
+		public async Task<BookDetailVM>  DetailAsync(int id,string username)
 		{
 			if (id <= 0) throw new Exception("Id not found");
-			Book book = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Chapters" });
-			List<Book> books = await _repo.GetAll( includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Chapters" }).ToListAsync();
+			AppUser user = await _user.GetUser(username, u => u.LibraryItems);
+			Book book = await _repo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Chapters", "Libraries" });
+			List<Book> books = await _repo.GetAll( includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Chapters","Libraries" }).ToListAsync();
 			if (book is null) throw new Exception("not found");
+			if (user is null) throw new Exception("not found");
 			if (books is null) throw new Exception("not found");
 			BookDetailVM vm = new BookDetailVM
 			{
+				user=user,
 				Books=books,
 				book = book
 			};

@@ -14,7 +14,7 @@ namespace Wreade.Application.Abstractions.Services
         Task CreateAdminRoleAsync();
         Task AssignRoleToUser(AppUser user, string roleName);
 		Task<List<string>> UpdateUser(AppUser user, EditProfileVM vm);
-		Task<AppUser> GetUser(string username);
+		Task<AppUser> GetUser(string username, params Expression<Func<AppUser, object>>[] includes);
 		
 		Task Follow(string followedId);
 		Task Unfollow(string followedId);

@@ -70,7 +70,7 @@ namespace WEB.Controllers
 		}
 		public async Task<IActionResult> Detail(int id)
 		{
-			return View(await _service.DetailAsync(id));
+			return View(await _service.DetailAsync(id,User.Identity.Name));
 		}
 	}
 }

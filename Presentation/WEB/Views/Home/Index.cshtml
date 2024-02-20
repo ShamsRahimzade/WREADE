@@ -3,6 +3,9 @@
 @model HomeVM
 @{
 	int count = 1;
+
+	int chapterCount = Model.Books.FirstOrDefault().Chapters?.Count ?? 0;
+
 }
 
 
@@ -41,7 +44,7 @@
 									@foreach (var book in item.BookCategories.Where(c => c.BookId == c.Book.Id).OrderBy(x => x.Book.Rating).Take(3).ToList())
 									{
 										<div @* style="bottom:230px;" *@ class="team-fullimage text-center clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
-											<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" class="blog-image">
+											<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" asp-route-username="@User.Identity.Name" class="blog-image">
 												<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
 											</a>
 											<div class="item-content">
@@ -96,62 +99,209 @@
 	================================================== -->
 	<!-- portfolio-section - start
 	================================================== -->
-	<section id="portfolio-section" class="portfolio-section sec-ptb-100 pt-0 text-center clearfix">
+	@* 	<section id="portfolio-section" class="portfolio-section sec-ptb-100 pt-0 text-center clearfix">
+	<div class="container">
+
+	<div class="section-title text-center mb-60 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+	<h2 class="title-text mb-15">Our Works</h2>
+	</div>
+	<div class="masoney-grid mb-60" style="position: relative; height: 1057.55px;">
+	<div class="grid-sizer"></div>
+
+	<div class="grid-item" style="position: absolute; left: 0%; top: 0px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+	<img src="~/assets/images/portfolio/3_img_1.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 33.332%; top: 0px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+	<img src="~/assets/images/portfolio/3_img_2.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 66.664%; top: 0px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+	<img src="~/assets/images/portfolio/3_img_3.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 33.332%; top: 285.672px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+	<img src="~/assets/images/portfolio/3_img_5.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 0%; top: 375.906px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+	<img src="~/assets/images/portfolio/3_img_4.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 66.664%; top: 486.203px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+	<img src="~/assets/images/portfolio/3_img_6.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 0%; top: 661.578px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+	<img src="~/assets/images/portfolio/3_img_7.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 33.332%; top: 771.875px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+	<img src="~/assets/images/portfolio/3_img_8.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+
+	<div class="grid-item" style="position: absolute; left: 66.664%; top: 771.875px;">
+	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+	<img src="~/assets/images/portfolio/3_img_9.jpg" alt="image_not_found">
+	<span class="item-content-2">
+	<strong class="item-title">Creativia</strong>
+	<small class="item-brand">Branding</small>
+	</span>
+	</a>
+	</div>
+	</div>
+	<div class="masoney-grid mb-60" style="position: relative; height: 1057.55px;">
+	<div class="grid-sizer"></div>
+	@if (Model.Books.Count > 0)
+	{
+
+	@foreach (var item in Model.Books.OrderBy(b => b.Id))
+	{
+	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="position: absolute; left: 0%; top: 0px;">
+	<div class="team-fullimage text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+	<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
+	<div class="item-content">
+	<div class="person-name"><h3>@item.User.Name</h3></div>
+	<div class="person-title"><span>@item.Name</span></div>
+	<div class="social-links ul-li-center clearfix">
+	<ul class="clearfix">
+	<li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+	<li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+	@* var appUser = await _userManager.GetUserAsync(User); *@
+	@* @if (item.Libraries is null)
+	{
+	<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" ><i class="mdi mdi-heart-outline"></i></a></li>
+
+	} *@
+	@* else
+	{ *@
+	@* 	@foreach (var library in Model.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name)?.LibraryItems )
+	{
+	@if (library.book.Id != item.Id)
+	{
+	<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
+	}
+	else
+	{
+	<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" asp-route-returnUrl="@Context.Request.Path.Value"><i class="mdi mdi-heart"></i></a></li>
+	}
+	}  *@
+
+	@* 							</ul>
+	</div>
+	</div>
+	</div>
+	</div>
+	}
+	}
+
+	</div>
+
+	<div class="btn-wrap text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+	<a href="portfolio-gird-boxed.html" class="btn">View All Works</a>
+	</div>
+
+	</div>
+	</section>  *@
+	<section id="team-section" class="team-section sec-ptb-100 clearfix">
 		<div class="container">
 
-			<div class="section-title text-center mb-60 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-				<h2 class="title-text mb-15">Our Works</h2>
+			<div class="section-title text-center mb-30 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+				<h2 class="title-text mb-15">Books</h2>
+				<p class="mb-0">Popular books </p>
 			</div>
 
-			<div class="masoney-grid mb-60" style="position: relative; height: 1057.55px;">
-				<div class="grid-sizer"></div>
-				@if (Model.Books.Count > 0)
+			<div class="row">
+				@foreach (var item in Model.Books.OrderBy(b => b.Id).Take(3))
 				{
+					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="team-fullimage text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+							<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
+							<div class="item-content">
+								<div class="person-name"><h3>@item.Name</h3></div>
+								<div class="person-title"><span>@item.User.UserName</span></div>
+								<div class="person-title"><span>@chapterCount</span></div>
+								<div class="social-links ul-li-center clearfix">
+									<ul class="clearfix">
+										<li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart"></i></a></li>
 
-					@foreach (var item in Model.Books.OrderBy(b => b.Id))
-					{
-						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="position: absolute; left: 0%; top: 0px;">
-							<div class="team-fullimage text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-								<div class="item-content">
-									<div class="person-name"><h3>@item.User.Name</h3></div>
-									<div class="person-title"><span>@item.Name</span></div>
-									<div class="social-links ul-li-center clearfix">
-										<ul class="clearfix">
-											<li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-											@* var appUser = await _userManager.GetUserAsync(User); *@
-											@* @if (item.Libraries is null)
+										  @if (Model.Users.FirstOrDefault(b => b.UserName == User.Identity.Name).LibraryItems is null)
+										{
+											<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
+
+										}
+										else
+										{
+
+											@foreach (var book in Model.User.LibraryItems)
 											{
-												<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" ><i class="mdi mdi-heart-outline"></i></a></li>
-
-											} *@
-											@* else
-											{ *@
-											 @* 	@foreach (var library in Model.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name)?.LibraryItems )
+												@if (Model.Users.FirstOrDefault(b => b.UserName == User.Identity.Name)?.LibraryItems?.Any(li => li.BookId == item.Id) ?? false)
 												{
-													@if (library.book.Id != item.Id)
-													{
-														<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
-													}
-													else
-													{
-														<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" asp-route-returnUrl="@Context.Request.Path.Value"><i class="mdi mdi-heart"></i></a></li>
-													}
-												}  *@
-											
-										</ul>
-									</div>
+													<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart"></i></a>
+												}
+												else
+												{
+													<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a>
+												}
+											}
+										} 
+										
+									</ul>
 								</div>
 							</div>
 						</div>
-					}
+					</div>
 				}
 
-			</div>
-
-			<div class="btn-wrap text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-				<a href="portfolio-gird-boxed.html" class="btn">View All Works</a>
 			</div>
 
 		</div>
@@ -204,11 +354,11 @@
 							<div class="team-fullimage text-center  add-effect" data-aos="fade-up" data-aos-delay="100">
 								<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><img src="~/assets/images/@item.CoverPhoto" alt="image_not_found"></a>
 								<div class="item-content">
-									<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><div class="person-name"><h3>@item.User.Name</h3></div></a>
+									<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><div class="person-name"><h3>@item.Name</h3></div></a>
 									<div class="person-title">
 										@if (item != null && item.Chapters != null)
 										{
-											<small class="item-brand">@item.Chapters.Count</small>
+											<small class="item-brand">@chapterCount</small>
 										}
 
 										else
