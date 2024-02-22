@@ -450,6 +450,9 @@ namespace Wreade.Persistence.DAL.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BookId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("ChapterImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -478,11 +481,16 @@ namespace Wreade.Persistence.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("ViewCount")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("BookId1");
 
                     b.ToTable("Chapters");
                 });
@@ -878,10 +886,14 @@ namespace Wreade.Persistence.DAL.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("Wreade.Domain.Entities.Book", "Book")
-                        .WithMany("Chapters")
+                        .WithMany()
                         .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Wreade.Domain.Entities.Book", null)
+                        .WithMany("Chapters")
+                        .HasForeignKey("BookId1");
 
                     b.Navigation("Book");
 

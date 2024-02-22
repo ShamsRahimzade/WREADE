@@ -29,6 +29,13 @@ namespace WEB.Controllers
             if (vm.Items == null) return NotFound();
             return View(vm);
         }
+		public async Task<IActionResult> CategoryBooks(int id, int page = 1, int take = 5)
+		{
+			PaginationVM<Book> book = await _service.GetCategoryId(id, page, take);
+			book.CategoryId = id;
+			if (book.Items == null) return NotFound();
+			return View(book);
+		}
 		//public async Task<IActionResult> Index()
 		//{
 		//	var userBooks = await _service.GetUserBooksAsync();

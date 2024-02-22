@@ -114,7 +114,7 @@
 								</div>
 							</li>
 							<li class="menu-item-has-child">
-								<a href="#!">Browse</a>
+								<a href="#">Browse</a>
 								<div class="mega-menu">
 									<div class="row" style="flex-direction:column;">
 
@@ -123,8 +123,8 @@
 										{
 											<div class="col-lg-6">
 												<div class="menu-list ul-li-block">
-													<ul style=" display:flex; flex-direction:column;  text-decoration-color:black; gap:50px; text-decoration:none;" class="clearfix">
-														<li style="text-decoration:none; text-decoration-color:black;"><a style="text-decoration:none;" asp-action="detail" asp-controller="category" asp-route-id="@item.Id">@item.Name</a></li>
+													<ul style=" display:flex; flex-direction:column;  gap:50px; text-decoration:none;" class="clearfix">
+														<li style="text-decoration:none;"><a style="text-decoration:none;" @* asp-action="detail" asp-controller="category" *@ href="#" @* asp-route-id="@item.Id" *@>@item.Name</a></li>
 
 													</ul>
 												</div>

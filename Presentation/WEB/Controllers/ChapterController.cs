@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Stripe;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
@@ -23,10 +24,8 @@ namespace WEB.Controllers
 		}
 		public async Task<IActionResult> Create(int bookId)
 		{
-			CreateChapterVM vm = new CreateChapterVM
-			{
-				bookId=bookId
-			};
+			CreateChapterVM vm = new CreateChapterVM();
+			vm.bookId = bookId;
 			
 			vm = await _chapservice.CreatedAsync(vm);
 			return View(vm);
@@ -73,9 +72,12 @@ namespace WEB.Controllers
 
 			return Redirect(returnUrl);
 		}
-		public async Task<IActionResult> Detail(int id)
+		public async Task<IActionResult> Detail(int id, int page = 1, int take = 1)
 		{
-			return View(await _chapservice.Detail(id));
+			PaginationVM<Chapter> vm = await _chapservice.GetAllAsync(id, page, take);
+			vm.BookId = id;
+			if (vm.Items == null) return NotFound();
+			return View(vm);
 		}
 		public async Task<IActionResult> ViewCount(int chapid)
 		{

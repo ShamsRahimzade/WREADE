@@ -16,7 +16,7 @@
 
 	<!-- slider-section - start
 	================================================== -->
-	<section id="slider-section" class="slider-section clearfix" style="background-image:url(/assets/images/backgrounds/dark.jpg);
+	<section id="slider-section" class="slider-section clearfix" @* style="background-color:orangered; *@
     /*  background-repeat:no-repeat; */
      background-size:cover;" >
 		<div id="agency-default-carousel"  class="agency-default-carousel owl-carousel owl-theme">
@@ -35,7 +35,7 @@
 										@item.Name
 									</h3>
 									
-									<a asp-action="detail" asp-controller="category" asp-route-id="@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id)?.CategoryId" class="btn">Go to detail</a>
+									<a asp-action="categorybooks" asp-controller="book" asp-route-id="@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id)?.CategoryId" class="btn">Go to detail</a>
 								</div>
 							</div>
 
@@ -256,7 +256,7 @@
 
 			<div class="section-title text-center mb-30 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 				<h2 class="title-text mb-15">Books</h2>
-				<p class="mb-0">Popular books </p>
+				<p style="color:orangered" class="mb-0">Popular books </p>
 			</div>
 
 			<div class="row">
@@ -325,19 +325,19 @@
 		<section id="service-section" class="service-section sec-ptb-100 bg-light-gray clearfix">
 			<div class="container">
 				<div class="row mt--60">
-					@foreach (var item in Model.Books.OrderByDescending(b => b.Rating)
+				@* 	@foreach (var item in Model.Books.OrderByDescending(b => b.Rating)
 							.Take(3))
-					{
-						count++;
-						<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+					{ *@
+						
+						<div class="justify-content-center">
 							<div class="service-default" data-aos="fade-up" data-aos-delay="100">
-								<a asp-action="user" asp-controller="profile" asp-route-username="@item.User.UserName"><h3 class="item-title">@item.User.Name</h3></a>
+							<a @* asp-action="user" asp-controller="profile" asp-route-username="@item.User.UserName" *@><h1 class="item-title" style="color:white">If there is a greater crime than burning books, it is reading them.</h1></a>
 								<p class="mb-0">
-									@item.User.SelfInformation
+									@* @item.User.SelfInformation *@
 								</p>
 							</div>
 						</div>
-					}
+					@* } *@
 				</div>
 			</div>
 		</section>

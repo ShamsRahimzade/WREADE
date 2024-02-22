@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Wreade.Application.Abstractions.Repostories;
 using Wreade.Application.Abstractions.Services;
@@ -95,7 +96,11 @@ namespace Wreade.Persistence.Implementations.Services
 		public async Task<PaginationVM<Chapter>> GetAllAsync(int id, int page = 1, int take = 5)
 		{
 			if (page < 1 || take < 1) throw new Exception("Bad request");
-			ICollection<Chapter> chapter = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id, IsDescending: true, includes: nameof(Book)).Where(c => c.BookId == id).ToListAsync();
+			ICollection<Chapter> chapter = await _chaprepo.GetPagination(
+				skip: (page - 1) * take, take: take,
+				orderExpression: x => x.Id, IsDescending: true,
+				includes: new string[] { nameof(Book) }).ToListAsync();
+			ICollection<Book> books = await _bookrepo.GetAllWhere(c => c.Id == id).ToListAsync();
 			if (chapter == null) throw new Exception("Not Found");
 			int count = await _chaprepo.GetAll().CountAsync();
 			if (count < 0) throw new Exception("Not Found");
@@ -108,17 +113,21 @@ namespace Wreade.Persistence.Implementations.Services
 			};
 			return vm;
 		}
-		public async Task<ChapterDetailVM> Detail(int id)
+		public async Task<PaginationVM<Chapter>> Detail(int id, int page = 1, int take = 1)
 		{
 			if (id <= 0) throw new Exception("Id not found");
+			if (page < 1 || take < 1) throw new Exception("Bad request");
 			Chapter chapter = await _chaprepo.GetByIdAsync(id, includes: new string[] {  "Comments", "Likes" });
-			List<Chapter> chapters = await _chaprepo.GetAll(includes: new string[] { "Comments", "Likes" }).ToListAsync();
-			if (chapter is null) throw new Exception("not found");
-			if (chapters is null) throw new Exception("not found");
-			ChapterDetailVM vm = new ChapterDetailVM
+			ICollection<Chapter> chapters = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id,expression:c=>c.BookId==id ,IsDescending: true, includes: nameof(Book)).Where(c => c.BookId == id).ToListAsync();
+			if (chapters == null) throw new Exception("Not Found");
+			int count = await _chaprepo.GetAll().CountAsync();
+			if (count < 0) throw new Exception("Not Found");
+			double totalpage = Math.Ceiling((double)count / take);
+			PaginationVM<Chapter> vm = new PaginationVM<Chapter>
 			{
-				Chapters = chapters,
-				chapter = chapter
+				Items=chapters,
+				CurrentPage = page,
+				TotalPage = totalpage
 			};
 			return vm;
 		}

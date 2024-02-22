@@ -77,7 +77,11 @@ main {
 }
 
 .container {
-  max-width: 1200px;
+    max-width: 1200px;
+    
+    border-radius:25px;
+    background-size: cover;
+    
 }
 
 .container-fluid {
@@ -146,7 +150,7 @@ img {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  color: #000000;
+  color: orangered;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -995,7 +999,7 @@ strong, span, small, label, i {
 }
 
 .bg-light-gray {
-  background-color: #f2f2f2;
+  background-color: orangered;
 }
 
 /* custom colors - end
@@ -2664,18 +2668,19 @@ button {
   margin-top: 30px;
   position: relative;
 }
-.team-fullimage:before {
-  top: 50%;
-  left: 50%;
-  width: 0%;
-  z-index: 1;
-  height: 90%;
-  content: "";
-  position: absolute;
-  transition: all 0.3s ease-in-out;
-  background-color: #000000;
-  transform: translate(-50%, -50%);
-}
+    .team-fullimage:before {
+        top: 50%;
+        left: 50%;
+        width: 0%;
+        z-index: 1;
+        height: 90%;
+        content: "";
+        position: absolute;
+        transition: all 0.3s ease-in-out;
+        background-color: rgba(000 / 50%);
+        border-radius: 30px;
+        transform: translate(-50%, -50%);
+    }
 .team-fullimage:hover:before {
   width: 90%;
 }
@@ -2684,7 +2689,7 @@ button {
   left: 0px;
   right: 0px;
   z-index: 2;
-  color: #ffffff;
+  color: white;
   padding: 0px 30px;
   position: absolute;
   transform: translateY(-50%);
@@ -2694,7 +2699,7 @@ button {
   margin-bottom: 8px;
 }
 .team-fullimage .person-name h3 {
-  color: #ffffff;
+  color: white;
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 0px;
@@ -4669,7 +4674,7 @@ button {
   position: absolute;
 }
 .agency-default-carousel .item.bg-gray {
-  background-color: #eaeaea;
+  background-color: orangered;
 }
 .agency-default-carousel .item .slider-content {
   padding-right: 60px;
@@ -4677,6 +4682,7 @@ button {
 .agency-default-carousel .item .item-title {
   font-size: 48px;
   margin-bottom: 40px;
+  color:white;
 }
 .agency-default-carousel .item p {
   font-size: 16px;

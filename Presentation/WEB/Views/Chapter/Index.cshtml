@@ -47,7 +47,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach (var item in Model.Items)
+						@foreach (var item in Model.Items.Where(c=>c.Book.Id==c.BookId&&c.Book.Id==Model.BookId))
 						{
 							<tr data-aos="fade-up" data-aos-delay="200">
 								<td>
@@ -85,7 +85,7 @@
 					<div class="col-lg-7 col-md-7 col-sm-8 col-xs-12">
 						<div class="btns-group ul-li-right" data-aos="fade-left" data-aos-delay="300">
 							<ul class="clearfix">
-								<li><a asp-action="create" asp-controller="chapter" class="btn btn-border">Create New Chapter</a></li>
+								<li><a asp-action="create" asp-controller="chapter" asp-route-bookId="@Model.BookId" class="btn btn-border">Create New Chapter</a></li>
 							</ul>
 						</div>
 					</div>

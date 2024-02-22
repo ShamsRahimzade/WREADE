@@ -98,7 +98,7 @@
 											<img src="~/assets/images/chapters/@item.ChapterImage" alt="image_not_found">
 										</div>
 										<div class="service-content">
-											<h4 class="service-title">@item.Title</h4>
+											<a asp-action="detail" asp-route-id="@item.Id" asp-controller="chapter"><h4 class="service-title">@item.Title</h4></a>
 											<p class="mb-0">
 												@item.CreatedAt
 											</p>
@@ -117,6 +117,7 @@
 									{
 										<button class="btn btn-warning btn-rounded btn-fw">Ongoing</button>
 									}
+									<button class="btn btn-success btn-rounded btn-fw "><a asp-action="detail" asp-controller="chapter" asp-route-id="@Model.book.Id">Read</a></button>
 									@{
 										TimeSpan difference = DateTime.Now - Model.book.CreatedAt;
 

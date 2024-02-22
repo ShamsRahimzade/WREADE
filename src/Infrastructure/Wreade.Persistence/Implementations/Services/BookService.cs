@@ -60,7 +60,7 @@ namespace Wreade.Persistence.Implementations.Services
 			vm.Categories = await _category.GetAll().ToListAsync();
 			return vm;
 		}
-		public async Task<PaginationVM<Book>> GetAllAsync(int page=1,int take = 5)
+		public async Task<PaginationVM<Book>> GetAllAsync( int page=1,int take = 5)
 		{
             if (page < 1 || take < 1) throw new Exception("Bad request");
             ICollection<Book> books = await _repo.GetPagination(skip: (page - 1) * take, take: take,
@@ -80,6 +80,23 @@ namespace Wreade.Persistence.Implementations.Services
             };
             return vm;
         }
+		public async Task<PaginationVM<Book>> GetCategoryId(int id, int page = 1, int take = 10)
+		{
+			if (page < 1 || take < 1) throw new Exception("Bad request");
+			//ICollection<Job> jobs = await _repository.GetAllWhere(c => c.Category).ToListAsync();
+			ICollection<Book> books = await _repo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id, expression: c => c.BookCategories.FirstOrDefault(c=>c.CategoryId==c.Category.Id).CategoryId==id, IsDescending: true, includes: new string[] { "Chapters", "BookCategories.Category", "BookTags", "BookTags.Tag", "Libraries" }).ToListAsync();
+			if (books == null) throw new Exception("Not Found");
+			int count = await _repo.GetAll().CountAsync();
+			if (count < 0) throw new Exception("Not Found");
+			double totalpage = Math.Ceiling((double)count / take);
+			PaginationVM<Book> vm = new PaginationVM<Book>
+			{
+				Items = books,
+				CurrentPage = page,
+				TotalPage = totalpage
+			};
+			return vm;
+		}
 		public async Task<ICollection<Book>> GetAll(int page = 1, int take = 10)
 		{
 			return await _repo.GetAll(includes: new string[] { nameof(Book.Chapters)}).ToListAsync();
@@ -88,7 +105,7 @@ namespace Wreade.Persistence.Implementations.Services
 		{
 
 
-			ICollection<Book> books = await _repo.GetPagination( skip: (page - 1) * take, take: take, orderExpression: c => c.AppUserId == userId, includes:new string[] { "Chapters", "BookCategories.Category", "BookTags", "BookTags.Tag", "Libraries" }).ToListAsync();
+			ICollection<Book> books = await _repo.GetPagination( skip: (page - 1) * take, take: take, expression: c => c.AppUserId == userId, includes:new string[] { "Chapters", "BookCategories.Category", "BookTags", "BookTags.Tag", "Libraries" }).ToListAsync();
 
 
 			int count = await _repo.GetAll().CountAsync(c => c.AppUserId == userId);

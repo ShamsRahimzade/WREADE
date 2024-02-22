@@ -12,5 +12,6 @@ namespace Wreade.Application.ViewModels
         public double TotalPage { get; set; }
         public int CurrentPage { get; set; }
 		public int BookId { get; set; }
+		public int CategoryId { get; set; }
 	}
 }

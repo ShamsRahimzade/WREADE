@@ -15,7 +15,7 @@ namespace Wreade.Application.Abstractions.Services
 		List<Book> GetReadingHistoryForUser(string userName);
 		Task<ICollection<Book>> GetAll(int page = 1, int take = 10);
 
-		Task<PaginationVM<Book>> GetAllAsync(int page = 1, int take = 5);
+		Task<PaginationVM<Book>> GetAllAsync( int page = 1, int take = 5);
 		Task<BookCreateVM> CreatedAsync(BookCreateVM vm);
 		Task<bool> CreateAsync(BookCreateVM vm, ModelStateDictionary ms);
 		Task<bool> DeleteAsync(int id);
@@ -24,5 +24,6 @@ namespace Wreade.Application.Abstractions.Services
 		Task<PaginationVM<Book>> GetBooksCreatedByUserAsync(string userId, int page = 1, int take = 10);
 		Task<List<Book>> GetUserBooksAsync();
 		Task<BookDetailVM> DetailAsync(int id, string username);
+		Task<PaginationVM<Book>> GetCategoryId(int id, int page = 1, int take = 10);
 	}
 }

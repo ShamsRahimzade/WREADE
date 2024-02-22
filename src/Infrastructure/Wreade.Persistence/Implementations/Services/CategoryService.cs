@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Wreade.Application.Abstractions.Repostories;
 using Wreade.Application.Abstractions.Services;
@@ -121,16 +122,20 @@ namespace Wreade.Persistence.Implementations.Services
 			await _categoryrepo.SaveChangeAsync();
 			return true;
 		}
-		public async Task<CategoryDetailVM> DetailAsync(int id)
+		public async Task<PaginationVM<Category>> DetailAsync(int id, int page = 1, int take = 10)
 		{
-			if (id <= 0) throw new Exception("Id not found");
-			Category category = await _categoryrepo.GetByIdAsync(id, includes: new string[] { "BookCategories", "BookCategories.Book" });
-			if (category is null) throw new Exception("not found");
-			CategoryDetailVM vm = new CategoryDetailVM
+			ICollection<Category> category = await _categoryrepo.GetPagination(skip: (page - 1) * take, take: take, includes: new string[] { "BookCategories", "BookeCategories.Book" },orderExpression:x=>x.Id).ToListAsync();
+			if (category == null) throw new Exception("Not Found");
+			int count = await _categoryrepo.GetAll(includes:new string[] {"BookCategories","BookeCategories.Book"} ).OrderBy(c => c.Id).CountAsync();
+			double totalpage = Math.Ceiling((double)count / take);
+			PaginationVM<Category> vm = new PaginationVM<Category>
 			{
-				category = category
+				Items = category,
+				CurrentPage = page,
+				TotalPage = totalpage
 			};
 			return vm;
+			
 		}
 		public async Task<CategoryUpdateVM> UpdatedAsync(int id, CategoryUpdateVM vm)
 		{
