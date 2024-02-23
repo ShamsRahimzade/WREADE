@@ -23,7 +23,6 @@ namespace Wreade.Domain.Entities
         public int FollowingCount { get; set; } = 0;
         public int FollowerCount { get; set; } = 0;
         public ICollection<Follow> Followers { get; set; }
-        public ICollection<Comment> Comments { get; set; }
         public ICollection<Follow> Followees { get; set; }
 		public bool IsPremium { get; set; }
 		public List<LibraryItem>? LibraryItems { get; set; }

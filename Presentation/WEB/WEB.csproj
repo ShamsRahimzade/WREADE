@@ -26,4 +26,15 @@
     <Folder Include="wwwroot\assets\images\chapters\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\assets\tables\css\.DS_Store" />
+    <None Include="wwwroot\assets\tables\css\bootstrap\.DS_Store" />
+    <None Include="wwwroot\assets\tables\css\bootstrap\mixins\.DS_Store" />
+    <None Include="wwwroot\assets\tables\fonts\.DS_Store" />
+    <None Include="wwwroot\assets\tables\images\.DS_Store" />
+    <None Include="wwwroot\assets\tables\js\.DS_Store" />
+    <None Include="wwwroot\assets\tables\scss\.DS_Store" />
+    <None Include="wwwroot\assets\tables\scss\bootstrap\.DS_Store" />
+  </ItemGroup>
+
 </Project>

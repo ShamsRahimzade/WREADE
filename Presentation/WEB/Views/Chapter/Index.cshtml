@@ -42,7 +42,7 @@
 					<thead>
 						<tr data-aos="fade-up" data-aos-delay="100">
 							<th scope="col">Chapter</th>
-							<th scope="col">ViewCount</th>
+							
 							<th scope="col">CreateTime</th>
 						</tr>
 					</thead>
@@ -65,8 +65,28 @@
 									</div>
 								</td>
 
-								<td>@item.ChapterViewCount</td>
-								<td>@item.CreatedAt</td>
+								
+								<td>
+									@{
+										TimeSpan difference = DateTime.Now - @item.CreatedAt;
+
+										string timedifference = "";
+										if (difference.TotalDays >= 1)
+										{
+											timedifference = $"{(int)difference.TotalDays} days ago";
+										}
+										else if (difference.TotalHours >= 1)
+										{
+											timedifference = $"{(int)difference.TotalHours} hours ago";
+										}
+										else
+										{
+											timedifference = $"{(int)difference.TotalMinutes} minutes ago";
+										}
+									}
+
+									@timedifference
+								</td>
 								
 
 								
@@ -113,7 +133,7 @@
 							</a>
 						</li>
 					</ul>
-					<a asp-action="create" asp-asp-controller="book"><button>Create</button></a>
+				
 				</nav>
 			</div>
 		</div>

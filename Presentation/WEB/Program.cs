@@ -1,5 +1,6 @@
 
 using Stripe;
+using WEB.Middlewares;
 using Wreade.Application;
 using Wreade.Persistence.ServiceRegistration;
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ app.UseAuthentication();
 app.UseRouting();
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 app.UseAuthorization();
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+
 app.UseEndpoints(endpoints =>
 {
 	endpoints.MapControllerRoute(
@@ -29,6 +32,6 @@ app.UseEndpoints(endpoints =>
 });
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=AppUser}/{action=login}/{id?}");
+    pattern: "{controller=AppUser}/{action=register}/{id?}");
 
 app.Run();

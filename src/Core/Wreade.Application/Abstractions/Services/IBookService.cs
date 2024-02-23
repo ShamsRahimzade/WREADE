@@ -23,6 +23,7 @@ namespace Wreade.Application.Abstractions.Services
 		Task<bool> UpdateAsync(int id, BookUpdateVM vm, ModelStateDictionary modelstate);
 		Task<PaginationVM<Book>> GetBooksCreatedByUserAsync(string userId, int page = 1, int take = 10);
 		Task<List<Book>> GetUserBooksAsync();
+		Task<PaginationVM<Book>> GetTagId(int id, int page = 1, int take = 10);
 		Task<BookDetailVM> DetailAsync(int id, string username);
 		Task<PaginationVM<Book>> GetCategoryId(int id, int page = 1, int take = 10);
 	}

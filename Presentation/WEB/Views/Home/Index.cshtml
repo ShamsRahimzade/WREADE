@@ -1,465 +1,210 @@
-﻿@using Wreade.Application.ViewModels;
-@using Wreade.Domain.Enums;
-@model HomeVM
-@{
-	int count = 1;
+﻿@model HomeVM
 
-	int chapterCount = Model.Books.FirstOrDefault().Chapters?.Count ?? 0;
+<!-- Carousel Start -->
+<div class="container-fluid p-0 pb-5">
+    <div class="owl-carousel header-carousel position-relative">
+        @foreach (var item in Model.MostReadCategory)
+        {
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="~/assets/assets/img/@item.Image" alt="">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(53, 53, 53, .7);">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-lg-8 text-center">
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome To WooDY</h5>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">@item.Name</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
+                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-}
+        }
+    </div>
+</div>
+<!-- Carousel End -->
+<!-- Feature Start -->
 
+<!-- Feature Start -->
 
-<!-- main body - start
-	================================================== -->
-<main>
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container " >
+        <div class="section-title text-center">
+            <h1 class="display-5 mb-5">Latest Books</h1>
+        </div>
+        <div class="row g-4 d-flex ">
+            @{
+                var books = Model.Books.Take(6);
+            }
+            @foreach (var item in books)
+            {
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="~/assets/assets/img/@item.CoverPhoto" alt="">
+                        </div>
+                        <div class="p-4 text-center border border-5 border-light border-top-0">
+                            <h4 class="mb-3">@item.Name</h4>
+                            @{
+                               
+                                var sentences = item.Description.Split('.').Take(1);
+                                var shortenedDescription = string.Join(".", sentences);
+                            }
+                            <p>@shortenedDescription</p>
+                            <a class="fw-medium" asp-action="detail" asp-controller="book" asp-route-id="@item.Id">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
 
+    </div>
+</div>
+<!-- Service End -->
+<!-- About Start -->
+@* <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+    <div class="container about px-lg-0">
+        @{
+            var latestBooks = Model.Books.OrderByDescending(j => j.CreatedAt).Take(1);
+        }
+        @foreach (var item in latestBooks)
+        {
+            <div class="row g-0 mx-lg-0">
+                <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute img-fluid w-100 h-100" src="~/assets/assets/img/@item.CoverPhoto" style="object-fit: cover;" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 about-text py-5 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="p-lg-5 pe-lg-0">
+                        <div class="section-title text-start">
+                            <h1 class="display-5 mb-4">@item.Name</h1>
+                        </div>
+                        @{
 
-	<!-- slider-section - start
-	================================================== -->
-	<section id="slider-section" class="slider-section clearfix" @* style="background-color:orangered; *@
-    /*  background-repeat:no-repeat; */
-     background-size:cover;" >
-		<div id="agency-default-carousel"  class="agency-default-carousel owl-carousel owl-theme">
+                            var sentences = item.Description.Split('.').Take(3);
+                            var shortenedDescription = string.Join(".", sentences);
+                        }
+                        <p class="mb-4 pb-2">@shortenedDescription</p>
+                        <div class="row g-4 mb-4 pb-2">
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+                                        <i class="fa fa-users fa-2x text-primary"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h2 class="text-primary mb-1" data-toggle="counter-up">1234</h2>
+                                        <p class="fw-medium mb-0">Happy Clients</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @*  <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="d-flex align-items-center">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+                        <i class="fa fa-check fa-2x text-primary"></i>
+                        </div>
+                        <div class="ms-3">
+                        <h2 class="text-primary mb-1" data-toggle="counter-up">1234</h2>
+                        <p class="fw-medium mb-0">Projects Done</p>
+                        </div>
+                        </div>
+                        </div> 
+                        </div>
+                        <a asp-action="detail" asp-controller="book" asp-route-id="@item.Id" class="btn btn-primary py-3 px-5">Read More</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div> *@
+<!-- About End -->
+<!-- Projects Start -->
+<div class="container-xxl py-5">
+    <div class="container ">
+        <div class="section-title text-center">
+            <h1 class="display-5 mb-5">Latest Books</h1>
+        </div>
+        <div class="row g-4 d-flex ">
+            @{
+                var bk = Model.Books.Take(6);
+            }
+            @foreach (var item in bk)
+            {
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="~/assets/assets/img/@item.CoverPhoto" alt="">
+                        </div>
+                        <div class="p-4 text-center border border-5 border-light border-top-0">
+                            <h4 class="mb-3">@item.Name</h4>
+                            @{
 
-			@foreach (var item in Model.MostReadCategory)
-			{
-				count = 1;
+                                var sentences = item.Description.Split('.').Take(1);
+                                var shortenedDescription = string.Join(".", sentences);
+                            }
+                            <p>@shortenedDescription</p>
+                            <a class="fw-medium" asp-action="detail" asp-controller="book" asp-route-id="@item.Id">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
 
-				<div class="item bg-gray d-flex align-items-center">
-					<div class="container">
-						<div class="row align-items-center">
+    </div>
+</div>
+<!-- Projects End -->
 
-							<div class="col-7">
-								<div class="slider-content">
-									<h3 class="item-title">
-										@item.Name
-									</h3>
-									
-									<a asp-action="categorybooks" asp-controller="book" asp-route-id="@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id)?.CategoryId" class="btn">Go to detail</a>
-								</div>
-							</div>
-
-							<div class="col-5">
-								<div class="slider-image">
-									@foreach (var book in item.BookCategories.Where(c => c.BookId == c.Book.Id).OrderBy(x => x.Book.Rating).Take(3).ToList())
-									{
-										<div @* style="bottom:230px;" *@ class="team-fullimage text-center clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
-											<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" asp-route-username="@User.Identity.Name" class="blog-image">
-												<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
-											</a>
-											<div class="item-content">
-												<div class="person-name">
-													<h3>
-														<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId">
-															@book.Book.Name
-														</a>
-													</h3>
-												</div>
-												<div class="person-title"><span><a href="#!">@book.Book.CreatedBy</a></span></div>
-
-											</div>
-										</div>
-										@* 	<div class="blog-grid clearfix aos-init aos-animate child-image child-image-@count" data-aos="fade-up" data-aos-delay="100">
-								<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId" class="blog-image">
-								<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
-								</a>
-								<h3 class="item-title">
-								<a asp-action="detail" asp-controller="book" asp-route-id="@book.BookId">
-								@book.Book.Name
-								</a>
-								</h3>
-								<div class="post-meta ul-li clearfix">
-								<ul class="clearfix">
-								<li>@book.Book.CreatedAt</li>
-								<li><a href="#!">@book.Book.CreatedBy</a></li>
-								</ul>
-								</div>
-								</div> *@
-										@* <div class="child-image child-image-@count">
-								<img src="~/assets/images/@book.Book.CoverPhoto" alt="image_not_found">
-								</div> *@
-										count++;
-									}
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-
-				</div>
-			}
-
-
-
-
-		</div>
-	</section>
-	<!-- slider-section - end
-	================================================== -->
-	<!-- portfolio-section - start
-	================================================== -->
-	@* 	<section id="portfolio-section" class="portfolio-section sec-ptb-100 pt-0 text-center clearfix">
-	<div class="container">
-
-	<div class="section-title text-center mb-60 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-	<h2 class="title-text mb-15">Our Works</h2>
-	</div>
-	<div class="masoney-grid mb-60" style="position: relative; height: 1057.55px;">
-	<div class="grid-sizer"></div>
-
-	<div class="grid-item" style="position: absolute; left: 0%; top: 0px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-	<img src="~/assets/images/portfolio/3_img_1.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 33.332%; top: 0px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-	<img src="~/assets/images/portfolio/3_img_2.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 66.664%; top: 0px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-	<img src="~/assets/images/portfolio/3_img_3.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 33.332%; top: 285.672px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-	<img src="~/assets/images/portfolio/3_img_5.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 0%; top: 375.906px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-	<img src="~/assets/images/portfolio/3_img_4.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 66.664%; top: 486.203px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-	<img src="~/assets/images/portfolio/3_img_6.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 0%; top: 661.578px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-	<img src="~/assets/images/portfolio/3_img_7.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 33.332%; top: 771.875px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-	<img src="~/assets/images/portfolio/3_img_8.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-
-	<div class="grid-item" style="position: absolute; left: 66.664%; top: 771.875px;">
-	<a href="#!" class="portfolio-fullimage add-effect aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-	<img src="~/assets/images/portfolio/3_img_9.jpg" alt="image_not_found">
-	<span class="item-content-2">
-	<strong class="item-title">Creativia</strong>
-	<small class="item-brand">Branding</small>
-	</span>
-	</a>
-	</div>
-	</div>
-	<div class="masoney-grid mb-60" style="position: relative; height: 1057.55px;">
-	<div class="grid-sizer"></div>
-	@if (Model.Books.Count > 0)
-	{
-
-	@foreach (var item in Model.Books.OrderBy(b => b.Id))
-	{
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="position: absolute; left: 0%; top: 0px;">
-	<div class="team-fullimage text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-	<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-	<div class="item-content">
-	<div class="person-name"><h3>@item.User.Name</h3></div>
-	<div class="person-title"><span>@item.Name</span></div>
-	<div class="social-links ul-li-center clearfix">
-	<ul class="clearfix">
-	<li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-	<li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-	@* var appUser = await _userManager.GetUserAsync(User); *@
-	@* @if (item.Libraries is null)
-	{
-	<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" ><i class="mdi mdi-heart-outline"></i></a></li>
-
-	} *@
-	@* else
-	{ *@
-	@* 	@foreach (var library in Model.Users.FirstOrDefault(u=>u.UserName==User.Identity.Name)?.LibraryItems )
-	{
-	@if (library.book.Id != item.Id)
-	{
-	<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
-	}
-	else
-	{
-	<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId" asp-route-returnUrl="@Context.Request.Path.Value"><i class="mdi mdi-heart"></i></a></li>
-	}
-	}  *@
-
-	@* 							</ul>
-	</div>
-	</div>
-	</div>
-	</div>
-	}
-	}
-
-	</div>
-
-	<div class="btn-wrap text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-	<a href="portfolio-gird-boxed.html" class="btn">View All Works</a>
-	</div>
-
-	</div>
-	</section>  *@
-	<section id="team-section" class="team-section sec-ptb-100 clearfix">
-		<div class="container">
-
-			<div class="section-title text-center mb-30 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-				<h2 class="title-text mb-15">Books</h2>
-				<p style="color:orangered" class="mb-0">Popular books </p>
-			</div>
-
-			<div class="row">
-				@foreach (var item in Model.Books.OrderBy(b => b.Id).Take(3))
-				{
-					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-						<div class="team-fullimage text-center clearfix aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-							<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-							<div class="item-content">
-								<div class="person-name"><h3>@item.Name</h3></div>
-								<div class="person-title"><span>@item.User.UserName</span></div>
-								<div class="person-title"><span>@chapterCount</span></div>
-								<div class="social-links ul-li-center clearfix">
-									<ul class="clearfix">
-										<li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-										<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart"></i></a></li>
-
-										  @if (Model.Users.FirstOrDefault(b => b.UserName == User.Identity.Name).LibraryItems is null)
-										{
-											<li>
-											<button type="button">
-												<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId">
-													<i class="fas fa-heart"></i>
-
-											</a>
-												</button>
-											</li>
-
-										}
-										else
-										{
-
-											
-												@if (Model.Users.FirstOrDefault(b => b.UserName == User.Identity.Name)?.LibraryItems?.Any(li => li.BookId == item.Id) ?? false)
-												{
-													<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="mdi mdi-heart"></i></a>
-												}
-												else
-												{
-													<li>
-												<button type="button">	<a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@item.Id" asp-route-userId="@item.AppUserId"><i class="fas fa-heart"></i></a></button>
-												</li>
-												
-												}
-											
-										} 
-										
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				}
-
-			</div>
-
-		</div>
-	</section>
-
-	<!-- portfolio-section - end
-	================================================== -->
-	<!-- service-section - start
-	================================================== -->
-	@if (User.IsInRole("Author"))
-	{
-		<section id="service-section" class="service-section sec-ptb-100 bg-light-gray clearfix">
-			<div class="container">
-				<div class="row mt--60">
-				@* 	@foreach (var item in Model.Books.OrderByDescending(b => b.Rating)
-							.Take(3))
-					{ *@
-						
-						<div class="justify-content-center">
-							<div class="service-default" data-aos="fade-up" data-aos-delay="100">
-							<a @* asp-action="user" asp-controller="profile" asp-route-username="@item.User.UserName" *@><h1 class="item-title" style="color:white">If there is a greater crime than burning books, it is reading them.</h1></a>
-								<p class="mb-0">
-									@* @item.User.SelfInformation *@
-								</p>
-							</div>
-						</div>
-					@* } *@
-				</div>
-			</div>
-		</section>
-	}
-	<!-- service-section - end
-	================================================== -->
-	<!-- team-section - start
-	================================================== -->
-	@if (Model.Books.Count >= 1)
-	{
-		<section id="team-section" class="team-section sec-ptb-100 clearfix">
-			<div class="container">
-
-				<div class="section-title text-center mb-30" data-aos="fade-up" data-aos-delay="100">
-					<h2 class="title-text mb-15">Are You Want Read Book?</h2>
-					<p class="mb-0">Latest Books</p>
-				</div>
-
-				<div class="row">
-					@foreach (var item in Model.Books.OrderByDescending(b => b.Id))
-					{
-						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-							<div class="team-fullimage text-center  add-effect" data-aos="fade-up" data-aos-delay="100">
-								<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><img src="~/assets/images/@item.CoverPhoto" alt="image_not_found"></a>
-								<div class="item-content">
-									<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><div class="person-name"><h3>@item.Name</h3></div></a>
-									<div class="person-title">
-										@if (item != null && item.Chapters != null)
-										{
-											<small class="item-brand">@chapterCount</small>
-										}
-
-										else
-										{
-											<span>0</span>
-										}
-									</div>
-									<div class="person-title"><span>@item.Rating</span></div>
-									<div class="person-title">
-										<span>
-											@if (@item.IsCompleted == true)
-											{
-												<button type="button" class="btn btn-success btn-rounded btn-fw">Completed</button>
-											}
-											else
-											{
-												<button type="button" class="btn btn-warning btn-rounded btn-fw">Ongoing</button>
-											}
-										</span>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					}
-
-
-				</div>
-
-			</div>
-		</section>
-	}
-	<!-- team-section - end
-	================================================== -->
-	<!-- testimonial-section - start
-	================================================== -->
-	<div id="testimonial-section" class="testimonial-section sec-ptb-100 text-center clearfix" data-background="~/assets/images/backgrounds/book2.jpg">
-		<div class="container" data-aos="fade-up" data-aos-delay="100">
-			<h1 style="color:#e5e5e5">Explore Premium Picks</h1>
-			<h3 style="color:#e5e5e5">Originals with any Premium or</h3>
-			<h3 style="color:#e5e5e5">Premium+ plan </h3>
-		</div>
-	</div>
-	<!-- testimonial-section - end
-	================================================== -->
-	<!-- blog-section - start
-	================================================== -->
-	@if (Model.MostReadCategory is not null && User.Identity.IsAuthenticated)
-	{
-		<section id="blog-section" class="blog-section sec-ptb-100 clearfix">
-			<div class="container">
-
-				<div class="section-title text-center mb-30" data-aos="fade-up" data-aos-delay="100">
-					<h2 style="text-align:center!important" class="title-text mb-15">Your Fav Category</h2>
-					<p style="text-align:center!important" class="mb-0">Recent books added to this category</p>
-				</div>
-
-				<div class="row">
-				</div>
-
-			</div>
-		</section>
-	}
-
-	<!-- blog-section - end
-	================================================== -->
-	<!-- partners-section - start
-	================================================== -->
-	<div id="partners-section" class="partners-section sec-ptb-100 bg-light-gray clearfix">
-		<div class="container" data-aos="fade-up" data-aos-delay="100">
-			<div id="partners-carousel" class="partners-carousel arrow-left-right owl-carousel owl-theme">
-
-				@foreach (var item in Model.Users)
-				{
-					<div class="item">
-						<a class="partner-logo" asp-controller="profile" asp-action="user" asp-route-username="@item.UserName">
-							<img class="before-image" src="~/assets/images/@item.MainImage" alt="image_not_found">
-							<img class="after-image" src="~/assets/images/@item.BackImage" alt="image_not_found">
-						</a>
-					</div>
-
-					<h3 class="item-title">
-						<a href="#!">
-							@item.Name
-						</a>
-					</h3>
-				}
-			</div>
-		</div>
-	</div>
-	<!-- partners-section - end
-	================================================== -->
-
-
-</main>
+<!-- Team Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="section-title text-center">
+            <h1 class="display-5 mb-5">Team Members</h1>
+        </div>
+        <div class="row g-4">
+           @foreach (var item in Model.MostReadCategory)
+            {
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item">
+                        <div class="overflow-hidden position-relative">
+                            <img  class="img-fluid" src="~/assets/assets/img/@item.Image" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center border border-5 border-light border-top-0 p-4">
+                            <h5 class="mb-0">Full Name</h5>
+                            <small>Designation</small>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+<!-- Testimonial Start -->
+@* @if (User.Identity.IsAuthenticated)
+{
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="section-title text-center">
+                <h1 class="display-5 mb-5">Testimonial</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+            @foreach (var item in Model.Users.Where(User.IsInRole("Writer")).ToString())
+                {
+                    <div class="testimonial-item text-center">
+                        <img class="img-fluid bg-light p-2 mx-auto mb-3" src="~/assets/assets/img/@item.Follower.MainImage" style="width: 90px; height: 90px;">
+                        <div class="testimonial-text text-center p-4">
+                            <p>@item.Followee.SelfInformation</p>
+                            <h5 class="mb-1">@item.Followee.Name</h5>
+                            @* <span class="fst-italic">@</span> *@
+                    
+<!-- Testimonial End -->

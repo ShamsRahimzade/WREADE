@@ -1,4 +1,12 @@
-﻿@using Wreade.Domain.Entities;
+﻿ @using Wreade.Domain.Entities;
+@model PaginationVM<Book>
+@{
+	int count = 0;
+
+
+}
+
+@* @using Wreade.Domain.Entities;
 @model PaginationVM<Book>
 @{
 	int count = 0;
@@ -53,7 +61,7 @@
 							<tr data-aos="fade-up" data-aos-delay="200">
 								<td>
 									<div class="item-image">
-										<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
+										<img style="width:200px;height:200px;" src="~/assets/assets/img/@item.CoverPhoto" alt="image_not_found">
 									</div>
 									<div class="item-content">
 										<h3 class="item-title">@item.Name</h3>
@@ -61,7 +69,7 @@
 											<ul class="clearfix">
 												<li><button type="button"><a asp-action="update" asp-controller="book" asp-route-id="@item.Id"><i class="fal fa-pencil-alt mr-1"></i> Edit</a></button></li>
 												<li><button type="button"> <a asp-action="delete" asp-controller="book" asp-route-id="@item.Id"> <i class="fal fa-times mr-1"></i> Remove</a></button></li>
-												<li><button type="button"> <a asp-action="index" asp-controller="chapter" asp-route-id="@item.Id"> <i class="fas fa-plus "></i> Add new chapters</a></button></li>
+												<li><button type="button"> <a asp-action="index" asp-controller="chapter" asp-route-bookId="@item.Id"> <i class="fas fa-plus "></i> Add new chapters</a></button></li>
 											</ul>
 										</div>
 									</div>
@@ -69,8 +77,6 @@
 
 								<td>@item.Rating</td>
 								<td>@item.Chapters.Count</td>
-								
-
 								<td>@item.IsCompleted</td>
 								<td>@item.IsAdult</td>
 							</tr>
@@ -125,4 +131,116 @@
 
 
 
-</main>
+</main> *@
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Corona Admin</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="~/manage/vendors/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="~/manage/vendors/css/vendor.bundle.base.css">
+	<!-- endinject -->
+	<!-- Plugin css for this page -->
+	<link rel="stylesheet" href="~/manage/vendors/jvectormap/jquery-jvectormap.css">
+	<link rel="stylesheet" href="~/manage/vendors/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="~/manage/vendors/owl-carousel-2/owl.carousel.min.css">
+	<link rel="stylesheet" href="~/manage/vendors/owl-carousel-2/owl.theme.default.min.css">
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" href="~/manage/css/style.css">
+	<!-- End layout styles -->
+	<link rel="shortcut icon" href="~/manage/images/favicon.png" />
+</head>
+
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Table 06</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="~/assets/tables/css/style.css">
+
+</head>
+<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-4">
+					<h2 class="heading-section"> My Books</h2>
+				</div>
+			</div>
+			<a asp-action="create" asp-controller="book" class="btn btn-dark btn-rounded btn-fw">Create</a><br /><br />
+			<div class="row">
+				<div class="col-md-12">
+					
+					<div class="table-wrap">
+						<table class="table">
+							<thead class="thead-primary">
+								<tr>
+									<th>&nbsp;</th>
+									<th>&nbsp;</th>
+									<th>Name</th>
+									<th>Chapter Count</th>
+									<th>Status</th>
+									<th>Adult</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							@foreach (var item in Model.Items)
+							{
+								count++;
+								<tbody>
+									<tr class="alert" role="alert">
+										<td>@count</td>
+										<td>
+											<div class="img" style="background-image:url(/assets/assets/img/@item.CoverPhoto);width:200px;height:200px;"></div>
+										</td>
+										<td>
+											<div class="email">
+												<a>@item.Name </a>
+												
+											</div>
+										</td>
+										<td>@item.Chapters.Count</td>
+										<td>@item.IsCompleted</td>
+										<td>@item.IsAdult</td>
+										<td>
+											<button type="button">
+												<span aria-hidden="true"><a asp-action="delete" asp-controller="book" asp-route-id="@item.Id"><i class="fa fa-close"></i></a></span>
+											</button>
+												<button type="button" >
+												<span aria-hidden="true"><a asp-action="update" asp-controller="book" asp-route-id="@item.Id"><i class="mdi mdi-reload"></i></a></span>
+											</button>
+											<button type="button">
+												<span aria-hidden="true"><a asp-action="index" asp-controller="chapter" asp-route-bookId="@item.Id"><i class="mdi mdi-book-open-page-variant"></i></a></span>
+											</button>
+										</td>
+									</tr>
+
+
+								</tbody>
+							}
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="~/assets/tables/js/jquery.min.js"></script>
+	<script src="~/assets/tables/js/popper.js"></script>
+	<script src="~/assets/tables/js/bootstrap.min.js"></script>
+	<script src="~/assets/tables/js/main.js"></script>
+
+</body>
+</html>
+

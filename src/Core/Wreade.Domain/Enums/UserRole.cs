@@ -8,8 +8,8 @@ namespace Wreade.Domain.Enums
 {
     public enum UserRole
     {
-        Author,
-        SimpleUser
+        Writer,
+        Reader
        
     }
 }

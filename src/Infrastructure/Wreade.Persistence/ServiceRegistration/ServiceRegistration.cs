@@ -48,7 +48,6 @@ namespace Wreade.Persistence.ServiceRegistration
 			services.AddScoped<IChapterRepository, ChapterRepository>();
 			services.AddScoped<ICategoryRepository, CategoryRepository>();
 			services.AddScoped<IFollowRepository, FollowRepository>();
-			services.AddScoped<IChapterViewCountRepository, ChapterViewCountRepository>();
 			services.AddScoped<IChapterRepository, ChapterRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagService, TagService>();
@@ -59,12 +58,13 @@ namespace Wreade.Persistence.ServiceRegistration
             services.AddScoped<ILibraryService, LibraryService>();
             services.AddScoped<ILibraryRepository, LibraryRepository>();
 			services.AddScoped< LayoutService>();
+			
 
 
 
 
 
-            return services;
+			return services;
         }
     }
 }

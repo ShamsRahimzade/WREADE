@@ -97,6 +97,23 @@ namespace Wreade.Persistence.Implementations.Services
 			};
 			return vm;
 		}
+		public async Task<PaginationVM<Book>> GetTagId(int id, int page = 1, int take = 10)
+		{
+			if (page < 1 || take < 1) throw new Exception("Bad request");
+			//ICollection<Job> jobs = await _repository.GetAllWhere(c => c.Category).ToListAsync();
+			ICollection<Book> books = await _repo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id, expression: c => c.BookTags.FirstOrDefault(c => c.TagId == c.Tag.Id).TagId == id, IsDescending: true, includes: new string[] { "Chapters", "BookCategories.Category", "BookTags", "BookTags.Tag", "Libraries" }).ToListAsync();
+			if (books == null) throw new Exception("Not Found");
+			int count = await _repo.GetAll().CountAsync();
+			if (count < 0) throw new Exception("Not Found");
+			double totalpage = Math.Ceiling((double)count / take);
+			PaginationVM<Book> vm = new PaginationVM<Book>
+			{
+				Items = books,
+				CurrentPage = page,
+				TotalPage = totalpage
+			};
+			return vm;
+		}
 		public async Task<ICollection<Book>> GetAll(int page = 1, int take = 10)
 		{
 			return await _repo.GetAll(includes: new string[] { nameof(Book.Chapters)}).ToListAsync();
@@ -192,7 +209,7 @@ namespace Wreade.Persistence.Implementations.Services
 					ms.AddModelError(string.Empty, "wrong size");
 					return false;
 				}
-				string file = await vm.CoverPhoto.CreateFileAsync(_env.WebRootPath, "assets", "images");
+				string file = await vm.CoverPhoto.CreateFileAsync(_env.WebRootPath, "assets", "assets","img");
 				book.CoverPhoto = file;
 			}
 			await _repo.AddAsync(book);
@@ -210,7 +227,7 @@ namespace Wreade.Persistence.Implementations.Services
 			}
 			if (exist.CoverPhoto is not null)
 			{
-				exist.CoverPhoto.DeleteFile(_env.WebRootPath, "assets", "images");
+				exist.CoverPhoto.DeleteFile(_env.WebRootPath, "assets", "assets","img");
 			}
 			_repo.Delete(exist);
 			await _repo.SaveChangeAsync();
@@ -261,8 +278,8 @@ namespace Wreade.Persistence.Implementations.Services
 					modelstate.AddModelError("Photo", "filesize");
 					return false;
 				}
-				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images");
-				book.CoverPhoto.DeleteFile(_env.WebRootPath, "assets", "images");
+				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "assets","img");
+				book.CoverPhoto.DeleteFile(_env.WebRootPath, "assets", "assets", "img");
 				book.CoverPhoto = main;
 			}
 			if (vm.TagIds != null)
@@ -313,6 +330,18 @@ namespace Wreade.Persistence.Implementations.Services
 			_repo.Update(book);
 			await _repo.SaveChangeAsync();
 			return true;
+		}
+		public async Task<AllBookVM> AllBookAsync(int page = 1, int take = 5)
+		{
+			AllBookVM vm = new AllBookVM
+			{
+				Categories = await _category.GetPagination(skip: (page - 1) * take, take: take, includes: new string[] { "Books" }).ToListAsync(),
+				Books = await _repo.GetPagination(skip: (page - 1) * take, take: take, includes: new string[] {  "Book.BookCategories","Book.BookCategories.Category", "Book.BookTags","Book.BookTags.Tag","Chapters" }).ToListAsync(),
+			};
+			return vm;
+
+
+
 		}
 		public async Task<BookDetailVM>  DetailAsync(int id,string username)
 		{

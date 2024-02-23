@@ -140,9 +140,10 @@ namespace Wreade.Persistence.Implementations.Services
                     modelstate.AddModelError("MainImage", "wrong image size");
                     return false;
                 }
-                user.MainImage = await register.MainImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
+                user.MainImage = await register.MainImage.CreateFileAsync(_env.WebRootPath, "assets", "assets", "img");
             }
-            if (register.BackImage is not null)
+			if (!ValidateRole(register.Role, modelstate)) return false;
+			if (register.BackImage is not null)
             {
                 if (!register.BackImage.CheckType("image/"))
                 {
@@ -154,7 +155,7 @@ namespace Wreade.Persistence.Implementations.Services
                     modelstate.AddModelError("BackImage", "wrong image size");
                     return false;
                 }
-                user.BackImage = await register.BackImage.CreateFileAsync(_env.WebRootPath, "assets", "images");
+                user.BackImage = await register.BackImage.CreateFileAsync(_env.WebRootPath, "assets", "assets", "img");
             }
             var result = await _user.CreateAsync(user, register.Password);
             if (!result.Succeeded)
@@ -176,7 +177,16 @@ namespace Wreade.Persistence.Implementations.Services
             return true;
 
         }
-        public async Task<List<string>> UpdateUser(AppUser user, EditProfileVM vm)
+		private bool ValidateRole(UserRole role, ModelStateDictionary modelstate)
+		{
+			if (!Enum.IsDefined(typeof(UserRole), role))
+			{
+				modelstate.AddModelError(string.Empty, "Please select a valid role");
+				return false;
+			}
+			return true;
+		}
+		public async Task<List<string>> UpdateUser(AppUser user, EditProfileVM vm)
         {
             List<string> str = new List<string>();
 
@@ -186,6 +196,10 @@ namespace Wreade.Persistence.Implementations.Services
             user.UserName = vm.Username;
             user.MainImage = vm.MainImage;
             user.BackImage = vm.BackImage;
+            user.SelfInformation = vm.SelfInformation;
+            user.Instagram = vm.Instagram;
+            user.Facebook = vm.Facebook;
+            user.Twitter = vm.Twitter;
             if (user.Email != vm.Email)
             {
                 var eres = await _user.SetEmailAsync(user, vm.Email);
@@ -224,7 +238,7 @@ namespace Wreade.Persistence.Implementations.Services
                     str.Add("Max file size is 7Mb");
                     return str;
                 }
-                user.MainImage = await vm.MainImageFile.CreateFileAsync(_env.WebRootPath, "assets", "images");
+                user.MainImage = await vm.MainImageFile.CreateFileAsync(_env.WebRootPath, "assets", "assets", "img");
             }
             if (vm.BackImageFile is not null)
             {
@@ -238,7 +252,7 @@ namespace Wreade.Persistence.Implementations.Services
                     str.Add("Max file size is 7Mb");
                     return str;
                 }
-                user.MainImage = await vm.BackImageFile.CreateFileAsync(_env.WebRootPath, "assets", "images");
+                user.MainImage = await vm.BackImageFile.CreateFileAsync(_env.WebRootPath, "assets", "assets", "img");
             }
 
             var res = await _user.UpdateAsync(user);

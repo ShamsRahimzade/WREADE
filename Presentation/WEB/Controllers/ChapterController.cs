@@ -15,10 +15,10 @@ namespace WEB.Controllers
         {
 			_chapservice = chapservice;
 		}
-        public async Task< IActionResult> Index(int id,int page = 1, int take = 5)
+        public async Task< IActionResult> Index(int bookId,int page = 1, int take = 5)
         {
-			PaginationVM<Chapter> vm = await _chapservice.GetAllAsync(id,page, take);
-			vm.BookId = id;
+			PaginationVM<Chapter> vm = await _chapservice.GetAllAsync(bookId, page, take);
+			vm.BookId = bookId;
 			if (vm.Items == null) return NotFound();
 			return View(vm);
 		}
@@ -28,6 +28,7 @@ namespace WEB.Controllers
 			vm.bookId = bookId;
 			
 			vm = await _chapservice.CreatedAsync(vm);
+			vm.bookId=bookId;
 			return View(vm);
 		}
 		[HttpPost]
@@ -58,14 +59,14 @@ namespace WEB.Controllers
 				return Redirect(returnurl);
 			return View(await _chapservice.UpdatedAsync(id, vm));
 		}
-		public async Task<IActionResult> LikePost(int chapid,string? returnUrl)
+		public async Task<IActionResult> LikeChapter(int chapid,string? returnUrl)
 		{
 			if (returnUrl is null) return RedirectToAction("Index", "Book");
 			await _chapservice.LikeChapter(chapid);
 
 			return Redirect(returnUrl);
 		}
-		public async Task<IActionResult> UnlikePost(int chapid, string? returnUrl)
+		public async Task<IActionResult> UnlikeChapter(int chapid, string? returnUrl)
 		{
 			if (returnUrl is null) return RedirectToAction("Index", "Book");
 			await _chapservice.UnlikeChap(chapid);

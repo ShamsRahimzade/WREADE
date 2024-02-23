@@ -18,8 +18,6 @@ namespace Wreade.Domain.Entities
 		[ForeignKey("BookId")]
 		public int BookId { get; set; }
         public Book Book { get; set; }
-        public ICollection<Comment>? Comments { get; set; }
-		public virtual ChapterViewCount ChapterViewCount { get; set; }
 		public ICollection<Like>? Likes { get; set; }
 		public int LikeCount { get; set; }
         public double ViewCount { get; set; }

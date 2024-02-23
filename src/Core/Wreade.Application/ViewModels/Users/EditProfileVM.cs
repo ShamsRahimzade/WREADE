@@ -43,5 +43,10 @@ namespace Wreade.Application.ViewModels
         [Required(ErrorMessage = "Date Of Birth is required.")]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+        public string? SelfInformation { get; set; }
+        public string? Instagram { get; set; }
+        public string? Facebook { get; set; }
+
+        public string? Twitter { get; set; }
     }
 }

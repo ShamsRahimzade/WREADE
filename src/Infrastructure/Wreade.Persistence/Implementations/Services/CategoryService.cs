@@ -51,7 +51,7 @@ namespace Wreade.Persistence.Implementations.Services
 					modelstate.AddModelError("Photo", "filesize");
 					return false;
 				}
-				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images");
+				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "assets","img");
 
 				category.Image = main;
 			}
@@ -112,8 +112,8 @@ namespace Wreade.Persistence.Implementations.Services
 					modelstate.AddModelError("Photo", "filesize");
 					return false;
 				}
-				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images");
-				category.Image.DeleteFile(_env.WebRootPath, "assets", "images");
+				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "assets", "img");
+				category.Image.DeleteFile(_env.WebRootPath, "assets", "assets","img");
 				category.Image = main;
 			}
 			category.Name = vm.Name;
@@ -159,7 +159,7 @@ namespace Wreade.Persistence.Implementations.Services
 			if (exist is null) throw new Exception("not found");
 			if (exist.Image is not null)
 			{
-				exist.Image.DeleteFile(_env.WebRootPath, "assets", "images");
+				exist.Image.DeleteFile(_env.WebRootPath, "assets", "assets","img");
 			}
 			_categoryrepo.Delete(exist);
 			await _categoryrepo.SaveChangeAsync();

@@ -35,17 +35,7 @@ namespace Wreade.Persistence.DAL
 			 .WithMany(u => u.Followees)
 			 .HasForeignKey(u => u.FolloweeId)
 		 .OnDelete(DeleteBehavior.Restrict);
-			modelBuilder.Entity<Comment>(entity =>
-			{
-				entity.HasOne(a => a.Author)
-				.WithMany(c => c.Comments)
-				.HasForeignKey(aId => aId.AppUserId)
-				.OnDelete(DeleteBehavior.Restrict);
-
-
-				
-
-			});
+			
 			modelBuilder.Entity<AppUser>(entity =>
 			{
 				entity.HasMany<Book>(p => p.Books)
@@ -53,10 +43,7 @@ namespace Wreade.Persistence.DAL
 				.HasForeignKey(pId => pId.AppUserId)
 				.OnDelete(DeleteBehavior.Restrict);
 
-				entity.HasMany<Comment>(c => c.Comments)
-				.WithOne(a => a.Author)
-				.HasForeignKey(cId => cId.AppUserId)
-				.OnDelete(DeleteBehavior.Restrict);
+				
 			});
 
 			
@@ -65,7 +52,6 @@ namespace Wreade.Persistence.DAL
 		}
 		public DbSet<Tag> Tags { get; set; }
 		public DbSet<Follow> Follows { get; set; }
-		public DbSet<Comment> Comments { get; set; }
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Book> Books { get; set; }
 		public DbSet<Image> Images { get; set; }
@@ -74,6 +60,7 @@ namespace Wreade.Persistence.DAL
 		public DbSet<Setting> Setting { get; set; }
 		public DbSet<Chapter> Chapters { get; set; }
 		public DbSet<LibraryItem> LibraryItems { get; set; }
-		public DbSet<ChapterViewCount> ChapterViewCounts { get; set; }
+		
+
 	}
 }

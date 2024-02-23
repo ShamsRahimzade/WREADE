@@ -13,5 +13,7 @@ namespace Wreade.Application.ViewModels
         public int CurrentPage { get; set; }
 		public int BookId { get; set; }
 		public int CategoryId { get; set; }
+		
+
 	}
 }

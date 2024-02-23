@@ -2,226 +2,62 @@
 @{
 	int chapterCount = Model.book.Chapters?.Count ?? 0;
 }
-<main>
-
-
-	<!-- breadcrumb-section - start
-	================================================== -->
-	<section id="breadcrumb-section" style="padding:150px;" class="breadcrumb-section sec-ptb-100 text-center clearfix" data-background="~/assets/images/backgrounds/bg_2.jpg">
-		<div class="container">
-			<h2 class="page-title mb-30" data-aos="fade-up" data-aos-delay="100">@Model.book.Name</h2>
-			<div class="breadcrumb-nev ul-li-center clearfix" data-aos="fade-up" data-aos-delay="300">
-				<ul class="clearfix">
-					<li><a asp-action="index" asp-controller="home"><i class="fas fa-home mr-1">Home</i></a></li>
-					<li><i class="fas fa-chevron-circle-right mr-1"></i>@Model.book.Name</li>
-				</ul>
-			</div>
-		</div>
-	</section>
-	<!-- breadcrumb-section - end
-	================================================== -->
-	<!-- about-section - start
-	================================================== -->
-	<section id="about-section" class="about-section sec-ptb-100 clearfix">
-		<div class="container">
-			<div class="row align-items-center justify-content-lg-between justify-content-md-between justify-content-sm-center">
-
-				<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
-					<div class="about-image" data-aos="fade-up" data-aos-delay="100">
-						<img src="~/assets/images/@Model.book.CoverPhoto" alt="image_not_found">
-					</div>
-				</div>
-
-				<div class="col-lg-5 col-md-6 col-sm-8 col-xs-12">
-					<div class="about-content" data-aos="fade-up" data-aos-delay="300">
-						<h2 class="item-title mb-10">
-							@Model.book.Description
-						</h2>
-					 
-						@* else
-						{ *@
-							@foreach (var item in Model.user.LibraryItems)
-							{
-								@if (item.BookId==Model.book.Id)
-								{
-									<ul>
-										<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@Model.book.Id" asp-route-userId="@Model.book.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
-									</ul>
-								}
-								else
-								{
-									<ul>
-									<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@Model.book.Id" asp-route-userId="@Model.book.AppUserId"><i class="mdi mdi-heart"></i></a></li>
-									</ul>
-								}
-
-							}
-
-						
-						@* @if (Model.libitems != null && Model.libitems.Any(u => u.AppUserId == u.User.Id))
-						{
-							<ul>
-								<li><a asp-action="removelibrary" asp-controller="library" asp-route-bookid="@Model.book.Id" asp-route-userId="@Model.book.AppUserId"><i class="mdi mdi-heart"></i></a></li>
-							</ul>
-						}
-						else
-						{
-							<ul>
-								<li><a asp-action="addlibrary" asp-controller="library" asp-route-bookid="@Model.book.Id" asp-route-userId="@Model.book.AppUserId"><i class="mdi mdi-heart-outline"></i></a></li>
-							</ul>
-						} *@
-						<div class="about-service ul-li-block clearfix">
-							<ul class="clearfix">
-								@* <a asp-action="AddToLibrary" asp-controller="library" asp-route-userId="@Model.book.AppUserId" asp-route-bookId="@Model.book.Id">
-								<p class="mb-0">
-								Add
-								</p>
-								</a> *@
-								@*  <form asp-action="RemoveFromLibrary" asp-controller="Library" method="post">
-								<input type="hidden" name="bookId" value="@Model.book.Id" />
-								<input type="hidden" name="userId" value="@Model.book.AppUserId" />
-								<button type="submit">Kitaplıktan Kaldır</button>
-								</form>
-								<form asp-controller="Library" asp-action="AddToLibrary" method="post">
-								<input type="hidden" name="userId" value="@Model.book.AppUserId" />
-								<div class="form-group">
-								<label for="bookId">Book Id:</label>
-								<input type="text" class="form-control" id="bookId" name="bookId" />
-								</div>
-								<button type="submit" class="btn btn-primary">Add</button>
-								</form> *@
-
-								@foreach (var item in Model.book.Chapters.Where(b => b.BookId == Model.book.Id).OrderByDescending(c => c.Id))
-								{
-									<li data-aos="fade-up" data-aos-delay="100">
-										<div class="service-icon">
-											<img src="~/assets/images/chapters/@item.ChapterImage" alt="image_not_found">
-										</div>
-										<div class="service-content">
-											<a asp-action="detail" asp-route-id="@item.Id" asp-controller="chapter"><h4 class="service-title">@item.Title</h4></a>
-											<p class="mb-0">
-												@item.CreatedAt
-											</p>
-											<p class="mb-0">
-												@chapterCount
-											</p>
-										</div>
-									</li>
-								}
-								<li>
-									@if (Model.book.IsCompleted == true)
-									{
-										<button class="btn btn-success btn-rounded btn-fw ">Completed</button>
-									}
-									else
-									{
-										<button class="btn btn-warning btn-rounded btn-fw">Ongoing</button>
-									}
-									<button class="btn btn-success btn-rounded btn-fw "><a asp-action="detail" asp-controller="chapter" asp-route-id="@Model.book.Id">Read</a></button>
-									@{
-										TimeSpan difference = DateTime.Now - Model.book.CreatedAt;
-
-										string timedifference = "";
-										if (difference.TotalDays >= 1)
-										{
-											timedifference = $"{(int)difference.TotalDays} days ago";
-										}
-										else if (difference.TotalHours >= 1)
-										{
-											timedifference = $"{(int)difference.TotalHours} hours ago";
-										}
-										else
-										{
-											timedifference = $"{(int)difference.TotalMinutes} minutes ago";
-										}
-									}
-
-									@timedifference
-
-								</li>
-
-							</ul>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-	<!-- about-section - end
-	================================================== -->
-	<!-- service-section - start
-	================================================== -->
-	<section id="service-section" class="service-section sec-ptb-100 bg-default-black text-white text-center clearfix">
-		<div class="container-fluid">
-			<div class="row mt--60">
-
-				@foreach (var item in Model.Books.Where(b => b.BookCategories.FirstOrDefault(bc => bc.CategoryId == bc.Category.Id).Category.Name == Model.book.BookCategories.FirstOrDefault(bc => bc.CategoryId == bc.Category.Id).Category.Name && b.Id != Model.book.Id))
-				{
-					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="service-default plr-70" data-aos="fade-up" data-aos-delay="100">
-							<span class="item-icon">
-								<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><img src="~/assets/images/@item.CoverPhoto" alt="image_not_found"></a>
-							</span>
-							<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><h3 class="item-title">@item.Name</h3></a>
-							<h3 class="item-title">@item.BookCategories.FirstOrDefault(b=>b.CategoryId==b.Category.Id).Category.Name</h3>
-							<p class="mb-0">
-								@item.Description
-							</p>
-						</div>
-					</div>
-
-
-				}
-
-
-			</div>
-		</div>
-	</section>
-	<!-- service-section - end
-	================================================== -->
-	<!-- testimonial-section - start
-	================================================== -->
-	<section id="testimonial-section" class="testimonial-section sec-ptb-100 clearfix">
-		<div class="container">
-
-			<div class="section-title mb-60" data-aos="fade-up" data-aos-delay="100">
-				<h2 class="title-text mb-15">Latestly Books.</h2>
-				<p class="m-0">
-					New Books
-				</p>
-			</div>
-
-			<div id="testimonial-carousel-2" class="testimonial-carousel-2 arrow-top-right owl-carousel owl-theme" data-aos="fade-up" data-aos-delay="300">
-				@foreach (var item in Model.Books.Take(6))
-				{
-					<div class="item">
-						<div class="testimonial-boxed">
-							<div class="person-image">
-								<img src="~/assets/images/@item.CoverPhoto" alt="image_not_found">
-							</div>
-							<div class="person-comment">
-								<p class="mb-30">
-									@item.Description
-								</p>
-								<h4 class="person-name">@item.CreatedBy</h4>
-								<span class="person-title">@item.Name</span>
-							</div>
-							<small class="quote-icon">
-								<img src="~/assets/images/icons/icon_1.png" alt="image_not_found">
-							</small>
-						</div>
-					</div>
-
-				}
-
-			</div>
-
-		</div>
-	</section>
-	<!-- testimonial-section - end
-	================================================== -->
 
 
 
-</main>
+
+<!-- Page Header Start -->
+<div style="background-image:url(/assets/assets/img/backkkk.jpg)" class="container-fluid page-header py-5 mb-5">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Feature</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Feature</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Feature Start -->
+<div class="container-fluid bg-light overflow-hidden px-lg-0" style="margin: 6rem 0;">
+    <div class="container feature px-lg-0">
+        <div class="row g-0 mx-lg-0">
+            <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.5s">
+                <div class="p-lg-5 ps-lg-0">
+                    <div class="section-title text-start">
+                        <h1 class="display-5 mb-4">@Model.book.Name</h1>
+                    </div>
+                  
+                    <p class="mb-4 pb-2">@Model.book.Description</p>
+                    <div class="row g-4">
+                        @foreach (var item in Model.book.Chapters.Where(b => b.BookId == Model.book.Id).OrderByDescending(c => c.Id))
+                        {
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="service-icon">
+                                        <img style="height:50px;width:50px;" src="~/assets/assets/img/@item.ChapterImage" alt="image_not_found">
+                                    </div>
+                                    <div class="service-content">
+                                        <a asp-action="detail" asp-route-id="@item.Id" asp-controller="chapter"><h4 class="service-title">@item.Title</h4></a>
+                                      
+                                        <p class="mb-0">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 pe-lg-0" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute img-fluid w-100 h-100" src="~/assets/assets/img/@Model.book.CoverPhoto" style="object-fit: cover;" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->

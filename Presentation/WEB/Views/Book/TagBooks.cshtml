@@ -1,0 +1,61 @@
+﻿@model PaginationVM<Book>
+<main>
+
+
+	<!-- breadcrumb-section - start
+	================================================== -->
+	<section id="breadcrumb-section" class="breadcrumb-section sec-ptb-100 text-center bg-default-black text-white clearfix">
+		<div class="container">
+			<h2 class="page-title mb-30" data-aos="fade-up" data-aos-delay="100">Company Profile</h2>
+			<div class="breadcrumb-nev ul-li-center clearfix" data-aos="fade-up" data-aos-delay="300">
+				<ul class="clearfix">
+					<li><a asp-action="index" asp-controller="home"><i class="fas fa-home mr-1"></i>Home</a></li>
+					<li><i class="fas fa-chevron-circle-right mr-1"></i> About Us</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- blog-section - start
+	================================================== -->
+	<section id="blog-section" class="blog-section sec-ptb-100 clearfix">
+		<div class="container">
+
+			<div class="section-title text-center mb-30" data-aos="fade-up" data-aos-delay="100">
+				<h2 class="title-text mb-15">Our Tag</h2>
+				<p class="mb-0"></p>
+			</div>
+
+			<div class="row">
+				@foreach (var item in Model.Items)
+				{
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="blog-grid clearfix" data-aos="fade-up" data-aos-delay="300">
+							<a href="#!" class="blog-image">
+								<img src="~/assets/images/@item.BookCategories.FirstOrDefault(bc=>bc.BookId==bc.Book.Id).Book.CoverPhoto" alt="image_not_found">
+							</a>
+							<h3 class="item-title">
+								<a asp-action="detail" asp-controller="book" asp-route-id="@item.BookTags.FirstOrDefault(bc=>bc.BookId==bc.Book.Id).Book.Id">
+									@item.BookTags.FirstOrDefault(bc=>bc.BookId==bc.Book.Id).Book.Name
+								</a>
+							</h3>
+							<div class="post-meta ul-li clearfix">
+								<ul class="clearfix">
+									<li>@item.BookTags.FirstOrDefault(bc=>bc.BookId==bc.Book.Id).Book.CreatedAt</li>
+									<li><a href="#!">@item.BookTags.FirstOrDefault(bc=>bc.BookId==bc.Book.Id).Book.CreatedBy</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				}
+
+			</div>
+
+		</div>
+	</section>
+	<!-- blog-section - end
+	================================================== -->
+
+
+</main>

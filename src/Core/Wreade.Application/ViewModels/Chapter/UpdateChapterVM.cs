@@ -15,6 +15,5 @@ namespace Wreade.Application.ViewModels
         public string? Image { get; set; }
         public IFormFile? Photo { get; set; }
         public int BookId { get; set; }
-        public ICollection<Comment>? Comments { get; set; }
     }
 }

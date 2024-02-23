@@ -59,8 +59,9 @@ namespace Wreade.Persistence.Implementations.Services
 				username = _http.HttpContext.User.Identity.Name;
 			}
 			AppUser User = await _service.GetUser(username, u => u.Followers,
-	u => u.Followees,
-	u => u.LibraryItems, u => u.Books);
+            	u => u.Followees,
+            	u => u.LibraryItems, u => u.Books);
+
 			//vm.bookId = id;
 			Chapter chapter = new Chapter
 			{
@@ -84,7 +85,7 @@ namespace Wreade.Persistence.Implementations.Services
 					ms.AddModelError(string.Empty, "wrong size");
 					return false;
 				}
-				string file = await vm.Image.CreateFileAsync(_env.WebRootPath, "assets", "images", "chapters");
+				string file = await vm.Image.CreateFileAsync(_env.WebRootPath, "assets", "assets", "img");
 				chapter.ChapterImage = file;
 			}
 
@@ -117,8 +118,8 @@ namespace Wreade.Persistence.Implementations.Services
 		{
 			if (id <= 0) throw new Exception("Id not found");
 			if (page < 1 || take < 1) throw new Exception("Bad request");
-			Chapter chapter = await _chaprepo.GetByIdAsync(id, includes: new string[] {  "Comments", "Likes" });
-			ICollection<Chapter> chapters = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take, orderExpression: x => x.Id,expression:c=>c.BookId==id ,IsDescending: true, includes: nameof(Book)).Where(c => c.BookId == id).ToListAsync();
+			Chapter chapter = await _chaprepo.GetByIdAsync(id, includes: new string[] {   "Likes" });
+			ICollection<Chapter> chapters = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take ,expression:c=>c.BookId==id, orderExpression: x => x.Id, IsDescending: true, includes: nameof(Book)).ToListAsync();
 			if (chapters == null) throw new Exception("Not Found");
 			int count = await _chaprepo.GetAll().CountAsync();
 			if (count < 0) throw new Exception("Not Found");
@@ -139,7 +140,7 @@ namespace Wreade.Persistence.Implementations.Services
 
 			if (exist.ChapterImage is not null)
 			{
-				exist.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "images", "chapters");
+				exist.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "assets", "img");
 			}
 			_chaprepo.Delete(exist);
 			await _chaprepo.SaveChangeAsync();
@@ -153,7 +154,6 @@ namespace Wreade.Persistence.Implementations.Services
 			vm.Image = exist.ChapterImage;
 			vm.Title = exist.Title;
 			vm.Text = exist.Text;
-			vm.Comments = exist.Comments;
 			return vm;
 		}
 		public async Task<bool> UpdateAsync(int id, UpdateChapterVM vm, ModelStateDictionary modelstate)
@@ -182,8 +182,8 @@ namespace Wreade.Persistence.Implementations.Services
 					modelstate.AddModelError("Photo", "filesize");
 					return false;
 				}
-				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "images", "chapters");
-				chapter.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "images", "chapters");
+				string main = await vm.Photo.CreateFileAsync(_env.WebRootPath, "assets", "assets", "img");
+				chapter.ChapterImage.DeleteFile(_env.WebRootPath, "assets", "assets", "img");
 				chapter.ChapterImage = main;
 			}
 			chapter.Title = vm.Title;
@@ -245,9 +245,8 @@ namespace Wreade.Persistence.Implementations.Services
 			if (chapter == null) throw new Exception();
 			
 
-			chapter.ViewCount++; // Görüntüleme sayısını artır
-
-			_chaprepo.Update(chapter); // Bölümü güncelle
+			chapter.ViewCount++; 
+			_chaprepo.Update(chapter); 
 			await _chaprepo.SaveChangeAsync();
 			return true;
 		}

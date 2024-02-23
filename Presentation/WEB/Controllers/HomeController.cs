@@ -28,13 +28,13 @@ namespace WEB.Controllers
 			ICollection<Book> readingHistory =await _book.GetAll();
 			ICollection<Category> categories = await _categoryService.GetAll();
 			
-			var mostReadCategory = readingHistory .OrderBy(g => g.Rating) .Take(3).ToList();
+			//var mostReadCategory = readingHistory.Take(3).ToList();
 
 			var viewModel = new HomeVM
 			{
 				
 				UserName = UserName,
-				MostReadCategory = categories.OrderBy(x => x.Rating).ToList(),
+				MostReadCategory = categories.ToList(),
 				ReadingHistory = readingHistory,
 				Books = vm.Books,
 				Users=vm.Users
