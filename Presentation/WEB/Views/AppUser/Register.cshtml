@@ -20,8 +20,7 @@
 
 </head>
 
-<body style="background-image:url(/assets/images/backgrounds/regis.jpg);
-     background-repeat:no-repeat;
+<body style="background-image:url(/assets/images/bcbook.jpg);
      background-size:cover;">
 
 	<div class="container" id="container">
@@ -29,7 +28,7 @@
 			<div class="col-md- bg-white ">
 				<div class="sign-in-from">
 					<form method="post">
-							<h4>Sign Up</h4>
+							<h4 style="text-align:left;">Sign Up</h4>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label asp-for="Register.Name">Your Name</label>
@@ -88,7 +87,7 @@
 						</div>
 						<div class="d-inline-block w-100">
 
-							<button  type="submit"  class="btn btn-#79306a float-right " style="margin-top:-10px; background-color:#b13565;">Sign Up</button>
+							<button  type="submit"  class="btn btn-#79306a float-right " style="margin-top:-10px; background-color:brown;">Sign Up</button>
 						</div>
 					</form>
 				</div>
@@ -102,16 +101,13 @@
 				<input asp-for="Login.UserNameOrEmail" placeholder="UserNameOrEmail">
 				<span class="text-danger" asp-validation-for="Login.UserNameOrEmail"></span>
 
-				<input asp-for="Login.Password" placeholder="password" id="showPassword">
-				<i class="fas fa-eye" id="showPassword"></i>
+				<input asp-for="Login.Password" placeholder="password">
 				<span class="text-danger" asp-validation-for="Login.Password"></span>
 
 				<label asp-for="Login.IsRemembered">Remember me:</label>
 				<input asp-for="Login.IsRemembered" placeholder="UserNameOrEmail">
 
-				
-
-				<a asp-action="ForgotPassword">forgot Password?</a>
+				<a asp-action="ForgotPassword">Forgot Password?</a>
 				<button asp-action="Login" asp-controller="appuser" type="submit">Login</button>
 			</form>
 		</div>
@@ -135,35 +131,3 @@
 </body>
 
 </html>
-<script>
-	function showPassword() {
-		var passwordInput = document.getElementById("passwordInput");
-		passwordInput.type = "text";
-	}
-
-	function hidePassword() {
-		var passwordInput = document.getElementById("passwordInput");
-		passwordInput.type = "password";
-	}
-
-	const passwordInput = document.getElementById("passwordInput");
-	const showPasswordButton = document.getElementById("showPassword");
-
-	showPasswordButton.addEventListener("click", function () {
-		if (passwordInput.type === "password") {
-			showPassword();
-			showPasswordButton.classList.remove("fa-eye");
-			showPasswordButton.classList.add("fa-eye-slash");
-		} else {
-			hidePassword();
-			showPasswordButton.classList.remove("fa-eye-slash");
-			showPasswordButton.classList.add("fa-eye");
-		}
-	});
-</script>
-<script src="~/assets/js/bootstrap.min.js"></script>
-<style>
-	.form-container.sign-up form {
-		margin-top: 0px;
-	}
-</style>

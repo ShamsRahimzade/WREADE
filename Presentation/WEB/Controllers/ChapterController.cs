@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Stripe;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
@@ -14,14 +16,19 @@ namespace WEB.Controllers
 		public ChapterController(IChapterService chapservice)
         {
 			_chapservice = chapservice;
+
 		}
-        public async Task< IActionResult> Index(int bookId,int page = 1, int take = 5)
+		[Authorize(Roles = "Writer")]
+
+		public async Task< IActionResult> Index(int bookId,int page = 1, int take = 5)
         {
 			PaginationVM<Chapter> vm = await _chapservice.GetAllAsync(bookId, page, take);
 			vm.BookId = bookId;
 			if (vm.Items == null) return NotFound();
 			return View(vm);
 		}
+		[Authorize(Roles = "Writer")]
+
 		public async Task<IActionResult> Create(int bookId)
 		{
 			CreateChapterVM vm = new CreateChapterVM();
@@ -32,18 +39,25 @@ namespace WEB.Controllers
 			return View(vm);
 		}
 		[HttpPost]
+		[Authorize(Roles = "Writer")]
+
 		public async Task<IActionResult> Create(CreateChapterVM vm)
 		{
+
 			if (await _chapservice.CreateAsync(vm, ModelState))
-				return RedirectToAction(nameof(Index), new { id = vm.bookId }); 
+				return RedirectToAction(nameof(Index), new { id = vm.bookId });
 			return View(await _chapservice.CreatedAsync(vm));
 		}
+		[Authorize(Roles = "Writer")]
+
 		public async Task<IActionResult> Delete(int id)
 		{
 			if (await _chapservice.DeleteAsync(id))
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction("Index","Chapter" );
 			return NotFound();
 		}
+		[Authorize(Roles = "Writer")]
+
 		public async Task<IActionResult> Update(int id)
 		{
 			UpdateChapterVM vm = new UpdateChapterVM();
@@ -51,20 +65,23 @@ namespace WEB.Controllers
 			return View(vm);
 		}
 		[HttpPost]
-		public async Task<IActionResult> Update(int id, UpdateChapterVM vm,string? returnurl)
+		[Authorize(Roles = "Writer")]
+
+		public async Task<IActionResult> Update(int id, UpdateChapterVM vm)
 		{
-			if(returnurl is null) return RedirectToAction("Index","Home");
+			
 			if (await _chapservice.UpdateAsync(id, vm, ModelState))
 
-				return Redirect(returnurl);
+				return RedirectToAction("Index", "Chapter");
 			return View(await _chapservice.UpdatedAsync(id, vm));
 		}
-		public async Task<IActionResult> LikeChapter(int chapid,string? returnUrl)
+		
+		public async Task<IActionResult> LikeChapter(int chapid)
 		{
-			if (returnUrl is null) return RedirectToAction("Index", "Book");
+			
 			await _chapservice.LikeChapter(chapid);
 
-			return Redirect(returnUrl);
+			return RedirectToAction();
 		}
 		public async Task<IActionResult> UnlikeChapter(int chapid, string? returnUrl)
 		{
@@ -73,10 +90,22 @@ namespace WEB.Controllers
 
 			return Redirect(returnUrl);
 		}
-		public async Task<IActionResult> Detail(int id, int page = 1, int take = 1)
+		[Authorize(Roles = "Reader,Writer,Admin")]
+
+		public async Task<IActionResult> GetChapter(int id)
+		{
+			return View(await _chapservice.Chapter(id));
+		}
+		[Authorize(Roles = "Writer,Reader,Admin")]
+		public async Task<IActionResult> GetAll(int bookid)
+		{
+			return View(await _chapservice.GetAll(bookid));
+		}
+		public async Task<IActionResult> Detail(int id,int bookid, int page = 1, int take = 1)
 		{
 			PaginationVM<Chapter> vm = await _chapservice.GetAllAsync(id, page, take);
-			vm.BookId = id;
+			vm.BookId = bookid;
+
 			if (vm.Items == null) return NotFound();
 			return View(vm);
 		}

@@ -29,8 +29,13 @@ namespace Wreade.Persistence.Implementations.Repositories.Generic
             query = _addIncludes(query, includes);
             return query;
         }
-
-        public IQueryable<T> GetAllWhere(Expression<Func<T, bool>>? expression = null, bool IsTracking = false, params string[] includes)
+		public async Task<int> GetChapterCountForBookAsync(int bookId)
+		{
+			return await _context.Chapters
+				.Where(c => c.BookId == bookId)
+				.CountAsync();
+		}
+		public IQueryable<T> GetAllWhere(Expression<Func<T, bool>>? expression = null, bool IsTracking = false, params string[] includes)
         {
             IQueryable<T> query = _context.Set<T>();
 

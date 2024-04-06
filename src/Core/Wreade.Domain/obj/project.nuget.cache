@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "scE6Q0Ayt7hSLo8vsgBvD3MhwZXTcdfzD/unK+usZFLAAOrd9r2Xu+cem+PdfiOcHSLjauHA1CpGte1IGpNVPw==",
+  "dgSpecHash": "hViMz1x9qt5T9niUbquz0kLo0gQnU9izfJ2qnTJxqS/5h3RSGMRWtJtLRN8AAm9CUzf8oimb7FDth2bcYiZn6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
+  "projectFilePath": "C:\\Users\\rehim\\OneDrive\\Desktop\\layihe wreade\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rehim\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.25\\microsoft.aspnetcore.cryptography.internal.6.0.25.nupkg.sha512",
     "C:\\Users\\rehim\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.25\\microsoft.aspnetcore.cryptography.keyderivation.6.0.25.nupkg.sha512",

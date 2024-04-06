@@ -3,24 +3,19 @@
 	<div class="container">
 		<div class="page-title-container">
 
-			<a asp-action="index" asp-controller="home" class="muted-link pb-1 d-inline-block breadcrumb-back">
-				<i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
-				<span class="text-small align-middle">Home</span>
-			</a>
+			
 			<h1 class="mb-0 pb-0 display-4" id="title">Book </h1>
 			<div class="col-md-6 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Create Book</h4>
-						<p class="card-description">
-							Basic form layout
-						</p>
+						<h4 class="card-title">Update Book</h4>
+						
 						<form method="post" enctype="multipart/form-data">
 							<div asp-validation-summary="ModelOnly"></div>
 							<div class="form-group">
-								<img style="width:100px; height:100px;" src="~/assets/images/@Model.Image" alt="image">
+								<img style="width:100px; height:100px;" src="~/assets/assets/img/@Model.Image" alt="image">
 								<input type="hidden"></input>
-								<label asp-for="Photo" for="exampleInputUsername1">Photo</label>
+								<label asp-for="Photo" for="exampleInputUsername1"></label>
 								<input asp-for="Photo" class="form-control" id="exampleInputUsername1" placeholder="Photo">
 								<span asp-validation-for="Photo" class="text-danger"></span>
 							</div>
@@ -33,14 +28,14 @@
 							<div class="form-group">
 								<label asp-for="TagIds">Tag</label>
 								<select asp-for="TagIds" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))">
-									<option selected disabled>Select one</option>
+									<option selected disabled>Select Tags</option>
 								</select>
 								<span asp-validation-for="TagIds" class="text-danger"> </span>
 							</div>
 							<div class="form-group">
 								<label asp-for="CategoryIds">Category</label>
 								<select asp-for="CategoryIds" asp-items="new SelectList(Model.Categories,nameof(Category.Id),nameof(Category.Name))">
-									<option selected disabled>Select one</option>
+									<option selected disabled>Select Categories</option>
 								</select>
 								<span asp-validation-for="CategoryIds" class="text-danger"> </span>
 							</div>
@@ -50,13 +45,13 @@
 								<span asp-validation-for="Description" class="text-danger"></span>
 							</div>
 							<div class="form-group">
-								<label asp-for="IsCompleted" for="exampleInputUsername1">IsCompleted</label>
-								<input asp-for="IsCompleted" class="form-control" id="exampleInputUsername1" placeholder="IsCompleted">
+								<label asp-for="IsCompleted" >IsCompleted</label>
+								<input asp-for="IsCompleted" >
 								<span asp-validation-for="IsCompleted" class="text-danger"></span>
 							</div>
 							<div class="form-group">
-								<label asp-for="IsAdult" for="exampleInputUsername1">IsAdult</label>
-								<input asp-for="IsAdult" class="form-control" id="exampleInputUsername1" placeholder="IsAdult">
+								<label asp-for="IsAdult" >IsAdult</label>
+								<input asp-for="IsAdult" >
 								<span asp-validation-for="IsAdult" class="text-danger"></span>
 							</div>
 							<button type="submit" class="btn btn-primary mr-2">Submit</button>

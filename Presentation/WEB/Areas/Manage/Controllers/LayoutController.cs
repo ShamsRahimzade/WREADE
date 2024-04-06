@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Stripe.Tax;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
@@ -8,7 +9,10 @@ using Wreade.Domain.Entities;
 namespace WEB.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    public class LayoutController : Controller
+	[Authorize(Roles = "Admin")]
+
+
+	public class LayoutController : Controller
     {
         private readonly ILayoutService _layoutService;
 

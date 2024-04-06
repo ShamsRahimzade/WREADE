@@ -19,17 +19,17 @@ namespace Wreade.Application.ViewModels
         [Required(ErrorMessage = "First Name is required.")]
         [MinLength(3, ErrorMessage = "Name must be at least 3 characters long")]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Name can only contain alphabetic characters")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [Required(ErrorMessage = "Last Name is required.")]
         [MinLength(3, ErrorMessage = "Name must be at least 3 characters long")]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Name can only contain alphabetic characters")]
-        public string Surname { get; set; }
+        public string? Surname { get; set; }
         [Required(ErrorMessage = "Username is required")]
         [MinLength(3, ErrorMessage = "Username must be at least 3 characters long")]
-        public string Username { get; set; }
+        public string? Username { get; set; }
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]
-        public string Email { get; init; }
+        public string? Email { get; init; }
         [DataType(DataType.Password)]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
         public string? CurrentPassword { get; set; }
@@ -42,7 +42,7 @@ namespace Wreade.Application.ViewModels
         public string? ConfirmPassword { get; set; }
         [Required(ErrorMessage = "Date Of Birth is required.")]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+ 
         public string? SelfInformation { get; set; }
         public string? Instagram { get; set; }
         public string? Facebook { get; set; }

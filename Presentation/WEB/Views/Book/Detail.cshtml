@@ -8,56 +8,86 @@
 
 <!-- Page Header Start -->
 <div style="background-image:url(/assets/assets/img/backkkk.jpg)" class="container-fluid page-header py-5 mb-5">
-    <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Feature</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                <li class="breadcrumb-item text-white active" aria-current="page">Feature</li>
-            </ol>
-        </nav>
-    </div>
+	<div class="container py-5">
+		<h1 class="display-3 text-white mb-3 animated slideInDown text-black" style="color:black;">@Model.book.Name</h1>
+		<nav aria-label="breadcrumb animated slideInDown">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a class="text-black" asp-action="index" asp-controller="home">Home</a></li>
+				<li class="breadcrumb-item"><a class="text-black" asp-action="index" asp-controller="book">Book</a></li>
+				<li class="breadcrumb-item text-black active" aria-current="page">@Model.book.Name</li>
+			</ol>
+		</nav>
+	</div>
 </div>
 <!-- Page Header End -->
 <!-- Feature Start -->
 <div class="container-fluid bg-light overflow-hidden px-lg-0" style="margin: 6rem 0;">
-    <div class="container feature px-lg-0">
-        <div class="row g-0 mx-lg-0">
-            <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.5s">
-                <div class="p-lg-5 ps-lg-0">
-                    <div class="section-title text-start">
-                        <h1 class="display-5 mb-4">@Model.book.Name</h1>
-                    </div>
-                  
-                    <p class="mb-4 pb-2">@Model.book.Description</p>
-                    <div class="row g-4">
-                        @foreach (var item in Model.book.Chapters.Where(b => b.BookId == Model.book.Id).OrderByDescending(c => c.Id))
-                        {
-                            <div class="col-6">
-                                <div class="d-flex align-items-center">
-                                    <div class="service-icon">
-                                        <img style="height:50px;width:50px;" src="~/assets/assets/img/@item.ChapterImage" alt="image_not_found">
-                                    </div>
-                                    <div class="service-content">
-                                        <a asp-action="detail" asp-route-id="@item.Id" asp-controller="chapter"><h4 class="service-title">@item.Title</h4></a>
-                                      
-                                        <p class="mb-0">
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                     
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 pe-lg-0" style="min-height: 400px;">
-                <div class="position-relative h-100">
-                    <img class="position-absolute img-fluid w-100 h-100" src="~/assets/assets/img/@Model.book.CoverPhoto" style="object-fit: cover;" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container feature px-lg-0">
+		<div class="row g-0 mx-lg-0">
+			<div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.5s">
+				<div class="p-lg-5 ps-lg-0">
+					<div class="section-title text-start">
+						<h1 class="display-5 mb-4">@Model.book.Name</h1>
+						@if (Model.book.IsCompleted == true)
+						{
+							<span  style="background-color:green;">Completed</span>
+						}
+						else
+						{
+							<span  style="background-color:yellow;">OnGoing</span>
+
+						}
+					</div>
+
+					<p class="">@Model.book.Description</p>
+					<p class="" style="text-decoration:none;">"Creater:" <a asp-action="user" asp-controller="profile" asp-route-username="@Model.book.CreatedBy"> @Model.book.CreatedBy</a></p>
+					<p class="" style="text-decoration:none;">
+						"Category:"@foreach (var item in @Model.book.BookCategories)
+						{
+							<a asp-action="categorybooks" asp-controller="book" asp-route-id="@item.Category.Id"> @item.Category.Name</a>
+							<text>,</text>
+						}
+					</p>
+					<p class="" style="text-decoration:none;">
+						"Tag:"@foreach (var item in @Model.book.BookTags)
+						{
+							<a asp-action="tagbooks" asp-controller="book" asp-route-id="@item.Tag.Id"> @item.Tag.Name</a>
+							<text>,</text>
+						}
+					</p>
+					
+					<div class="row g-4">
+						@foreach (var item in Model.book.Chapters.Where(b => b.BookId == Model.book.Id).OrderByDescending(c => c.Id).Take(2))
+						{
+							<div class="col-12">
+								<div class="d-flex align-items-center">
+									<div class="service-icon">
+										<img style="height:50px;width:50px;" src="~/assets/assets/img/@item.ChapterImage" alt="image_not_found">
+									</div>
+									<div class="service-content">
+										<a asp-action="detail"  asp-route-bookid="@Model.book.Id" asp-route-id="@item.Id " asp-controller="chapter"><h4 class="service-title">@item.Title</h4></a>
+
+										<p class="mb-0">
+										</p>
+									</div>
+								</div>
+							</div>
+						}
+
+					</div>
+				</div>
+				@if (Model.book.Chapters.Count > 0)
+				{
+					<a asp-action="getall" asp-controller="chapter" asp-route-bookid="@Model.book.Id" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Go to read<i class="fa fa-arrow-right ms-3"></i></a>
+
+				}
+			</div>
+			<div class="col-lg-6 pe-lg-0" style="min-height: 400px;">
+				<div class="position-relative h-100">
+					<img class="position-absolute img-fluid w-100 h-100" src="~/assets/assets/img/@Model.book.CoverPhoto" style="object-fit: cover;" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- Feature End -->

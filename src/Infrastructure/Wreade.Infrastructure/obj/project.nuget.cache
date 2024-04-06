@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QVQmsLowAhkkSS7trp7LocM4/Vl3n6+S7IPuPB83mInmy8aj+NbKgshpsXn5dIO4GpelsprHQrSGx6vd4WTA8w==",
+  "dgSpecHash": "pNFQ1+0lPmpi3E5fPM08JQ42poRpsBrZJYSb3J5lDnmyFAQbXJoMQ6x/GpNNUALcwTdeN0XqnlkrP3KZLnQZgw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Infrastructure\\Wreade.Infrastructure\\Wreade.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\rehim\\OneDrive\\Desktop\\layihe wreade\\WREADE\\src\\Infrastructure\\Wreade.Infrastructure\\Wreade.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rehim\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\rehim\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -37,6 +37,11 @@ namespace WEB.Controllers
 				return RedirectToAction("Index", "Home");
 			return View(combinevm);
 		}
+		public async Task<IActionResult> CreateAdminRole()
+		{
+			await _service.CreateAdminRoleAsync();
+			return RedirectToAction("Index", "Home");
+		}
 		public IActionResult Login()
 		{
 			if (User.Identity.IsAuthenticated)

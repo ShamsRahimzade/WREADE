@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
@@ -6,6 +7,8 @@ using Wreade.Domain.Entities;
 namespace WEB.Areas.Manage.Controllers
 {
 	[Area("Manage")]
+	[Authorize(Roles = "Admin")]
+
 	public class TagController : Controller
 	{
 		private readonly ITagService _service;

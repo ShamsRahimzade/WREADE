@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Wreade.Application.Abstractions.Services;
 using Wreade.Application.ViewModels;
 using Wreade.Domain.Entities;
@@ -6,7 +7,10 @@ using Wreade.Domain.Entities;
 namespace WEB.Areas.Manage.Controllers
 {
     [Area("Manage")]
-    public class CategoryController : Controller
+	[Authorize(Roles ="Admin")]
+
+
+	public class CategoryController : Controller
     {
         private readonly ICategoryService _service;
 

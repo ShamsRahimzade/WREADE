@@ -1,0 +1,32 @@
+﻿@model ChapterDetailVM
+
+<main>
+	<!-- details-section - start
+	================================================== -->
+	<section id="details-section" class="details-section blog-details sec-ptb-100 text-center clearfix">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-10 col-md-10 col-sm-11 col-xs-12">
+					<div class="details-content" data-aos="fade-up" data-aos-delay="100">
+						<h2 class="item-title">@Model.chapter.Title</h2>
+						<div class="post-meta ul-li-center mb-60 clearfix">
+							<ul class="clearfix">
+
+								@* <li><a href="#!">@item.Book.User.UserName</a></li> *@
+							</ul>
+						</div>
+					</div>
+					<div class="details-image h-auto mb-60" data-aos="fade-up" data-aos-delay="300">
+						<img style="width:300px;height:300px;border-radius:25px;" src="~/assets/assets/img/@Model.chapter.ChapterImage" alt="image_not_found"><br /><br />
+					</div>
+
+					<div class="details-content mb-100">
+						<p class="mb-60" data-aos="fade-up" data-aos-delay="200">
+							@Model.chapter.Text
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>

@@ -3,10 +3,7 @@
 	<div class="container">
 		<div class="page-title-container">
 
-			<a asp-action="index" asp-controller="home" class="muted-link pb-1 d-inline-block breadcrumb-back">
-				<i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
-				<span class="text-small align-middle">Home</span>
-			</a>
+		
 			<h1 class="mb-0 pb-0 display-4" id="title">Chapter </h1>
 			<div class="col-md-6 grid-margin stretch-card">
 				<div class="card">
@@ -18,7 +15,7 @@
 						<form method="post" enctype="multipart/form-data">
 							<div asp-validation-summary="ModelOnly"></div>
 							<div class="form-group">
-								<img style="width:100px; height:100px;" src="~/assets/images/chapters/@Model.Image" alt="image">
+								<img style="width:100px; height:100px;" src="~/assets/assets/img/@Model.Image" alt="image">
 								<input type="hidden"></input>
 								<label asp-for="Photo" for="exampleInputUsername1">Photo</label>
 								<input asp-for="Photo" class="form-control" id="exampleInputUsername1" placeholder="Photo">
@@ -36,7 +33,6 @@
 								<input asp-for="Text" class="form-control" id="exampleInputUsername1" placeholder="Text">
 								<span asp-validation-for="Text" class="text-danger"></span>
 							</div>
-
 							<button type="submit" class="btn btn-primary mr-2">Submit</button>
 							<button asp-action="index" asp-controller="chapter" class="btn btn-light">Cancel</button>
 						</form>

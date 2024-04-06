@@ -9,161 +9,169 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WEB
 build_property.RootNamespace = WEB
-build_property.ProjectDir = C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB\
+build_property.ProjectDir = C:\Users\rehim\OneDrive\Desktop\layihe wreade\WREADE\Presentation\WEB\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\rehim\OneDrive\Desktop\WREADE\WREADE\Presentation\WEB
+build_property.MSBuildProjectDirectory = C:\Users\rehim\OneDrive\Desktop\layihe wreade\WREADE\Presentation\WEB
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Category/Create.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Category/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENhdGVnb3J5XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Category/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENhdGVnb3J5XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Category/Update.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Category/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENhdGVnb3J5XFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/DashBoard/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/DashBoard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXERhc2hCb2FyZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Layout/Create.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Layout/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExheW91dFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Layout/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Layout/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExheW91dFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Layout/Update.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Layout/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExheW91dFxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Shared/_Layout.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Tag/Create.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Tag/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhZ1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Tag/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Tag/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/Tag/Update.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/Tag/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFRhZ1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/_ViewImports.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Areas/Manage/Views/_ViewStart.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Areas/Manage/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/AppUser/ForgotPassword.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/AppUser/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwVXNlclxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/AppUser/Register.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/AppUser/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwVXNlclxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/AppUser/ResetPassword.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/AppUser/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwVXNlclxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/CategoryBooks.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Book/CategoryBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xDYXRlZ29yeUJvb2tzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Create.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Book/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Detail.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Book/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Ifff.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xJZmZmLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Book/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/TagBooks.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Book/TagBooks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xUYWdCb29rcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Book/Update.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Book/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Category/Detail.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Category/AllCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQWxsQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Category/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Chapter/Create.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Chapter/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Chapter/Detail.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Chapter/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Chapter/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Chapter/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxHZXRBbGwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Chapter/GetChapter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxHZXRDaGFwdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Chapter/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Chapter/Update.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Chapter/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhcHRlclxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Error/ErrorPage.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Error/ErrorPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3JQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Home/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Library/Index.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Library/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Premium/Premium.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Premium/Premium.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlbWl1bVxQcmVtaXVtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Profile/Edit.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Profile/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Profile/User.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Profile/User.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Search/Search.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Search/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhcmNoXFNlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/_ViewImports.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/_ViewStart.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rehim/OneDrive/Desktop/WREADE/WREADE/Presentation/WEB/Views/Shared/_Layout.cshtml]
+[C:/Users/rehim/OneDrive/Desktop/layihe wreade/WREADE/Presentation/WEB/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-tcgsckyrk2

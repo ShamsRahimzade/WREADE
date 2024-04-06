@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {}
+    "C:\\Users\\rehim\\OneDrive\\Desktop\\layihe wreade\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {
+    "C:\\Users\\rehim\\OneDrive\\Desktop\\layihe wreade\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\rehim\\OneDrive\\Desktop\\layihe wreade\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
         "projectName": "Wreade.Domain",
-        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
+        "projectPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\layihe wreade\\WREADE\\src\\Core\\Wreade.Domain\\Wreade.Domain.csproj",
         "packagesPath": "C:\\Users\\rehim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\WREADE\\WREADE\\src\\Core\\Wreade.Domain\\obj\\",
+        "outputPath": "C:\\Users\\rehim\\OneDrive\\Desktop\\layihe wreade\\WREADE\\src\\Core\\Wreade.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

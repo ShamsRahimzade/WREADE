@@ -15,7 +15,9 @@ namespace Wreade.Application.Abstractions.Services
         Task<bool> UpdateAsync(int id, UpdateChapterVM vm, ModelStateDictionary modelstate);
         Task LikeChapter(int chapid);
         Task UnlikeChap(int chapid);
-		Task<PaginationVM<Chapter>> Detail(int id, int page = 1, int take = 1);
+		Task<PaginationVM<Chapter>> Detail(int id, int bookid, int page = 1, int take = 1);
         Task<bool> ViewChapter(int chapterId);
+        Task<ChapterDetailVM> Chapter(int id);
+        Task<ICollection<Chapter>> GetAll(int bookId);
 	}
 }

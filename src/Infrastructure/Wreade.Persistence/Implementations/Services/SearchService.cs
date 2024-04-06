@@ -32,6 +32,7 @@ namespace Wreade.Persistence.Implementations.Services
 		}
 		public async Task<List<Book>> GetBooks(string searchTerm)
 		{
+
 			return await _book.GetAllWhere(x => x.Name.Contains(searchTerm) ||x.Description.Contains(searchTerm), includes: new string[] { "BookCategories", "BookCategories.Category", "BookTags", "BookTags.Tag", "Chapters" }).ToListAsync();
 		}
 		public async Task<List<Category>> GetCategory(string searchTerm)

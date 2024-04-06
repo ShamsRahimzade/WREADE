@@ -21,7 +21,7 @@ app.UseAuthentication();
 app.UseRouting();
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 app.UseAuthorization();
-app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+//app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseEndpoints(endpoints =>
 {

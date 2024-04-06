@@ -94,6 +94,14 @@ namespace Wreade.Persistence.Implementations.Services
 			return true;
 
 		}
+		public async Task<ICollection<Chapter>> GetAll(int bookId)
+		{
+			if (bookId <= 0) throw new Exception("book not found");
+			ICollection<Chapter> chaps = await _chaprepo.GetAllWhere(expression: c => c.BookId == bookId, includes: new string[] { nameof(Book) }).ToListAsync();
+			return chaps;
+
+
+		}
 		public async Task<PaginationVM<Chapter>> GetAllAsync(int id, int page = 1, int take = 5)
 		{
 			if (page < 1 || take < 1) throw new Exception("Bad request");
@@ -114,16 +122,17 @@ namespace Wreade.Persistence.Implementations.Services
 			};
 			return vm;
 		}
-		public async Task<PaginationVM<Chapter>> Detail(int id, int page = 1, int take = 1)
+		public async Task<PaginationVM<Chapter>> Detail(int id,int bookid, int page = 1, int take = 1)
 		{
 			if (id <= 0) throw new Exception("Id not found");
 			if (page < 1 || take < 1) throw new Exception("Bad request");
 			Chapter chapter = await _chaprepo.GetByIdAsync(id, includes: new string[] {   "Likes" });
-			ICollection<Chapter> chapters = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take ,expression:c=>c.BookId==id, orderExpression: x => x.Id, IsDescending: true, includes: nameof(Book)).ToListAsync();
+			ICollection<Chapter> chapters = await _chaprepo.GetPagination(skip: (page - 1) * take, take: take ,expression:c=>c.BookId==bookid, orderExpression: x => x.Id, IsDescending: true, includes: nameof(Book)).ToListAsync();
 			if (chapters == null) throw new Exception("Not Found");
-			int count = await _chaprepo.GetAll().CountAsync();
+			int count = await _chaprepo.GetChapterCountForBookAsync(bookid);
 			if (count < 0) throw new Exception("Not Found");
 			double totalpage = Math.Ceiling((double)count / take);
+
 			PaginationVM<Chapter> vm = new PaginationVM<Chapter>
 			{
 				Items=chapters,
@@ -132,6 +141,21 @@ namespace Wreade.Persistence.Implementations.Services
 			};
 			return vm;
 		}
+		public async Task<ChapterDetailVM> Chapter(int id)
+		{
+			if (id <= 0) throw new Exception("Id not found");
+			Chapter chapter = await _chaprepo.GetByIdAsync(id, includes: nameof(Book));
+			List<Chapter> chapters = await _chaprepo.GetAll(includes: nameof(Book)).ToListAsync();
+			if (chapter is null) throw new Exception("not found");
+			if (chapters is null) throw new Exception("not found");
+			ChapterDetailVM vm = new ChapterDetailVM
+			{
+				Chapters = chapters,
+				chapter = chapter
+			};
+			return vm;
+		}
+		
 		public async Task<bool> DeleteAsync(int id)
 		{
 			if (id < 1) throw new Exception("id");
@@ -250,5 +274,6 @@ namespace Wreade.Persistence.Implementations.Services
 			await _chaprepo.SaveChangeAsync();
 			return true;
 		}
+		
 	}
 }

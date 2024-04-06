@@ -4,415 +4,167 @@
 
 @{
 	bool isFollowing = Model.Followees.Any(x => x.FollowerId == User.FindFirstValue(ClaimTypes.NameIdentifier));
+
 }
 
 
-<main>
-	@* <div class="padding" style="display:flex; justify-content:center;">
-	<div class="col-md-8">
-	<!-- Column -->
-	<div class="card">
-	<img class="card-img-top" src="~/assets/images/@Model.BackImage" alt="Card image cap" style="display:flex; justify-content:center;">
-	<div class="card-body little-profile text-center">
-	<div class="pro-img"><img src="~/assets/images/@Model.MainImage" alt="user"></div>
-	<h3 class="m-b-0">@(Model.Name + Model.Surname)</h3>
-	<p>@@@Model.UserName</p>
-	@if (User.Identity.IsAuthenticated)
-	{
+
+<div style="background-image:url(/assets/assets/img/@Model.BackImage)" class="container-fluid page-header py-5 mb-5">
+	<div class="container py-5">
+		<h1 class="display-3 text-white mb-3 animated slideInDown">@Model.UserName</h1>
+		<nav aria-label="breadcrumb animated slideInDown">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a class="text-white" asp-action="index" asp-controller="home">Home</a></li>
+				<li class="breadcrumb-item text-white active" aria-current="page">@Model.UserName</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+<!-- About Start -->
+<div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+	<div class="container about px-lg-0">
+		<div class="row g-0 mx-lg-0">
+			<div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
+				<div class="position-relative h-100">
+					<img class="position-absolute img-fluid w-100 h-100" src="~/assets/assets/img/@Model.MainImage" style="object-fit: cover;" alt="">
+				</div>
+			</div>
+			<div class="col-lg-6 about-text py-5 wow fadeIn" data-wow-delay="0.5s">
+				<div class="p-lg-5 pe-lg-0">
+					<div class="section-title text-start">
+						<h1 class="display-5 mb-4">@(Model.Name + Model.Surname)</h1>
+						<p class="mb-4 pb-2">@@@Model.UserName</p>
 
 
-	@if (User.Identity.Name == Model.UserName)
-	{
-	<div class="social-links">
-	<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
-	<li><a asp-action="Edit" asp-route-username="@Model.UserName"><i class="ri-pencil-line"></i></a></li>
-	<li><a href="javascript:void();"><i class="ri-settings-4-line"></i></a></li>
-	</ul>
-	</div>
+					</div>
+					<p class="mb-4 pb-2">@Model.SelfInformation</p>
+					<div class="row g-4 mb-4 pb-2">
+						<div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
+							<div class="d-flex align-items-center">
+								<div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+									<i class="fa fa-users fa-2x text-primary"></i>
+								</div>
+								<div class="ms-3">
+									<h2 class="text-primary mb-1" data-toggle="counter-up">@Model.FollowerCount</h2>
+									<p class="fw-medium mb-0">Followers</p>
+								</div>
 
-	}
-	else
-	{
-	if (!isFollowing)
-	{
-	<div class="social-links">
-	<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
-	<a asp-controller="Profile" asp-action="Follow" asp-route-followeeId="@Model.Id">
-	<li class=" rounded p-2  mr-3"> Follow</li></a>
+							</div>
+						</div>
+						<div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
+							<div class="d-flex align-items-center">
+								<div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+									<i class="fa fa-users fa-2x text-primary"></i>
+								</div>
 
-	</ul>
-	</div>
-	}
-	else
-	{
-	<div class="social-links">
-	<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
-	<a asp-controller="Profile" asp-action="Unfollow" asp-route-followeeId="@Model.Id">
-	<li class=" rounded p-2  mr-3"> Unfollow</li></a>
-
-	</ul>
-	</div>
-	}
-	}
-	}
-	else
-	{
-	<div class="social-links">
-	<ul class="header-nav d-flex flex-wrap justify-start p-0 m-0">
-	<a asp-controller="appuser" asp-action="register" asp-route-followeeId="@Model.Id">
-	<li class=" rounded p-2  mr-3"> Follow</li></a>
-
-	</ul>
-	</div>
-	}
-	<div class="row text-center m-t-20">
-	<div class="col-lg-6 col-md-6 m-t-20">
-	<h3 class="m-b-0 font-light">@Model.FollowingCount</h3><small>Following</small>
-	</div>
-	<div class="col-lg-6 col-md-6 m-t-20">
-	<h3 class="m-b-0 font-light">@Model.FollowerCount</h3><small>Followers</small>
-	</div>
-
-	</div>
-	</div>
-	</div>
-	</div>
-	</div> *@
-	<div class="container">
-		<div class="row row-broken bootstrap snippets bootdeys">
-			<div class="col-xs-12 cover">
-				<h6 class="cover-name text-light">Profile Detail</h6>
-				<img src="~/assets/images/@Model.BackImage" class="cover-img" style="display:flex; justify-content:center; height:350px;" alt="image">
-				<div class="cover-inside cover-blackout text-c text-light">
-					<img class="cover-avatar size-md img-round" src="~/assets/images/@Model.MainImage" alt="profile">
-					<div class="field name font-weight-700">@(Model.Name + Model.Surname)</div>
-					<br>
-					<div class="field place">@@@Model.UserName</div>
-					<div class="help-block-1 text-c hidden-xs">
-						@if (User.IsInRole("Author"))
-						{
-							<div class="user-icon f-l">
-								<div id="bar"><canvas width="64" height="19" style="display: inline-block; width: 64px; height: 19px; vertical-align: top;"></canvas></div>
-								@if (Model.Books.Count == 1)
+								<div class="ms-3">
+									<h2 class="text-primary mb-1" data-toggle="counter-up">@Model.FollowingCount</h2>
+									<p class="fw-medium mb-0">Following</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s"> 
+							@if (User.Identity.Name == Model.UserName)
+							{
+								<div class="d-flex align-items-center">
+									<a asp-action="index" asp-controller="library" asp-route-id="@Model.Id">
+										<div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+											<i class="fa fa-check fa-2x text-primary"></i>
+										</div>
+									</a>
+									<div class="ms-3">
+										<h2 class="text-primary mb-1" data-toggle="counter-up">@Model.LibraryItems.Count</h2>
+										<p class="fw-medium mb-0">Reading Book</p>
+									</div>
+								</div>
+							}
+							@if (User.Identity.Name != Model.UserName)
+							{
+								@if (!isFollowing)
 								{
-									<b>@Model.Books.Count</b>
-									<text>Book</text>
+									<a asp-controller="Profile" asp-action="Follow" asp-route-followeeId="@Model.Id" class="btn btn-primary py-3 px-5">Follow</a>
 								}
 								else
 								{
-									<b>@Model.Books.Count</b>
-									<text>Books</text>
+									<a asp-controller="Profile" asp-action="unfollow" asp-route-followeeId="@Model.Id" class="btn btn-primary py-3 px-5">Unfollow</a>
+
 								}
-							</div>
-						}
-						<div class="user-icon">
-							<div id="line"><canvas width="120" height="19" style="display: inline-block; width: 120px; height: 19px; vertical-align: top;"></canvas></div>
-							<b>@Model.FollowingCount</b> Following
-						</div>
-						<div class="user-icon f-r">
-							<div id="pie"><canvas width="19" height="19" style="display: inline-block; width: 19px; height: 19px; vertical-align: top;"></canvas></div>
-							<b>@Model.FollowerCount</b> Followers
-						</div>
-					</div>
-					@if (User.Identity.Name != Model.UserName)
-					{
-						<div class="help-block-1 hidden-xs">
-							@if (!isFollowing)
-							{
-							<button type="button" class="btn btn-success f-l">	<a asp-controller="Profile" asp-action="Follow" asp-route-followeeId="@Model.Id">Follow</a></button>
 							}
 							else
 							{
-								<button type="button" class="btn btn-success f-l">	<a asp-controller="Profile" asp-action="unfollow" asp-route-followeeId="@Model.Id">Unfollow</a></button>
+								<a asp-controller="Profile" asp-action="edit" asp-route-username="@Model.UserName" class="btn btn-primary py-3 px-5">Edit Profile</a>
 
 							}
 						</div>
-					}
-					else
-					{
-						<div class="field place"><a asp-action="edit" asp-route-username="@Model.UserName"><text>Detail</text></a></div>
+						@if (User.IsInRole("Writer") )
+						{
+							<div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
+								<div class="d-flex align-items-center">
+									<a asp-action="index" asp-controller="book">
+										<div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+											<i class="fa fa-check fa-2x text-primary"></i>
+										</div>
+									</a>
+									<div class="ms-3">
+										<h2 class="text-primary mb-1" data-toggle="counter-up">@Model.Books.Count</h2>
+										<p class="fw-medium mb-0">My Books</p>
+									</div>
+								</div>
+							</div>
+						}
+						@if (User.Identity.Name != Model.UserName)
+						{
+							<div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
+								<div class="d-flex align-items-center">
+									
+										<div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+											<i class="fa fa-check fa-2x text-primary"></i>
+										</div>
+									
+									<div class="ms-3">
+										<h2 class="text-primary mb-1" data-toggle="counter-up">@Model.Books.Count</h2>
+										<p class="fw-medium mb-0">User Books</p>
+									</div>
+								</div>
+							</div>
+						}
+					</div>
 
-					}
 
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<!-- About End -->
+<!-- Team Start -->
+@if (User.IsInRole("Writer"))
+{
+	@foreach (var item in Model.Books)
+	{
+		<div class="container-xxl py-5">
+			<div class="container">
+				<div class="section-title text-center">
+					<h1 class="display-5 mb-5">My Books</h1>
+				</div>
+				<div class="row g-4">
 
-</main>
-@* <style>
-	body {
-		background-color: #d7dfe3;
+					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+						<div class="team-item">
+							<div class="overflow-hidden position-relative">
+								<a asp-action="detail" asp-controller="book" asp-route-id="@item.Id"><img class="img-fluid" src="~/assets/assets/img/@item.CoverPhoto" alt=""></a>
+
+							</div>
+							<div class="text-center border border-5 border-light border-top-0 p-4">
+								<h5 class="mb-0">@item.Name</h5>
+								<small>@item.Description</small>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	}
-
-	.padding {
-		padding: 9rem !important;
-		margin-left: 15px
-	}
-
-	.card-img-top {
-		height: 300px;
-		background-position: center;
-	}
-
-
-	.card-no-border .card {
-		border-color: #d7dfe3;
-		border-radius: 4px;
-		margin-bottom: 30px;
-		-webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-		box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
-	}
-
-	.card-body {
-		-ms-flex: 1 1 auto;
-		flex: 1 1 auto;
-		padding: 1.25rem
-	}
-
-	.pro-img {
-		margin-top: -80px;
-		margin-bottom: 20px
-	}
-
-	.little-profile .pro-img img {
-		width: 128px;
-		height: 128px;
-		-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-		box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-		border-radius: 100%
-	}
-
-	html body .m-b-0 {
-		margin-bottom: 0px
-	}
-
-	h3 {
-		line-height: 30px;
-		font-size: 21px
-	}
-
-	.btn-rounded.btn-md {
-		padding: 1px 35px;
-		font-size: 16px
-	}
-
-	html body .m-t-10 {
-		margin-top: 10px
-	}
-
-	.btn-primary,
-	.btn-primary.disabled {
-		background: #7460ee;
-		border: 1px solid #7460ee;
-		-webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
-		box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
-		-webkit-transition: 0.2s ease-in;
-		-o-transition: 0.2s ease-in;
-		transition: 0.2s ease-in
-	}
-
-	.btn-rounded {
-		border-radius: 60px;
-		padding: 7px 18px
-	}
-
-	.m-t-20 {
-		margin-top: 60px
-	}
-
-	.text-center {
-		text-align: center !important
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		color: #455a64;
-		font-family: "Poppins", sans-serif;
-		font-weight: 400
-	}
-
-	p {
-		margin-top: 0;
-		margin-bottom: 1rem
-	}</style> *@
-<style>
-	body {
-		margin-top: 20px;
-	}
-
-	.row-broken > div[class*='col-'] {
-		padding-top: 0;
-		padding-left: 0;
-	}
-
-	.cover {
-		position: relative;
-		overflow: hidden;
-		height: 500px;
-	}
-
-	.row-broken > div[class*='col-']:last-child {
-		padding-right: 0;
-	}
-
-	.cover-name {
-		position: absolute;
-		z-index: 2;
-		top: 20px;
-		left: 20px;
-	}
-
-	.text-light {
-		color: #ffffff;
-	}
-
-	.cover-img {
-		display: block;
-		min-height: 100%;
-		margin: 0 auto;
-	}
-
-	.cover-blackout {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: rgba(0, 0, 0, 0.5);
-		z-index: 1;
-	}
-
-	.text-c {
-		text-align: center;
-	}
-
-	.cover-avatar.size-md {
-		width: 130px;
-		height: 130px;
-		margin: 90px auto 0;
-	}
-
-	.cover-inside * {
-		line-height: 2;
-	}
-
-	.cover-avatar {
-		display: block;
-	}
-
-	.img-round {
-		border-radius: 50%;
-	}
-
-	.cover-inside .field {
-		font-size: 16px;
-		display: inline-block;
-	}
-
-	.cover-inside * {
-		line-height: 2;
-	}
-
-	.font-weight-700 {
-		font-weight: 700;
-	}
-
-	.cover-inside .place {
-		padding: 0 0 0 20px;
-		background: url("http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/icon-52.png") 0 50% no-repeat;
-	}
-
-	.cover-inside .field {
-		font-size: 16px;
-		display: inline-block;
-	}
-
-	.cover .help-block-1 {
-		width: 50%;
-		margin: 12px auto 0;
-		overflow: hidden;
-	}
-
-	.cover .user-icon {
-		display: inline-block;
-		padding: 35px 0 0;
-		font-size: 16px;
-		line-height: 20px;
-	}
-
-	.f-l {
-		float: left;
-	}
-
-	.f-r {
-		float: right;
-	}
-
-	.btn-success {
-		background-color: #46be8a;
-	}
-
-	.btn {
-		min-width: 180px;
-		font-size: 26px;
-		line-height: 48px;
-		font-weight: normal;
-		color: #ffffff;
-		padding: 0 24px;
-		-webkit-transition: background false false, 0.25s false false, cubic-bezier(0.4, 1, 0.3, 1) false false;
-		-moz-transition: background false false false, 0.25s false false false, cubic-bezier(0.4, 1, 0.3, 1) false false false;
-		-o-transition: background false false false, 0.25s false false false, cubic-bezier(0.4, 1, 0.3, 1) false false false;
-		transition: background, 0.25s, cubic-bezier(0.4, 1, 0.3, 1);
-	}
-
-	.btn {
-		display: inline-block;
-		margin-bottom: 0;
-		text-align: center;
-		vertical-align: middle;
-		touch-action: manipulation;
-		cursor: pointer;
-		background-image: none;
-		white-space: nowrap;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-		border: none;
-	}
-
-	button {
-		outline: none;
-	}</style>
-<script>
-	$(function () {
-		$("#bar").sparkline([12, 32, 9, 11, 14, 24, 19, 6, 8, 13, 22, 12, 32], {
-			barColor: "#42b382",
-			negBarColor: "#e4ad06",
-			type: 'bar'
-		});
-
-		$("#pie").sparkline([4, 6, 4], {
-			type: 'pie',
-			sliceColors: ["#ffc107", "#63A8EB", "#E9585B"]
-		});
-
-		$("#line").sparkline([5, 6, 7, 9, 9, 5, 3, 2, 2, 4, 6, 7, 5, 6, 7, 9, 9, 5, 3, 2, 2, 4, 6, 7], {
-			type: 'line',
-			spotColor: "#fff",
-			minSpotColor: "#fff",
-			maxSpotColor: "#fff",
-			spotRadius: 4,
-			lineWidth: 3,
-			lineColor: "#fff",
-			fillColor: "transparent",
-			highlightSpotColor: '#E9585B',
-			highlightLineColor: '#E9585B',
-			defaultPixelsPerValue: 5
-		});
-	})</script>
+}
+<!-- Team End -->

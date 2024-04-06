@@ -79,7 +79,7 @@ namespace Wreade.Persistence.Implementations.Services
 			if (tag is null) throw new Exception("not found");
 			if (await _tagrepo.IsExistAsync(c => c.Name == vm.Name) && await _tagrepo.IsExistAsync(c => c.Id != id))
 			{
-				modelstate.AddModelError("Name", "this category is exist");
+				modelstate.AddModelError("Name", "this tag is exist");
 				return false;
 			}
 			tag.Name = vm.Name;

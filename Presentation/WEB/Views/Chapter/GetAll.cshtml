@@ -1,0 +1,70 @@
+﻿@model ICollection<Chapter>
+<main>
+
+
+	<!-- breadcrumb-section - start
+	================================================== -->
+	<section id="breadcrumb-section" class="breadcrumb-section sec-ptb-100 pb-0 clearfix">
+		<div class="container">
+			<div class="row align-items-center justify-content-lg-between justify-content-md-between justify-content-sm-center">
+				<div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+					<h2 class="page-title mb-0 aos-init aos-animate" data-aos="fade-right" data-aos-delay="100">All items</h2>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+	<!-- breadcrumb-section - end
+	================================================== -->
+	<!-- shop-section - start
+	================================================== -->
+	<section id="shop-section" class="shop-section sec-ptb-100 clearfix">
+		<div class="container">
+			<div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
+				<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+				
+
+					<div class="tab-content">
+
+						<div class="col-6">
+							@if (Model.Any())
+							{
+								@foreach (var item in Model)
+								{
+									<div class="col-12">
+										<div class="d-flex align-items-center">
+											<div class="service-icon">
+												<img style="height:50px;width:50px;" src="~/assets/assets/img/@item.ChapterImage" alt="image_not_found">
+											</div>
+											<div class="service-content">
+												<a asp-action="detail" asp-route-bookid="@item.Book.Id" asp-route-id="@item.Id " asp-controller="chapter"><h4 class="service-title">@item.Title</h4></a>
+
+												<p class="mb-0">
+												</p>
+											</div>
+										</div>
+									</div>
+								}
+							}
+							else
+							{
+								<br>
+								<img style="justify-content:center" src="~/assets/images/error.jpg" alt="image_not_found">
+							}
+						</div>
+
+
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+	<!-- shop-section - end
+	================================================== -->
+
+
+</main>

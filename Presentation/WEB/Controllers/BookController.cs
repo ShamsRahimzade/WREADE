@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wreade.Application.Abstractions.Repostories;
@@ -19,7 +20,9 @@ namespace WEB.Controllers
             _service = service;
 			_context = context;
 		}
-        public async Task<IActionResult> Index(int page = 1, int take = 5)
+		//[Authorize(Roles = "Writer,Admin")]
+
+		public async Task<IActionResult> Index(int page = 1, int take = 5)
         {
 
 			string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -31,6 +34,8 @@ namespace WEB.Controllers
             if (vm.Items == null) return NotFound();
             return View(vm);
         }
+		[Authorize(Roles = "Writer,Reader,Admin")]
+
 		public async Task<IActionResult> CategoryBooks(int id, int page = 1, int take = 5)
 		{
 			PaginationVM<Book> book = await _service.GetCategoryId(id, page, take);
@@ -38,6 +43,8 @@ namespace WEB.Controllers
 			if (book.Items == null) return NotFound();
 			return View(book);
 		}
+		[Authorize(Roles = "Writer,Reader,Admin")]
+
 		public async Task<IActionResult> AllBook(int? chapterId, int? categoryId, int? order, int chaptercountFrom = 0, int chaptercountTo = 100, int page = 1, int take = 5)
 		{
 			IQueryable<Book> query = _context.Books.Include(j => j.Libraries).Include(j => j.BookCategories).ThenInclude(j => j.Category).Include(c => c.Chapters).AsQueryable();
@@ -98,6 +105,8 @@ namespace WEB.Controllers
 			//	return NotFound();
 			//}
 		}
+		[Authorize(Roles = "Writer,Reader,Admin")]
+
 		public async Task<IActionResult> TagBooks(int id, int page = 1, int take = 5)
 		{
 			PaginationVM<Book> book = await _service.GetTagId(id, page, take);
@@ -110,6 +119,8 @@ namespace WEB.Controllers
 		//	var userBooks = await _service.GetUserBooksAsync();
 		//	return View(userBooks);
 		//}
+		//[Authorize(Roles = "Writer,Admin")]
+
 		public async Task<IActionResult> Create()
         {
 			BookCreateVM vm = new BookCreateVM();
@@ -117,18 +128,24 @@ namespace WEB.Controllers
 			return View(vm);
 		}
         [HttpPost]
-        public async Task<IActionResult> Create(BookCreateVM vm)
+		//[Authorize(Roles = "Writer")]
+
+		public async Task<IActionResult> Create(BookCreateVM vm)
         {
 			if (await _service.CreateAsync(vm, ModelState))
 				return RedirectToAction(nameof(Index));
 			return View(await _service.CreatedAsync(vm));
 		}
+		[Authorize(Roles = "Writer")]
+
 		public async Task<IActionResult> Delete(int id)
 		{
 			if (await _service.DeleteAsync(id))
 				return RedirectToAction(nameof(Index));
 			return NotFound();
 		}
+		[Authorize(Roles = "Writer,Admin")]
+
 		public async Task<IActionResult> Update(int id)
 		{
 			BookUpdateVM vm = new BookUpdateVM();
@@ -136,6 +153,8 @@ namespace WEB.Controllers
 			return View(vm);
 		}
 		[HttpPost]
+		[Authorize(Roles = "Writer")]
+
 		public async Task<IActionResult> Update(int id, BookUpdateVM vm)
 		{
 			
@@ -144,6 +163,8 @@ namespace WEB.Controllers
 				return RedirectToAction(nameof(Index));
 			return View(await _service.UpdatedAsync(id, vm));
 		}
+		[Authorize(Roles = "Writer,Reader,Admin")]
+
 		public async Task<IActionResult> Detail(int id)
 		{
 			return View(await _service.DetailAsync(id,User.Identity.Name));

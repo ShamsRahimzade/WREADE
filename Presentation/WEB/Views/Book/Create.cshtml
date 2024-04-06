@@ -1,55 +1,6 @@
 ﻿@model BookCreateVM
-<div class="container col-md-6">
-	<form method="post" enctype="multipart/form-data">
-		<div class="row g-6 mx-auto">
-			<div class="col-12 col-sm-6">
-				<label asp-for="CoverPhoto" for="exampleInputUsername1">CoverPhoto</label>
-				<input asp-for="CoverPhoto" class="form-control" id="exampleInputUsername1" placeholder="CoverPhoto">
-				<span asp-validation-for="CoverPhoto" class="text-danger"></span>
-			</div>
-			<div class="col-12 col-sm-6">
-				<label asp-for="Name" for="exampleInputUsername1">Name</label>
-				<input asp-for="Name" class="form-control" id="exampleInputUsername1" placeholder="Name">
-				<span asp-validation-for="Name" class="text-danger"></span>
-			</div>
-			<div class="col-12 col-sm-6">
-				<label asp-for="TagIds">Tag</label>
-				<select asp-for="TagIds" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))">
-					<option selected disabled>Select one</option>
-				</select>
-				<span asp-validation-for="TagIds" class="text-danger"> </span>
-			</div>
-			<div class="col-12 col-sm-6">
-				<label asp-for="CategoryIds">Category</label>
-				<select asp-for="CategoryIds" asp-items="new SelectList(Model.Categories,nameof(Category.Id),nameof(Category.Name))">
-					<option selected disabled>Select one</option>
-				</select>
-				<span asp-validation-for="CategoryIds" class="text-danger"> </span>
-			</div>
-			<div class="col-12">
-				<label asp-for="Description" for="exampleInputUsername1">Description</label>
-				<input asp-for="Description" class="form-control" id="exampleInputUsername1" placeholder="Description">
-				<span asp-validation-for="Description" class="text-danger"></span>
-			</div>
-			<div class="col-12">
-				<label asp-for="IsAdult" for="exampleInputUsername1">IsAdult</label>
-				<input asp-for="IsAdult" class="form-control" id="exampleInputUsername1" placeholder="IsAdult">
-				<span asp-validation-for="IsAdult" class="text-danger"></span>
-			</div>
-			<div class="col-12">
-				<label asp-for="IsCompleted" for="exampleInputUsername1">IsCompleted</label>
-				<input asp-for="IsCompleted" class="form-control" id="exampleInputUsername1" placeholder="IsCompleted">
-				<span asp-validation-for="IsCompleted" class="text-danger"></span>
-			</div>
-			<div class="col-12">
-				<button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
-			</div>
-		</div>
-	</form>
-</div>
 
-
-@* <main>
+<main>
 	<div class="container">
 		<div class="page-title-container">
 
@@ -59,10 +10,8 @@
 				<div class="card">
 					<div class="card-body">
 						<h4 class="card-title">Create Book</h4>
-						<p class="card-description">
-							Basic form layout
-						</p>
-						<form  method="post" enctype="multipart/form-data">
+						
+						<form method="post" enctype="multipart/form-data">
 							<div asp-validation-summary="ModelOnly"></div>
 							<div class="form-group">
 								<label asp-for="CoverPhoto" for="exampleInputUsername1">CoverPhoto</label>
@@ -75,17 +24,18 @@
 								<span asp-validation-for="Name" class="text-danger"></span>
 							</div>
 
+
 							<div class="form-group">
 								<label asp-for="TagIds">Tag</label>
 								<select asp-for="TagIds" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))">
-									<option selected disabled>Select one</option>
+									<option selected disabled>Select Tags</option>
 								</select>
 								<span asp-validation-for="TagIds" class="text-danger"> </span>
 							</div>
 							<div class="form-group">
 								<label asp-for="CategoryIds">Category</label>
 								<select asp-for="CategoryIds" asp-items="new SelectList(Model.Categories,nameof(Category.Id),nameof(Category.Name))">
-									<option selected disabled>Select one</option>
+									<option selected disabled>Select Categories</option>
 								</select>
 								<span asp-validation-for="CategoryIds" class="text-danger"> </span>
 							</div>
@@ -95,17 +45,17 @@
 								<span asp-validation-for="Description" class="text-danger"></span>
 							</div>
 							<div class="form-group">
-								<label asp-for="IsCompleted" for="exampleInputUsername1">IsCompleted</label>
-								<input asp-for="IsCompleted" class="form-control" id="exampleInputUsername1" placeholder="IsCompleted">
-								<span asp-validation-for="IsCompleted" class="text-danger"></span>
-							</div>
-							<div class="form-group">
-								<label asp-for="IsAdult" for="exampleInputUsername1">IsAdult</label>
-								<input asp-for="IsAdult" class="form-control" id="exampleInputUsername1" placeholder="IsAdult">
+								<label asp-for="IsAdult" >IsAdult</label>
+								<input asp-for="IsAdult" >
 								<span asp-validation-for="IsAdult" class="text-danger"></span>
 							</div>
+							<div class="form-group">
+								<label asp-for="IsCompleted" >IsCompleted</label>
+								<input asp-for="IsCompleted" >
+								<span asp-validation-for="IsCompleted" class="text-danger"></span>
+							</div>
 							<button type="submit" class="btn btn-primary mr-2">Submit</button>
-							<button asp-action="index" asp-asp-controller="book" class="btn btn-light">Cancel</button>
+							<button asp-action="index" asp-controller="book" class="btn btn-light">Cancel</button>
 						</form>
 					</div>
 				</div>
@@ -114,4 +64,4 @@
 	</div>
 
 
-</main> *@
+</main>
